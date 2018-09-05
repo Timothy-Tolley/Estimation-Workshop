@@ -22,7 +22,7 @@ class AnalysisOne extends React.Component {
   componentDidMount () {
     const groupId = localStorage.getItem('group_id')
     const userId = localStorage.getItem('user_id')
-    const analysisOneUrl = 'http://localhost:3000/api/v1/estimation/analysis-one'
+    const analysisOneUrl = 'https://estimation-workshop.herokuapp.com/api/v1/estimation/analysis-one'
     request
       .get(analysisOneUrl)
       .query({
@@ -173,7 +173,7 @@ class AnalysisOne extends React.Component {
           })}
         </h1>
 
-        <button className = 'spacer-button' onClick = {() => { location.href = 'http://localhost:3000/element-estimations' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = 'https://estimation-workshop.herokuapp.com/element-estimations' }}>
           Next
         </button>
       </div>

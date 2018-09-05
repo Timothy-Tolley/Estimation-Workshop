@@ -22,7 +22,7 @@ class AnalysisTwo extends React.Component {
 
   componentDidMount () {
     const userId = localStorage.getItem('user_id')
-    const analysisTwoUrl = `http://localhost:3000/api/v1/estimation/analysis-two/${userId}`
+    const analysisTwoUrl = `https://estimation-workshop.herokuapp.com/api/v1/estimation/analysis-two/${userId}`
     request
       .get(analysisTwoUrl)
       .then(res => {
@@ -106,7 +106,7 @@ class AnalysisTwo extends React.Component {
         <h1 className = 'analysis-text'>
 
         </h1>
-        <button className = 'spacer-button' onClick = {() => { location.href = 'http://localhost:3000/trivia-one' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = 'https://estimation-workshop.herokuapp.com/trivia-one' }}>
           Next
         </button>
       </div>

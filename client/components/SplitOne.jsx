@@ -7,7 +7,7 @@ class SplitOne extends React.Component {
         <h1 className = 'spacer-text'>
          Please wait for Graham to explain the next steps before continuing..
         </h1>
-        <button className = 'spacer-button' onClick = {() => { location.href = 'http://localhost:3000/group-benefit' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = 'https://estimation-workshop.herokuapp.com/group-benefit' }}>
           Next
         </button>
       </div>
