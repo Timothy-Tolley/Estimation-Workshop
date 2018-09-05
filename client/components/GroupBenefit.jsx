@@ -14,7 +14,7 @@ class GroupBenefit extends React.Component {
   componentDidMount () {
     let userId = localStorage.getItem('user_id')
     userId = JSON.parse(userId)
-    const url = `https://estimation-workshop.herokuapp.com/api/v1/users/group/${userId}`
+    const url = `/api/v1/users/group/${userId}`
     request
       .get(url)
       // needs update on production
@@ -25,7 +25,7 @@ class GroupBenefit extends React.Component {
   }
 
   sendDataToServer (survey) {
-    const url = 'https://estimation-workshop.herokuapp.com/api/v1/estimation/benefit'
+    const url = '/api/v1/estimation/benefit'
     const groupId = localStorage.getItem('group_id')
     request
       .post(url)
@@ -37,7 +37,7 @@ class GroupBenefit extends React.Component {
       .on('error', (err) => alert(err.status))
       .then(res => {
         if (res.status === 200) {
-          location.href = 'https://estimation-workshop.herokuapp.com/split-two'
+          location.href = '/split-two'
         }
         // remove on production
         // eslint-disable-next-line no-console

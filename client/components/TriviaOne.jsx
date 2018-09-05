@@ -12,7 +12,7 @@ class TriviaOne extends React.Component {
   }
 
   sendDataToServer (survey) {
-    const url = 'https://estimation-workshop.herokuapp.com/api/v1/brier/trivia-one'
+    const url = '/api/v1/brier/trivia-one'
     const userId = localStorage.getItem('user_id')
     request
       .post(url)
@@ -24,7 +24,7 @@ class TriviaOne extends React.Component {
       .on('error', (err) => alert(err.status))
       .then(res => {
         if (res.status === 200) {
-          location.href = 'https://estimation-workshop.herokuapp.com/split-three'
+          location.href = '/split-three'
         }
         // remove on production
         // eslint-disable-next-line no-console

@@ -22,7 +22,7 @@ class AnalysisTwo extends React.Component {
 
   componentDidMount () {
     const userId = localStorage.getItem('user_id')
-    const analysisTwoUrl = `https://estimation-workshop.herokuapp.com/api/v1/estimation/analysis-two/${userId}`
+    const analysisTwoUrl = `/api/v1/estimation/analysis-two/${userId}`
     request
       .get(analysisTwoUrl)
       .then(res => {

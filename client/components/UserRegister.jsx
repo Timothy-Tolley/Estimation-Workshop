@@ -9,7 +9,7 @@ class UserRegister extends React.Component {
   }
 
   sendDataToServer (survey) {
-    const url = 'https://estimation-workshop.herokuapp.com/api/v1/users'
+    const url = '/api/v1/users'
     request
       .post(url)
       .send(survey.data)
@@ -22,7 +22,7 @@ class UserRegister extends React.Component {
       .then(res => {
         if (res.status === 200) {
           setTimeout(() => {
-            location.href = 'https://estimation-workshop.herokuapp.com/split-one'
+            location.href = '/split-one'
           }, 1500)
         }
         // remove on production

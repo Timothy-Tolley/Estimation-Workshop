@@ -10,13 +10,13 @@ class CostEstimate extends React.Component {
 
   componentDidMount () {
     const userId = localStorage.getItem('user_id')
-    const url = `https://estimation-workshop.herokuapp.com/api/v1/users/update-gb${userId}`
+    const url = `/api/v1/users/update-gb${userId}`
     request
       .post(url)
   }
 
   sendDataToServer (survey) {
-    const url = 'https://estimation-workshop.herokuapp.com/api/v1/estimation/cost'
+    const url = '/api/v1/estimation/cost'
     const groupId = localStorage.getItem('group_id')
     const userId = localStorage.getItem('user_id')
     request
@@ -28,7 +28,7 @@ class CostEstimate extends React.Component {
       })
       .then(res => {
         if (res.status === 200) {
-          location.href = 'https://estimation-workshop.herokuapp.com/analysis-one'
+          location.href = '/analysis-one'
         }
         // remove on production
         // eslint-disable-next-line no-console

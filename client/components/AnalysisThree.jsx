@@ -12,7 +12,7 @@ class AnalysisThree extends React.Component {
 
   componentDidMount () {
     const userId = localStorage.getItem('user_id')
-    const analysisThreeUrl = `https://estimation-workshop.herokuapp.com/api/v1/brier/${userId}`
+    const analysisThreeUrl = `/api/v1/brier/${userId}`
     request
       .get(analysisThreeUrl)
       .then(res => {
