@@ -1,0 +1,53 @@
+{
+  "name": "react-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "repository": "https://github.com/Timothy-Tolley/react-template.git",
+  "author": "timothy-tolley <timothytolley@outlook.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "start": "node server/index.js",
+    "build": "webpack --config ./client/webpack.config.js",
+    "dev": "nodemon --watch server/index.js & yarn build --watch",
+    "test": "jest --watch --noStackTrace",
+    "webpack": "webpack --config ./client/webpack.config.js",
+    "postinstall": "webpack && knex migrate:latest"
+  },
+  "engines": {
+    "node": "^8.0.0",
+    "yarn": ">= 0.18.0"
+  },
+  "babel": {
+    "presets": [
+      "env",
+      "react",
+      "stage-3"
+    ]
+  },
+  "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "jStat": "^1.7.1",
+    "knex": "^0.15.2",
+    "node": "^10.7.0",
+    "pg": "^7.4.3",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-router-dom": "^4.3.1",
+    "sqlite3": "^4.0.2",
+    "superagent": "^3.8.3",
+    "survey-react": "^1.0.39",
+    "webpack": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "webpack-cli": "^3.1.0"
+  }
+}
