@@ -11,7 +11,7 @@
     "build": "webpack --config ./client/webpack.config.js",
     "dev": "nodemon --watch server/index.js & yarn build --watch",
     "test": "jest --watch --noStackTrace",
-    "postinstall": "build && knex migrate:latest"
+    "postinstall": "webpack --config ./client/webpack.config.js && knex migrate:latest"
   },
   "engines": {
     "node": "^8.0.0",
