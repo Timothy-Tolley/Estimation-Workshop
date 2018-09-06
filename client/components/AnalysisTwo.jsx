@@ -106,7 +106,7 @@ class AnalysisTwo extends React.Component {
         <h1 className = 'analysis-text'>
 
         </h1>
-        <button className = 'spacer-button' onClick = {() => { location.href = 'https://estimation-workshop.herokuapp.com/trivia-one' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = '/trivia-one' }}>
           Next
         </button>
       </div>

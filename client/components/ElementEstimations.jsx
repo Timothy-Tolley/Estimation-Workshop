@@ -10,7 +10,7 @@ class ElementEstimation extends React.Component {
 
   // componentDidMount () {
   //   const userId = localStorage.getItem('user_id')
-  //   const url = `https://estimation-workshop.herokuapp.com/api/v1/users/update-gb${userId}`
+  //   const url = `/api/v1/users/update-gb${userId}`
   //   request
   //     .post(url)
   // }

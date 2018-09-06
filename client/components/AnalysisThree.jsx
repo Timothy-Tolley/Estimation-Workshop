@@ -32,7 +32,7 @@ class AnalysisThree extends React.Component {
         <h1 className = 'analysis-text'>
           Your Score After Training: {this.state.brierScore1}
         </h1>
-        <button className = 'spacer-button' onClick = {() => { location.href = 'https://estimation-workshop.herokuapp.com/final' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = '/final' }}>
           Next
         </button>
       </div>
