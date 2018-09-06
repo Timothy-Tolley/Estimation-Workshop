@@ -16,6 +16,10 @@ class AnalysisOne extends React.Component {
       groupCostPess: [],
       groupCostOpt: [],
       groupCostLikely: [],
+      groupBenefitP10: null,
+      groupBenefitP50: null,
+      groupBenefitP90: null,
+      groupBenefitP100: null,
       lognormalPDF10: null,
       lognormalPDF5: null,
       lognormalPDF1: null,
@@ -71,6 +75,7 @@ class AnalysisOne extends React.Component {
           groupBenefitP10: p10,
           groupBenefitP50: p50,
           groupBenefitP90: p90,
+          groupBenefitP100: p100,
           individualCost: res.body.icd,
           groupCostPess: gcp,
           groupCostOpt: gco,
@@ -106,6 +111,9 @@ class AnalysisOne extends React.Component {
           </p>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - P90 = {this.state.groupBenefitP90}
+          </p>
+          <p className = 'analysis-text-small' >
+                  Benefit Estimate Group - P100 = {this.state.groupBenefitP100}
           </p>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - lognormal.pdf where x: 1 --- y: {this.state.lognormalPDF10}
