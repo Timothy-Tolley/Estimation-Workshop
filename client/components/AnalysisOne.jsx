@@ -1,6 +1,6 @@
 import React from 'react'
-import request from 'superagent'
 import jStat from 'jStat'
+import request from 'superagent'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -96,6 +96,7 @@ class AnalysisOne extends React.Component {
         <h1 className = 'analysis-text'>
           Analysis One
         </h1>
+
         <h1 className = 'analysis-text'>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - MEAN = {this.state.groupBenefitMean}
