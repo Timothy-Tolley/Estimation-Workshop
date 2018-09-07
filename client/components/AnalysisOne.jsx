@@ -1,6 +1,9 @@
 import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
+import {VictoryChart, VictoryLine, VictoryContainer} from 'victory'
+import _ from 'lodash'
+import {LineChart} from 'react-easy-chart'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -12,6 +15,7 @@ class AnalysisOne extends React.Component {
       groupBenefitChance: null,
       groupBenefitMean: null,
       groupBenefitStDev: null,
+      groupBeneGraphData: [],
       individualCost: [],
       groupCostPess: [],
       groupCostOpt: [],
@@ -20,13 +24,10 @@ class AnalysisOne extends React.Component {
       groupBenefitP50: null,
       groupBenefitP90: null,
       groupBenefitP100: null,
-      groupBeneLogMean: null,
-      groupBeneLogStDev: null,
-      lognormalPDF10: null,
-      lognormalPDF5: null,
-      lognormalPDF1: null,
-      lognormalPDFp100: null
-
+      lognormalPDFp99: null,
+      lognormalPDFp50: null,
+      lognormalPDFp10: null,
+      lognormalPDFp90: null
     }
   }
 
@@ -56,26 +57,29 @@ class AnalysisOne extends React.Component {
           res.body.gbd[0].optimistic,
           res.body.gbd[0].likely
         ]
+
         // regular mean + stdev
         let mean = jStat.mean(groupBeneArray)
         let std = jStat.stdev(groupBeneArray, true)
+        let meanMathLog = Math.log(mean)
+        let stdMathLog = Math.log(std)
         // p values
-        let p10 = jStat.lognormal.inv(0.1, mean, std)
-        let p50 = jStat.lognormal.inv(0.5, mean, std)
-        let p90 = jStat.lognormal.inv(0.9, mean, std)
-        let p100 = jStat.lognormal.inv(0.99, mean, std)
+        let p10 = jStat.lognormal.inv(0.1, meanMathLog, stdMathLog)
+        let p50 = jStat.lognormal.inv(0.5, meanMathLog, stdMathLog)
+        let p90 = jStat.lognormal.inv(0.9, meanMathLog, stdMathLog)
+        let p99 = jStat.lognormal.inv(0.99, meanMathLog, stdMathLog)
         // log mean and stDev
-        let logMean = jStat.lognormal.mean(mean, std)
-        let logVariance = jStat.lognormal.variance(mean, std)
-        let logStDev = Math.sqrt(logVariance)
+        // let logMean = jStat.lognormal.mean(mean, std)
+        // let logVariance = jStat.lognormal.variance(mean, std)
+        // let logStDev = Math.sqrt(logVariance)
+        //
+        let pdfp99 = jStat.lognormal.pdf(p99, meanMathLog, stdMathLog)
         // graph results
-        let pdf1 = jStat.lognormal.pdf(0.1, mean, std)
-        let pdf5 = jStat.lognormal.pdf(0.5, mean, std)
-        let pdf10 = jStat.lognormal.pdf(1, mean, std)
-        let pdfp100 = jStat.lognormal.pdf(p100, mean, std)
-        // //graph array - in progress
-        // let graphData = []
-        // graphData.push([jStat.lognormal.pdf(10, logMean, logStDev), 10])
+        let xVals = _.range(0, p99, (p99 / 1000))
+        let graphData = xVals.map(xVal => {
+          let yVal = jStat.lognormal.pdf(xVal, meanMathLog, stdMathLog)
+          return {x: xVal, y: yVal}
+        })
 
         // add all to state
         this.setState({
@@ -83,23 +87,18 @@ class AnalysisOne extends React.Component {
           groupBenefitOpt: res.body.gbd[0].optimistic,
           groupBenefitLikely: res.body.gbd[0].likely,
           groupBenefitChance: res.body.gbd[0].chance_of_success,
-          groupBenefitMean: mean,
-          groupBenefitStDev: std,
-          // groupBeneGraphData: graphData,
+          groupBenefitMean: meanMathLog,
+          groupBenefitStDev: stdMathLog,
+          groupBeneGraphData: graphData,
           groupBenefitP10: p10,
           groupBenefitP50: p50,
           groupBenefitP90: p90,
-          groupBenefitP100: p100,
-          groupBeneLogMean: logMean,
-          groupBeneLogStDev: logStDev,
+          groupBenefitP100: p99,
           individualCost: res.body.icd,
           groupCostPess: gcp,
           groupCostOpt: gco,
           groupCostLikely: gcl,
-          lognormalPDF10: pdf10,
-          lognormalPDF5: pdf5,
-          lognormalPDF1: pdf1,
-          lognormalPDFp100: pdfp100
+          lognormalPDFp99: pdfp99
         })
       })
     // eslint-disable-next-line no-console
@@ -112,13 +111,48 @@ class AnalysisOne extends React.Component {
         <h1 className = 'analysis-text'>
           Analysis One
         </h1>
+        <h1 className = 'analysis-text'>
+          Victory Chart - x axis range - 0 - 4,000,000
+        </h1>
+        <VictoryChart maxDomain = {{x: 4000000}} height={400} width={900} padding={100}
+          containerComponent={<VictoryContainer responsive={false}/>}
+        >
+          <VictoryLine
+            data={this.state.groupBeneGraphData}
+            style={{data: {stroke: '#c43a31', strokeWidth: 0.5}}}
+          />
+
+        </VictoryChart>
+        <h1 className = 'analysis-text'>
+          React Easy Chart - x axis range - 0 - 400,000
+        </h1>
+        <LineChart
+          data={
+            [
+              this.state.groupBeneGraphData,
+              [{x: this.state.groupBenefitP90, y: 0}, {x: this.state.groupBenefitP90, y: 0.0000004}],
+              [{x: this.state.groupBenefitP10, y: 0}, {x: this.state.groupBenefitP10, y: 0.0000004}],
+              [{x: this.state.groupBenefitP50, y: 0}, {x: this.state.groupBenefitP50, y: 0.0000004}]
+            ]
+          }
+          width={900}
+          height={400}
+          margin={{top: 10, right: 30, bottom: 30, left: 100}}
+          axes
+          axisLabels={{x: 'X Axis', y: 'Y Axis'}}
+          interpolate={'cardinal'}
+          grid
+          verticalGrid
+          lineColors={['pink', 'cyan', 'red', 'black']}
+          xDomainRange={[0, 400000]}
+        />
 
         <h1 className = 'analysis-text'>
           <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - MEAN = {this.state.groupBenefitMean}
+                  Benefit Estimate Group - MEAN (Log)= {this.state.groupBenefitMean}
           </p>
           <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - STANDARD DEVIATION = {this.state.groupBenefitStDev}
+                  Benefit Estimate Group - STANDARD DEVIATION (Log)= {this.state.groupBenefitStDev}
           </p>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - P10 = {this.state.groupBenefitP10}
@@ -133,22 +167,7 @@ class AnalysisOne extends React.Component {
                   Benefit Estimate Group - P100 = {this.state.groupBenefitP100}
           </p>
           <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - logMean = {this.state.groupBeneLogMean}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - logStDev = {this.state.groupBeneLogStDev}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - lognormal.pdf where x: 1 --- y: {this.state.lognormalPDF10}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - lognormal.pdf where x: 0.5 --- y: {this.state.lognormalPDF5}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - lognormal.pdf where x: 0.1 --- y: {this.state.lognormalPDF1}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - lognormal.pdf where x: p100 --- y: {this.state.lognormalPDFp100}
+                  Benefit Estimate Group - lognormal.pdf where x: p100 --- y: {this.state.lognormalPDFp99}
           </p>
         </h1>
         <h1 className = 'analysis-text'>
