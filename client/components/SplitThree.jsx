@@ -11,7 +11,7 @@ class SplitTwo extends React.Component {
 
   componentDidMount () {
     const userId = localStorage.getItem('user_id')
-    const url = `http://localhost:3000/api/v1/brier/trivia-one/${userId}`
+    const url = `/api/v1/brier/trivia-one/${userId}`
     request
       .get(url)
       .then(res =>
@@ -29,7 +29,7 @@ class SplitTwo extends React.Component {
         <h1 className = 'spacer-text'>
          Please wait for Graham to explain the next steps before continuing..
         </h1>
-        <button className = 'spacer-button' onClick = {() => { location.href = 'http://localhost:3000/trivia-two' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = '/trivia-two' }}>
           Next
         </button>
       </div>
