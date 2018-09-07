@@ -12,7 +12,7 @@
     "dev": "nodemon --watch server/index.js & yarn build --watch",
     "test": "jest --watch --noStackTrace",
     "webpack": "webpack --config ./client/webpack.config.js",
-    "postinstall": "webpack && knex migrate:latest"
+    "postinstall": "webpack --config ./client/webpack.config.js && knex migrate:latest"
   },
   "engines": {
     "node": "^8.0.0",
