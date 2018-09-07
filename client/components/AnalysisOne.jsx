@@ -24,6 +24,7 @@ class AnalysisOne extends React.Component {
       lognormalPDF5: null,
       lognormalPDF1: null,
       lognormalPDFp100: null
+
     }
   }
 
