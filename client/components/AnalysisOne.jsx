@@ -1,6 +1,6 @@
 import React from 'react'
-import request from 'superagent'
 import jStat from 'jStat'
+import request from 'superagent'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -19,14 +19,19 @@ class AnalysisOne extends React.Component {
       groupBenefitP10: null,
       groupBenefitP50: null,
       groupBenefitP90: null,
-      groupBenefitP100: null
+      groupBenefitP100: null,
+      lognormalPDF10: null,
+      lognormalPDF5: null,
+      lognormalPDF1: null,
+      lognormalPDFp100: null
+
     }
   }
 
   componentDidMount () {
     const groupId = localStorage.getItem('group_id')
     const userId = localStorage.getItem('user_id')
-    const analysisOneUrl = 'http://localhost:3000/api/v1/estimation/analysis-one'
+    const analysisOneUrl = '/api/v1/estimation/analysis-one'
     request
       .get(analysisOneUrl)
       .query({
@@ -54,6 +59,10 @@ class AnalysisOne extends React.Component {
         let p50 = jStat.lognormal.inv(0.5, mean, std)
         let p90 = jStat.lognormal.inv(0.9, mean, std)
         let p100 = jStat.lognormal.inv(0.99, mean, std)
+        let pdf1 = jStat.lognormal.pdf(0.1, mean, std)
+        let pdf5 = jStat.lognormal.pdf(0.5, mean, std)
+        let pdf10 = jStat.lognormal.pdf(1, mean, std)
+        let pdfp100 = jStat.lognormal.pdf(p100, mean, std)
         let graphData = []
         graphData.push([jStat.lognormal.pdf(10, mean, std), 10])
         this.setState({
@@ -71,7 +80,11 @@ class AnalysisOne extends React.Component {
           individualCost: res.body.icd,
           groupCostPess: gcp,
           groupCostOpt: gco,
-          groupCostLikely: gcl
+          groupCostLikely: gcl,
+          lognormalPDF10: pdf10,
+          lognormalPDF5: pdf5,
+          lognormalPDF1: pdf1,
+          lognormalPDFp100: pdfp100
         })
       })
     // eslint-disable-next-line no-console
@@ -84,6 +97,7 @@ class AnalysisOne extends React.Component {
         <h1 className = 'analysis-text'>
           Analysis One
         </h1>
+
         <h1 className = 'analysis-text'>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - MEAN = {this.state.groupBenefitMean}
@@ -102,6 +116,18 @@ class AnalysisOne extends React.Component {
           </p>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - P100 = {this.state.groupBenefitP100}
+          </p>
+          <p className = 'analysis-text-small' >
+                  Benefit Estimate Group - lognormal.pdf where x: 1 --- y: {this.state.lognormalPDF10}
+          </p>
+          <p className = 'analysis-text-small' >
+                  Benefit Estimate Group - lognormal.pdf where x: 0.5 --- y: {this.state.lognormalPDF5}
+          </p>
+          <p className = 'analysis-text-small' >
+                  Benefit Estimate Group - lognormal.pdf where x: 0.1 --- y: {this.state.lognormalPDF1}
+          </p>
+          <p className = 'analysis-text-small' >
+                  Benefit Estimate Group - lognormal.pdf where x: p100 --- y: {this.state.lognormalPDFp100}
           </p>
         </h1>
         <h1 className = 'analysis-text'>
@@ -181,7 +207,7 @@ class AnalysisOne extends React.Component {
           })}
         </h1>
 
-        <button className = 'spacer-button' onClick = {() => { location.href = 'http://localhost:3000/element-estimations' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = '/element-estimations' }}>
           Next
         </button>
       </div>

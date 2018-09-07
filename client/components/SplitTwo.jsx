@@ -7,7 +7,7 @@ class SplitTwo extends React.Component {
         <h1 className = 'spacer-text'>
          Please wait for Graham to explain the next steps before continuing..
         </h1>
-        <button className = 'spacer-button' onClick = {() => { location.href = 'http://localhost:3000/cost' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = '/cost' }}>
           Next
         </button>
       </div>

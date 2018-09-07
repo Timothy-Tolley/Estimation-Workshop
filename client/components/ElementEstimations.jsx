@@ -10,20 +10,20 @@ class ElementEstimation extends React.Component {
 
   // componentDidMount () {
   //   const userId = localStorage.getItem('user_id')
-  //   const url = `http://localhost:3000/api/v1/users/update-gb${userId}`
+  //   const url = `/api/v1/users/update-gb${userId}`
   //   request
   //     .post(url)
   // }
 
   sendDataToServer (survey) {
     const userId = localStorage.getItem('user_id')
-    const url = `http://localhost:3000/api/v1/estimation/elements/${userId}`
+    const url = `/api/v1/estimation/elements/${userId}`
     request
       .post(url)
       .send(survey.data)
       .then(res => {
         if (res.status === 200) {
-          location.href = 'http://localhost:3000/analysis-two'
+          location.href = '/analysis-two'
         }
         // remove on production
         // eslint-disable-next-line no-console

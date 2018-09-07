@@ -12,7 +12,7 @@ class AnalysisThree extends React.Component {
 
   componentDidMount () {
     const userId = localStorage.getItem('user_id')
-    const analysisThreeUrl = `http://localhost:3000/api/v1/brier/${userId}`
+    const analysisThreeUrl = `/api/v1/brier/${userId}`
     request
       .get(analysisThreeUrl)
       .then(res => {
@@ -32,7 +32,7 @@ class AnalysisThree extends React.Component {
         <h1 className = 'analysis-text'>
           Your Score After Training: {this.state.brierScore1}
         </h1>
-        <button className = 'spacer-button' onClick = {() => { location.href = 'http://localhost:3000/final' }}>
+        <button className = 'spacer-button' onClick = {() => { location.href = '/final' }}>
           Next
         </button>
       </div>

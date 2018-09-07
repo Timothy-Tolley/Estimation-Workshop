@@ -12,7 +12,7 @@ class TriviaOne extends React.Component {
   }
 
   sendDataToServer (survey) {
-    const url = 'http://localhost:3000/api/v1/brier/trivia-one'
+    const url = '/api/v1/brier/trivia-one'
     const userId = localStorage.getItem('user_id')
     request
       .post(url)
@@ -24,7 +24,7 @@ class TriviaOne extends React.Component {
       .on('error', (err) => alert(err.status))
       .then(res => {
         if (res.status === 200) {
-          location.href = 'http://localhost:3000/split-three'
+          location.href = '/split-three'
         }
         // remove on production
         // eslint-disable-next-line no-console
