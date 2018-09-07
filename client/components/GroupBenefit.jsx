@@ -53,13 +53,13 @@ class GroupBenefit extends React.Component {
             {
               name: 'pessimistic',
               type: 'text',
-              title: 'Please enter your pessimistic estimate for benefit',
+              title: 'Please enter your pessimistic estimate for benefit ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -71,13 +71,13 @@ class GroupBenefit extends React.Component {
             {
               name: 'optimistic',
               type: 'text',
-              title: 'Next, please enter your optimistic estimate for benefit',
+              title: 'Next, please enter your optimistic estimate for benefit ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -89,13 +89,13 @@ class GroupBenefit extends React.Component {
             {
               name: 'likely',
               type: 'text',
-              title: 'Next, please enter your likely estimate for benefit',
+              title: 'Next, please enter your likely estimate for benefit ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -107,8 +107,8 @@ class GroupBenefit extends React.Component {
             {
               name: 'chance_of_success',
               type: 'text',
-              title: 'Finally, please enter the percentage chance of success',
-              placeHolder: 'percentage chance',
+              title: 'Finally, please enter the percentage chance of success (%)',
+              placeHolder: 'percentage chance (%)',
               validators: [
                 {
                   type: 'numeric',

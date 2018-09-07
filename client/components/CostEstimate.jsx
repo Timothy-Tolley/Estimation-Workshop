@@ -44,13 +44,13 @@ class CostEstimate extends React.Component {
             {
               name: 'pessimistic',
               type: 'text',
-              title: 'Please enter your pessimistic estimate for cost',
+              title: 'Please enter your pessimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -62,13 +62,13 @@ class CostEstimate extends React.Component {
             {
               name: 'optimistic',
               type: 'text',
-              title: 'Next, please enter your optimistic estimate for cost',
+              title: 'Next, please enter your optimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -80,13 +80,13 @@ class CostEstimate extends React.Component {
             {
               name: 'likely',
               type: 'text',
-              title: 'Next, please enter your likely estimate for cost',
+              title: 'Next, please enter your likely estimate for cost ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true

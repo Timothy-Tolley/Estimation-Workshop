@@ -39,13 +39,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_one',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A Spade',
+              title: 'Pessimistic Cost Estimate for: A Spade ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -53,13 +53,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_one',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: A Spade',
+              title: 'Optimistic Cost Estimate for: A Spade ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -67,13 +67,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_one',
               type: 'text',
-              title: 'Likely Cost Estimate for: A Spade',
+              title: 'Likely Cost Estimate for: A Spade ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -85,13 +85,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_two',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A Digger for a day',
+              title: 'Pessimistic Cost Estimate for: A Digger for a day ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -99,13 +99,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_two',
               type: 'text',
-              title: 'Optimistic Cost Estimate for:  A Digger for a day',
+              title: 'Optimistic Cost Estimate for:  A Digger for a day ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -113,13 +113,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_two',
               type: 'text',
-              title: 'Likely Cost Estimate for:  A Digger for a day',
+              title: 'Likely Cost Estimate for:  A Digger for a day ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -131,13 +131,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_three',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A worker for 8 hours',
+              title: 'Pessimistic Cost Estimate for: A worker for 8 hours ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -145,13 +145,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_three',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: A worker for 8 hours',
+              title: 'Optimistic Cost Estimate for: A worker for 8 hours ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -159,13 +159,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_three',
               type: 'text',
-              title: 'Likely Cost Estimate for: A worker for 8 hours',
+              title: 'Likely Cost Estimate for: A worker for 8 hours ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -177,13 +177,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_four',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: 10 small native trees ',
+              title: 'Pessimistic Cost Estimate for: 10 small native trees  ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -191,13 +191,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_four',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: 10 small native trees',
+              title: 'Optimistic Cost Estimate for: 10 small native trees ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -205,13 +205,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_four',
               type: 'text',
-              title: 'Likely Cost Estimate for: 10 small native trees',
+              title: 'Likely Cost Estimate for: 10 small native trees ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -223,7 +223,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_five',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A bag of cement',
+              title: 'Pessimistic Cost Estimate for: A bag of cement ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -237,7 +237,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_five',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: A bag of cement',
+              title: 'Optimistic Cost Estimate for: A bag of cement ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -251,13 +251,13 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_five',
               type: 'text',
-              title: 'Likely Cost Estimate for: A bag of cement',
+              title: 'Likely Cost Estimate for: A bag of cement ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
