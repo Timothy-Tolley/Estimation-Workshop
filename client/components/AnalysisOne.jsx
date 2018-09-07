@@ -59,7 +59,7 @@ class AnalysisOne extends React.Component {
         // regular mean + stdev
         let mean = jStat.mean(groupBeneArray)
         let std = jStat.stdev(groupBeneArray, true)
-        // p values 
+        // p values
         let p10 = jStat.lognormal.inv(0.1, mean, std)
         let p50 = jStat.lognormal.inv(0.5, mean, std)
         let p90 = jStat.lognormal.inv(0.9, mean, std)
@@ -68,11 +68,11 @@ class AnalysisOne extends React.Component {
         let logMean = jStat.lognormal.mean(mean, std)
         let logVariance = jStat.lognormal.variance(mean, std)
         let logStDev = Math.sqrt(logVariance)
-        // graph results 
-        let pdf1 = jStat.lognormal.pdf(0.1, logMean, logStDev)
-        let pdf5 = jStat.lognormal.pdf(0.5, logMean, logStDev)
-        let pdf10 = jStat.lognormal.pdf(1, logMean, logStDev)
-        let pdfp100 = jStat.lognormal.pdf(p100, logMean, logStDev)
+        // graph results
+        let pdf1 = jStat.lognormal.pdf(0.1, mean, std)
+        let pdf5 = jStat.lognormal.pdf(0.5, mean, std)
+        let pdf10 = jStat.lognormal.pdf(1, mean, std)
+        let pdfp100 = jStat.lognormal.pdf(p100, mean, std)
         // //graph array - in progress
         // let graphData = []
         // graphData.push([jStat.lognormal.pdf(10, logMean, logStDev), 10])
