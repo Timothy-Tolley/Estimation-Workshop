@@ -20,6 +20,8 @@ class AnalysisOne extends React.Component {
       groupBenefitP50: null,
       groupBenefitP90: null,
       groupBenefitP100: null,
+      groupBeneLogMean: null,
+      groupBeneLogStDev: null,
       lognormalPDF10: null,
       lognormalPDF5: null,
       lognormalPDF1: null,
@@ -48,23 +50,34 @@ class AnalysisOne extends React.Component {
         let gcl = res.body.gcd.map(dataSet => {
           return dataSet.likely
         })
+        // array for group benefit calculations
         let groupBeneArray = [
           res.body.gbd[0].pessimistic,
           res.body.gbd[0].optimistic,
           res.body.gbd[0].likely
         ]
+        // regular mean + stdev
         let mean = jStat.mean(groupBeneArray)
         let std = jStat.stdev(groupBeneArray, true)
+        // p values 
         let p10 = jStat.lognormal.inv(0.1, mean, std)
         let p50 = jStat.lognormal.inv(0.5, mean, std)
         let p90 = jStat.lognormal.inv(0.9, mean, std)
         let p100 = jStat.lognormal.inv(0.99, mean, std)
-        let pdf1 = jStat.lognormal.pdf(0.1, mean, std)
-        let pdf5 = jStat.lognormal.pdf(0.5, mean, std)
-        let pdf10 = jStat.lognormal.pdf(1, mean, std)
-        let pdfp100 = jStat.lognormal.pdf(p100, mean, std)
-        let graphData = []
-        graphData.push([jStat.lognormal.pdf(10, mean, std), 10])
+        // log mean and stDev
+        let logMean = jStat.lognormal.mean(mean, std)
+        let logVariance = jStat.lognormal.variance(mean, std)
+        let logStDev = Math.sqrt(logVariance)
+        // graph results 
+        let pdf1 = jStat.lognormal.pdf(0.1, logMean, logStDev)
+        let pdf5 = jStat.lognormal.pdf(0.5, logMean, logStDev)
+        let pdf10 = jStat.lognormal.pdf(1, logMean, logStDev)
+        let pdfp100 = jStat.lognormal.pdf(p100, logMean, logStDev)
+        // //graph array - in progress
+        // let graphData = []
+        // graphData.push([jStat.lognormal.pdf(10, logMean, logStDev), 10])
+
+        // add all to state
         this.setState({
           groupBenefitPess: res.body.gbd[0].pessimistic,
           groupBenefitOpt: res.body.gbd[0].optimistic,
@@ -72,11 +85,13 @@ class AnalysisOne extends React.Component {
           groupBenefitChance: res.body.gbd[0].chance_of_success,
           groupBenefitMean: mean,
           groupBenefitStDev: std,
-          groupBeneGraphData: graphData,
+          // groupBeneGraphData: graphData,
           groupBenefitP10: p10,
           groupBenefitP50: p50,
           groupBenefitP90: p90,
           groupBenefitP100: p100,
+          groupBeneLogMean: logMean,
+          groupBeneLogStDev: logStDev,
           individualCost: res.body.icd,
           groupCostPess: gcp,
           groupCostOpt: gco,
@@ -116,6 +131,12 @@ class AnalysisOne extends React.Component {
           </p>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - P100 = {this.state.groupBenefitP100}
+          </p>
+          <p className = 'analysis-text-small' >
+                  Benefit Estimate Group - logMean = {this.state.groupBeneLogMean}
+          </p>
+          <p className = 'analysis-text-small' >
+                  Benefit Estimate Group - logStDev = {this.state.groupBeneLogStDev}
           </p>
           <p className = 'analysis-text-small' >
                   Benefit Estimate Group - lognormal.pdf where x: 1 --- y: {this.state.lognormalPDF10}
