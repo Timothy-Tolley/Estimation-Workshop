@@ -55,7 +55,7 @@ class AnalysisOne extends React.Component {
         let GBP90 = jStat.lognormal.inv(0.9, gbMeanMathLog, gbStdMathLog)
         let GBP92 = jStat.lognormal.inv(0.92, gbMeanMathLog, gbStdMathLog)
         // graph results
-        let GBxVals = _.range(0, GBP92, (GBP92 / 500))
+        let GBxVals = _.range(0, GBP92, (GBP92 / 10))
         let GByVals = []
         let GBgraphData = GBxVals.map(xVal => {
           let GByVal = jStat.lognormal.pdf(xVal, gbMeanMathLog, gbStdMathLog)
@@ -82,7 +82,7 @@ class AnalysisOne extends React.Component {
         let ICP90 = jStat.lognormal.inv(0.9, ICMeanMathLog, ICStDevMathLog)
         let ICP99 = jStat.lognormal.inv(0.99, ICMeanMathLog, ICStDevMathLog)
         // graph results
-        let ICxVals = _.range(0, ICP99, (ICP99 / 500))
+        let ICxVals = _.range(0, ICP99, (ICP99 / 100))
         let ICyVals = []
         let ICgraphData = ICxVals.map(xVal => {
           let ICyVal = jStat.lognormal.pdf(xVal, ICMeanMathLog, ICStDevMathLog)
@@ -108,7 +108,7 @@ class AnalysisOne extends React.Component {
         let GCP90 = jStat.lognormal.inv(0.9, GCMeanMathLog, GCStDevMathLog)
         let GCP99 = jStat.lognormal.inv(0.99, GCMeanMathLog, GCStDevMathLog)
         // graph results
-        let GCxVals = _.range(0, GCP99, (GCP99 / 500))
+        let GCxVals = _.range(0, GCP99, (GCP99 / 100))
         let GCyVals = []
         let GCgraphData = GCxVals.map(xVal => {
           let GCyVal = jStat.lognormal.pdf(xVal, GCMeanMathLog, GCStDevMathLog)
