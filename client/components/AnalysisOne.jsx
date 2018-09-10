@@ -166,7 +166,7 @@ class AnalysisOne extends React.Component {
               color: 'red'
             }, {
               key: 'p90',
-              color: 'black'
+              color: 'purple'
             }
           ]}
           dataId={'key'}
@@ -176,7 +176,7 @@ class AnalysisOne extends React.Component {
             {color: 'blue'},
             {color: 'cyan'},
             {color: 'red'},
-            {color: 'black'}
+            {color: 'purple'}
           ]}
           styles = {{
             '.legend': {
@@ -206,7 +206,7 @@ class AnalysisOne extends React.Component {
           interpolate={'cardinal'}
           grid
           verticalGrid
-          lineColors={['orange', 'blue', 'cyan', 'red', 'black']}
+          lineColors={['orange', 'blue', 'cyan', 'red', 'purple']}
           xDomainRange={[0, (this.state.GBP90 + 10000)]}
           xTicks={10}
           yTicks={10}
@@ -228,7 +228,7 @@ class AnalysisOne extends React.Component {
               color: 'red'
             }, {
               key: 'p90',
-              color: 'black'
+              color: 'purple'
             }
           ]}
           dataId={'key'}
@@ -238,7 +238,7 @@ class AnalysisOne extends React.Component {
             {color: 'green'},
             {color: 'cyan'},
             {color: 'red'},
-            {color: 'black'}
+            {color: 'purple'}
           ]}
           styles = {{
             '.legend': {
@@ -268,7 +268,7 @@ class AnalysisOne extends React.Component {
           interpolate={'cardinal'}
           grid
           verticalGrid
-          lineColors={['orange', 'green', 'cyan', 'red', 'black']}
+          lineColors={['orange', 'green', 'cyan', 'red', 'purple']}
           xDomainRange={[0, (this.state.GBP90 + 10000)]}
           xTicks={10}
           yTicks={10}
