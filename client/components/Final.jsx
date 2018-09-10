@@ -42,11 +42,6 @@ class Final extends React.Component {
       })
   }
   render () {
-    const usedEmail = () => {
-      if(this.state.currentEmail === null) {
-        return this.state.work_email
-      }
-    }
     var emailCheckJSON = {title: 'Please answer each question to the best of your ability',
       pages: [
         {name: 'page1',

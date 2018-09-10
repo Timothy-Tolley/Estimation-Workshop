@@ -80,9 +80,9 @@ class AnalysisOne extends React.Component {
         let ICP10 = jStat.lognormal.inv(0.1, ICMeanMathLog, ICStDevMathLog)
         let ICP50 = jStat.lognormal.inv(0.5, ICMeanMathLog, ICStDevMathLog)
         let ICP90 = jStat.lognormal.inv(0.9, ICMeanMathLog, ICStDevMathLog)
-        let ICP92 = jStat.lognormal.inv(0.92, ICMeanMathLog, ICStDevMathLog)
+        let ICP99 = jStat.lognormal.inv(0.99, ICMeanMathLog, ICStDevMathLog)
         // graph results
-        let ICxVals = _.range(0, ICP92, (ICP92 / 500))
+        let ICxVals = _.range(0, ICP99, (ICP99 / 500))
         let ICyVals = []
         let ICgraphData = ICxVals.map(xVal => {
           let ICyVal = jStat.lognormal.pdf(xVal, ICMeanMathLog, ICStDevMathLog)
@@ -106,9 +106,9 @@ class AnalysisOne extends React.Component {
         let GCP10 = jStat.lognormal.inv(0.1, GCMeanMathLog, GCStDevMathLog)
         let GCP50 = jStat.lognormal.inv(0.5, GCMeanMathLog, GCStDevMathLog)
         let GCP90 = jStat.lognormal.inv(0.9, GCMeanMathLog, GCStDevMathLog)
-        let GCP92 = jStat.lognormal.inv(0.92, GCMeanMathLog, GCStDevMathLog)
+        let GCP99 = jStat.lognormal.inv(0.99, GCMeanMathLog, GCStDevMathLog)
         // graph results
-        let GCxVals = _.range(0, GCP92, (GCP92 / 500))
+        let GCxVals = _.range(0, GCP99, (GCP99 / 500))
         let GCyVals = []
         let GCgraphData = GCxVals.map(xVal => {
           let GCyVal = jStat.lognormal.pdf(xVal, GCMeanMathLog, GCStDevMathLog)
@@ -129,13 +129,13 @@ class AnalysisOne extends React.Component {
           ICP10: ICP10,
           ICP50: ICP50,
           ICP90: ICP90,
-          ICP92: ICP92,
+          ICP99: ICP99,
           ICMax: ICMax,
           GCgraphData: GCgraphData,
           GCP10: GCP10,
           GCP50: GCP50,
           GCP90: GCP90,
-          GCP92: GCP92,
+          GCP99: GCP99,
           GCMax: GCMax
         })
       })
@@ -149,12 +149,15 @@ class AnalysisOne extends React.Component {
         <h1 className = 'analysis-text'>
           Analysis One
         </h1>
-        <h1 className = 'analysis-text'> Group Benefit </h1>
+        <h1 className = 'analysis-text'> Group Benefit vs Individual Cost </h1>
         <Legend
           data= {[
             {
               key: 'Group Benefit Curve',
               color: 'orange'
+            }, {
+              key: 'Individual Cost Curve',
+              color: 'blue'
             }, {
               key: 'P10',
               color: 'cyan'
@@ -170,6 +173,7 @@ class AnalysisOne extends React.Component {
           horizontal
           config = {[
             {color: 'orange'},
+            {color: 'blue'},
             {color: 'cyan'},
             {color: 'red'},
             {color: 'black'}
@@ -188,6 +192,7 @@ class AnalysisOne extends React.Component {
           data={
             [
               this.state.GBgraphData,
+              this.state.ICgraphData,
               [{x: this.state.GBP10, y: 0}, {x: this.state.GBP10, y: this.state.GBMax}],
               [{x: this.state.GBP50, y: 0}, {x: this.state.GBP50, y: this.state.GBMax}],
               [{x: this.state.GBP90, y: 0}, {x: this.state.GBP90, y: this.state.GBMax}]
@@ -201,35 +206,39 @@ class AnalysisOne extends React.Component {
           interpolate={'cardinal'}
           grid
           verticalGrid
-          lineColors={['orange', 'cyan', 'red', 'black']}
+          lineColors={['orange', 'blue', 'cyan', 'red', 'black']}
           xDomainRange={[0, (this.state.GBP90 + 10000)]}
           xTicks={10}
           yTicks={10}
         />
-        <h1 className = 'analysis-text'> Individual Cost </h1>
+        <h1 className = 'analysis-text'> Group Benefit vs Group Cost </h1>
         <Legend
           data= {[
             {
-              key: 'Individual Cost Curve',
+              key: 'Group Benefit Curve',
+              color: 'orange'
+            }, {
+              key: 'Group Cost Curve',
+              color: 'green'
+            }, {
+              key: 'P10',
+              color: 'cyan'
+            }, {
+              key: 'P50',
               color: 'red'
             }, {
-              key: 'P10',
-              color: 'blue'
-            }, {
-              key: 'P50',
-              color: 'green'
-            }, {
               key: 'p90',
-              color: 'orange'
+              color: 'black'
             }
           ]}
           dataId={'key'}
           horizontal
           config = {[
+            {color: 'orange'},
+            {color: 'green'},
+            {color: 'cyan'},
             {color: 'red'},
-            {color: 'blue'},
-            {color: 'green'},
-            {color: 'orange'}
+            {color: 'black'}
           ]}
           styles = {{
             '.legend': {
@@ -244,67 +253,11 @@ class AnalysisOne extends React.Component {
         <LineChart
           data={
             [
-              this.state.ICgraphData,
-              [{x: this.state.ICP10, y: 0}, {x: this.state.ICP10, y: this.state.ICMax}],
-              [{x: this.state.ICP50, y: 0}, {x: this.state.ICP50, y: this.state.ICMax}],
-              [{x: this.state.ICP90, y: 0}, {x: this.state.ICP90, y: this.state.ICMax}]
-            ]
-          }
-          width={1000}
-          height={400}
-          margin={{top: 40, right: 5, bottom: 30, left: 100}}
-          axes
-          axisLabels={{x: 'X Axis', y: 'Y Axis'}}
-          interpolate={'cardinal'}
-          grid
-          verticalGrid
-          lineColors={['red', 'blue', 'green', 'orange']}
-          xDomainRange={[0, (this.state.ICP90 + 10000)]}
-          xTicks={10}
-          yTicks={10}
-        />
-        <h1 className = 'analysis-text'> Group Cost </h1>
-        <Legend
-          data= {[
-            {
-              key: 'Group Cost Curve',
-              color: 'purple'
-            }, {
-              key: 'P10',
-              color: 'green'
-            }, {
-              key: 'P50',
-              color: 'pink'
-            }, {
-              key: 'p90',
-              color: 'brown'
-            }
-          ]}
-          dataId={'key'}
-          horizontal
-          config = {[
-            {color: 'purple'},
-            {color: 'green'},
-            {color: 'pink'},
-            {color: 'brown'}
-          ]}
-          styles = {{
-            '.legend': {
-              backgroundColor: '#f9f9f9',
-              borderRadius: '2px',
-              fontSize: '0.8em',
-              marginLeft: '40px',
-              maxWidth: '50%',
-              fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
-            }
-          }}/>
-        <LineChart
-          data={
-            [
+              this.state.GBgraphData,
               this.state.GCgraphData,
-              [{x: this.state.GCP10, y: 0}, {x: this.state.GCP10, y: this.state.GCMax}],
-              [{x: this.state.GCP50, y: 0}, {x: this.state.GCP50, y: this.state.GCMax}],
-              [{x: this.state.GCP90, y: 0}, {x: this.state.GCP90, y: this.state.GCMax}]
+              [{x: this.state.GBP10, y: 0}, {x: this.state.GBP10, y: this.state.GBMax}],
+              [{x: this.state.GBP50, y: 0}, {x: this.state.GBP50, y: this.state.GBMax}],
+              [{x: this.state.GBP90, y: 0}, {x: this.state.GBP90, y: this.state.GBMax}]
             ]
           }
           width={1000}
@@ -315,11 +268,12 @@ class AnalysisOne extends React.Component {
           interpolate={'cardinal'}
           grid
           verticalGrid
-          lineColors={['purple', 'green', 'pink', 'brown']}
-          xDomainRange={[0, (this.state.GCP90 + 10000)]}
+          lineColors={['orange', 'green', 'cyan', 'red', 'black']}
+          xDomainRange={[0, (this.state.GBP90 + 10000)]}
           xTicks={10}
           yTicks={10}
         />
+
         <button className = 'spacer-button' onClick = {() => { location.href = '/element-estimations' }}>
           Next
         </button>
