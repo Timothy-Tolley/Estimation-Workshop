@@ -1,6 +1,7 @@
 const environment = process.env.NODE_ENV || 'development'
 const config = require('../../knexfile')[environment]
 const connection = require('knex')(config)
+// const {brierScore} = require('brier-score')
 
 module.exports = {
   getBothBriers,
@@ -39,7 +40,9 @@ function getBothBriers (input, testConn) {
 }
 
 function addBrierOne (input, testConn) {
-  // const brierScore =
+  // const brierScoreOne = brierScore({
+
+  // })
   const conn = testConn || connection
   return conn('trivia_one')
     .insert({
@@ -54,12 +57,15 @@ function addBrierOne (input, testConn) {
       upper_limit_four: input.data.question4.upper_limit,
       lower_limit_five: input.data.question5.lower_limit,
       upper_limit_five: input.data.question5.upper_limit
-      // brier_score: brierScore
+      // brier_score: brierScoreOne
     })
 }
 
 function addBrierTwo (input, testConn) {
-  // const brierScore =
+  // const brierScoreTwo = brierScore({
+  //   probability: ,
+  //   outcome:
+  // })
   const conn = testConn || connection
   return conn('trivia_two')
     .insert({
@@ -74,6 +80,6 @@ function addBrierTwo (input, testConn) {
       upper_limit_four: input.data.question4.upper_limit,
       lower_limit_five: input.data.question5.lower_limit,
       upper_limit_five: input.data.question5.upper_limit
-      // brier_score: brierScore
+      // brier_score: brierScoreTwo
     })
 }

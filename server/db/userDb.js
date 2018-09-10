@@ -6,7 +6,9 @@ module.exports = {
   addUser,
   updateComplete,
   checkComplete,
-  getGroup
+  getGroup,
+  getEmail,
+  updateEmailPrefs
 }
 
 function checkComplete (input, testConn) {
@@ -53,4 +55,68 @@ function getGroup (input, testConn) {
       user_id: input
     })
     .select('group_id')
+}
+
+function getEmail (input, testConn) {
+  const conn = testConn || connection
+  return conn('users')
+    .where({
+      user_id: input
+    })
+    .select('email', 'work_email')
+}
+
+function updateEmailPrefs (id, input, testConn) {
+  const conn = testConn || connection
+  if (input.correctCheck === 'No' && input.workEmailCheck === 'Yes') {
+    return conn('users')
+      .where({
+        user_id: id
+      })
+      .update({
+        work_email: input.updateEmail,
+        email: null
+      })
+  } else if (input.correctCheck === 'No' && input.workEmailCheck === 'No' && input.addEmailCheck === 'Yes') {
+    return conn('users')
+      .where({
+        user_id: id
+      })
+      .update({
+        email: input.updateEmail,
+        work_email: input.addWorkEmail
+      })
+  } else if (input.correctCheck !== 'No' && input.workEmailCheck === 'No' && input.addEmailCheck === 'Yes') {
+    return conn('users')
+      .where({
+        user_id: id
+      })
+      .update({
+        work_email: input.addWorkEmail
+      })
+  } else if (input.correctCheck !== 'No' && input.workEmailCheck === 'Yes') {
+    return conn('users')
+      .where({
+        user_id: id
+      })
+      .update({
+        work_email: input.correctCheck,
+        email: null
+      })
+  } else if (input.correctCheck === 'No' && input.workEmailCheck === 'No' && input.addEmailCheck === 'No') {
+    return conn('users')
+      .where({
+        user_id: id
+      })
+      .update({
+        work_email: null,
+        email: input.updateEmail
+      })
+  } else {
+    return conn('users')
+      .where({
+        user_id: id
+      })
+      .select()
+  }
 }

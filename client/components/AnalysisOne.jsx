@@ -1,33 +1,28 @@
 import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
-import {VictoryChart, VictoryLine, VictoryContainer} from 'victory'
 import _ from 'lodash'
-import {LineChart} from 'react-easy-chart'
+import {LineChart, Legend} from 'react-easy-chart'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      groupBenefitPess: null,
-      groupBenefitOpt: null,
-      groupBenefitLikely: null,
-      groupBenefitChance: null,
-      groupBenefitMean: null,
-      groupBenefitStDev: null,
-      groupBeneGraphData: [],
-      individualCost: [],
-      groupCostPess: [],
-      groupCostOpt: [],
-      groupCostLikely: [],
-      groupBenefitP10: null,
-      groupBenefitP50: null,
-      groupBenefitP90: null,
-      groupBenefitP100: null,
-      lognormalPDFp99: null,
-      lognormalPDFp50: null,
-      lognormalPDFp10: null,
-      lognormalPDFp90: null
+      GBgraphData: [],
+      GBP10: null,
+      GBP50: null,
+      GBP90: null,
+      GBP92: null,
+      ICgraphData: [],
+      ICP10: null,
+      ICP50: null,
+      ICP90: null,
+      ICP92: null,
+      GCgraphData: [],
+      GCP10: null,
+      GCP50: null,
+      GCP90: null,
+      GCP92: null
     }
   }
 
@@ -42,63 +37,106 @@ class AnalysisOne extends React.Component {
         user: userId
       })
       .then(res => {
-        let gcp = res.body.gcd.map(dataSet => {
-          return dataSet.pessimistic
-        })
-        let gco = res.body.gcd.map(dataSet => {
-          return dataSet.optimistic
-        })
-        let gcl = res.body.gcd.map(dataSet => {
-          return dataSet.likely
-        })
+        // GROUP BENEFIT
         // array for group benefit calculations
-        let groupBeneArray = [
+        let GBArray = [
           res.body.gbd[0].pessimistic,
           res.body.gbd[0].optimistic,
           res.body.gbd[0].likely
         ]
-
-        // regular mean + stdev
-        let mean = jStat.mean(groupBeneArray)
-        let std = jStat.stdev(groupBeneArray, true)
-        let meanMathLog = Math.log(mean)
-        let stdMathLog = Math.log(std)
+        // mean + stdev
+        let gbMean = jStat.mean(GBArray)
+        let gbStd = jStat.stdev(GBArray, true)
+        let gbMeanMathLog = Math.log(gbMean)
+        let gbStdMathLog = Math.log(gbStd)
         // p values
-        let p10 = jStat.lognormal.inv(0.1, meanMathLog, stdMathLog)
-        let p50 = jStat.lognormal.inv(0.5, meanMathLog, stdMathLog)
-        let p90 = jStat.lognormal.inv(0.9, meanMathLog, stdMathLog)
-        let p99 = jStat.lognormal.inv(0.99, meanMathLog, stdMathLog)
-        // log mean and stDev
-        // let logMean = jStat.lognormal.mean(mean, std)
-        // let logVariance = jStat.lognormal.variance(mean, std)
-        // let logStDev = Math.sqrt(logVariance)
-        //
-        let pdfp99 = jStat.lognormal.pdf(p99, meanMathLog, stdMathLog)
+        let GBP10 = jStat.lognormal.inv(0.1, gbMeanMathLog, gbStdMathLog)
+        let GBP50 = jStat.lognormal.inv(0.5, gbMeanMathLog, gbStdMathLog)
+        let GBP90 = jStat.lognormal.inv(0.9, gbMeanMathLog, gbStdMathLog)
+        let GBP92 = jStat.lognormal.inv(0.92, gbMeanMathLog, gbStdMathLog)
         // graph results
-        let xVals = _.range(0, p99, (p99 / 1000))
-        let graphData = xVals.map(xVal => {
-          let yVal = jStat.lognormal.pdf(xVal, meanMathLog, stdMathLog)
-          return {x: xVal, y: yVal}
+        let GBxVals = _.range(0, GBP92, (GBP92 / 500))
+        let GByVals = []
+        let GBgraphData = GBxVals.map(xVal => {
+          let GByVal = jStat.lognormal.pdf(xVal, gbMeanMathLog, gbStdMathLog)
+          GByVals.push(GByVal)
+          return {x: xVal, y: GByVal}
         })
+        let GBMax = Math.max(...GByVals)
+
+        // INDIVIDUAL COST
+        // array for ID calculations
+        let ICArray = [
+          res.body.icd[0].pessimistic,
+          res.body.icd[0].optimistic,
+          res.body.icd[0].likely
+        ]
+        // mean + stdev
+        let ICMean = jStat.mean(ICArray)
+        let ICStDev = jStat.stdev(ICArray, true)
+        let ICMeanMathLog = Math.log(ICMean)
+        let ICStDevMathLog = Math.log(ICStDev)
+        // p values
+        let ICP10 = jStat.lognormal.inv(0.1, ICMeanMathLog, ICStDevMathLog)
+        let ICP50 = jStat.lognormal.inv(0.5, ICMeanMathLog, ICStDevMathLog)
+        let ICP90 = jStat.lognormal.inv(0.9, ICMeanMathLog, ICStDevMathLog)
+        let ICP92 = jStat.lognormal.inv(0.92, ICMeanMathLog, ICStDevMathLog)
+        // graph results
+        let ICxVals = _.range(0, ICP92, (ICP92 / 500))
+        let ICyVals = []
+        let ICgraphData = ICxVals.map(xVal => {
+          let ICyVal = jStat.lognormal.pdf(xVal, ICMeanMathLog, ICStDevMathLog)
+          ICyVals.push(ICyVal)
+          return {x: xVal, y: ICyVal}
+        })
+        let ICMax = Math.max(...ICyVals)
+
+        // GROUP COST
+        // array for ID calculations
+        let GCArray = []
+        res.body.gcd.forEach(dataset =>
+          GCArray.push(dataset.pessimistic, dataset.optimistic, dataset.likely)
+        )
+        // mean + stdev
+        let GCMean = jStat.mean(GCArray)
+        let GCStDev = jStat.stdev(GCArray, true)
+        let GCMeanMathLog = Math.log(GCMean)
+        let GCStDevMathLog = Math.log(GCStDev)
+        // p values
+        let GCP10 = jStat.lognormal.inv(0.1, GCMeanMathLog, GCStDevMathLog)
+        let GCP50 = jStat.lognormal.inv(0.5, GCMeanMathLog, GCStDevMathLog)
+        let GCP90 = jStat.lognormal.inv(0.9, GCMeanMathLog, GCStDevMathLog)
+        let GCP92 = jStat.lognormal.inv(0.92, GCMeanMathLog, GCStDevMathLog)
+        // graph results
+        let GCxVals = _.range(0, GCP92, (GCP92 / 500))
+        let GCyVals = []
+        let GCgraphData = GCxVals.map(xVal => {
+          let GCyVal = jStat.lognormal.pdf(xVal, GCMeanMathLog, GCStDevMathLog)
+          GCyVals.push(GCyVal)
+          return {x: xVal, y: GCyVal}
+        })
+        let GCMax = Math.max(...GCyVals)
 
         // add all to state
         this.setState({
-          groupBenefitPess: res.body.gbd[0].pessimistic,
-          groupBenefitOpt: res.body.gbd[0].optimistic,
-          groupBenefitLikely: res.body.gbd[0].likely,
-          groupBenefitChance: res.body.gbd[0].chance_of_success,
-          groupBenefitMean: meanMathLog,
-          groupBenefitStDev: stdMathLog,
-          groupBeneGraphData: graphData,
-          groupBenefitP10: p10,
-          groupBenefitP50: p50,
-          groupBenefitP90: p90,
-          groupBenefitP100: p99,
-          individualCost: res.body.icd,
-          groupCostPess: gcp,
-          groupCostOpt: gco,
-          groupCostLikely: gcl,
-          lognormalPDFp99: pdfp99
+          GBgraphData: GBgraphData,
+          GBP10: GBP10,
+          GBP50: GBP50,
+          GBP90: GBP90,
+          GBP92: GBP92,
+          GBMax: GBMax,
+          ICgraphData: ICgraphData,
+          ICP10: ICP10,
+          ICP50: ICP50,
+          ICP90: ICP90,
+          ICP92: ICP92,
+          ICMax: ICMax,
+          GCgraphData: GCgraphData,
+          GCP10: GCP10,
+          GCP50: GCP50,
+          GCP90: GCP90,
+          GCP92: GCP92,
+          GCMax: GCMax
         })
       })
     // eslint-disable-next-line no-console
@@ -111,142 +149,177 @@ class AnalysisOne extends React.Component {
         <h1 className = 'analysis-text'>
           Analysis One
         </h1>
-        <h1 className = 'analysis-text'>
-          Victory Chart - x axis range - 0 - 4,000,000
-        </h1>
-        <VictoryChart maxDomain = {{x: 4000000}} height={400} width={900} padding={100}
-          containerComponent={<VictoryContainer responsive={false}/>}
-        >
-          <VictoryLine
-            data={this.state.groupBeneGraphData}
-            style={{data: {stroke: '#c43a31', strokeWidth: 0.5}}}
-          />
-
-        </VictoryChart>
-        <h1 className = 'analysis-text'>
-          React Easy Chart - x axis range - 0 - 400,000
-        </h1>
+        <h1 className = 'analysis-text'> Group Benefit </h1>
+        <Legend
+          data= {[
+            {
+              key: 'Group Benefit Curve',
+              color: 'orange'
+            }, {
+              key: 'P10',
+              color: 'cyan'
+            }, {
+              key: 'P50',
+              color: 'red'
+            }, {
+              key: 'p90',
+              color: 'black'
+            }
+          ]}
+          dataId={'key'}
+          horizontal
+          config = {[
+            {color: 'orange'},
+            {color: 'cyan'},
+            {color: 'red'},
+            {color: 'black'}
+          ]}
+          styles = {{
+            '.legend': {
+              backgroundColor: '#f9f9f9',
+              borderRadius: '2px',
+              fontSize: '0.8em',
+              marginLeft: '40px',
+              maxWidth: '50%',
+              fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
+            }
+          }}/>
         <LineChart
           data={
             [
-              this.state.groupBeneGraphData,
-              [{x: this.state.groupBenefitP90, y: 0}, {x: this.state.groupBenefitP90, y: 0.0000004}],
-              [{x: this.state.groupBenefitP10, y: 0}, {x: this.state.groupBenefitP10, y: 0.0000004}],
-              [{x: this.state.groupBenefitP50, y: 0}, {x: this.state.groupBenefitP50, y: 0.0000004}]
+              this.state.GBgraphData,
+              [{x: this.state.GBP10, y: 0}, {x: this.state.GBP10, y: this.state.GBMax}],
+              [{x: this.state.GBP50, y: 0}, {x: this.state.GBP50, y: this.state.GBMax}],
+              [{x: this.state.GBP90, y: 0}, {x: this.state.GBP90, y: this.state.GBMax}]
             ]
           }
-          width={900}
+          width={1000}
           height={400}
-          margin={{top: 10, right: 30, bottom: 30, left: 100}}
+          margin={{top: 40, right: 5, bottom: 30, left: 100}}
           axes
           axisLabels={{x: 'X Axis', y: 'Y Axis'}}
           interpolate={'cardinal'}
           grid
           verticalGrid
-          lineColors={['pink', 'cyan', 'red', 'black']}
-          xDomainRange={[0, 400000]}
+          lineColors={['orange', 'cyan', 'red', 'black']}
+          xDomainRange={[0, (this.state.GBP90 + 10000)]}
+          xTicks={10}
+          yTicks={10}
         />
-
-        <h1 className = 'analysis-text'>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - MEAN (Log)= {this.state.groupBenefitMean}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - STANDARD DEVIATION (Log)= {this.state.groupBenefitStDev}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - P10 = {this.state.groupBenefitP10}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - P50 = {this.state.groupBenefitP50}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - P90 = {this.state.groupBenefitP90}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - P100 = {this.state.groupBenefitP100}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - lognormal.pdf where x: p100 --- y: {this.state.lognormalPDFp99}
-          </p>
-        </h1>
-        <h1 className = 'analysis-text'>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - Pessimistic = {this.state.groupBenefitPess}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - Optimistic = {this.state.groupBenefitOpt}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - Likely = {this.state.groupBenefitLikely}
-          </p>
-          <p className = 'analysis-text-small' >
-                  Benefit Estimate Group - Chance of Success = {this.state.groupBenefitChance}
-          </p>
-        </h1>
-        <h1 className = 'analysis-text'>
-          {this.state.individualCost.map((cost, idx) => {
-            return (
-              <div key = {idx}>
-                <p className = 'analysis-text-small' >
-                  Cost Estimate Individual - Pessimistic = {cost.pessimistic}
-                </p>
-                <p className = 'analysis-text-small' >
-                  Cost Estimate Individual - Optimistic = {cost.optimistic}
-                </p>
-                <p className = 'analysis-text-small' >
-                  Cost Estimate Individual - Likely = {cost.likely}
-                </p>
-              </div>
-            )
-          })}
-        </h1>
-
-        <h1 className = 'analysis-text'>
-          <p className = 'analysis-text-small' >
-            Pessimistic results (group)
-          </p>
-          {this.state.groupCostPess.map((data, idx) => {
-            return (
-              <div key = {idx}>
-                <p className = 'analysis-text-small' >
-                  {data}
-                </p>
-              </div>
-            )
-          })}
-        </h1>
-
-        <h1 className = 'analysis-text'>
-          <p className = 'analysis-text-small' >
-            Optimistic results (group)
-          </p>
-          {this.state.groupCostOpt.map((data, idx) => {
-            return (
-              <div key = {idx}>
-                <p className = 'analysis-text-small' >
-                  {data}
-                </p>
-              </div>
-            )
-          })}
-        </h1>
-
-        <h1 className = 'analysis-text'>
-          <p className = 'analysis-text-small' >
-            Likely results (group)
-          </p>
-          {this.state.groupCostLikely.map((data, idx) => {
-            return (
-              <div key = {idx}>
-                <p className = 'analysis-text-small' >
-                  {data}
-                </p>
-              </div>
-            )
-          })}
-        </h1>
-
+        <h1 className = 'analysis-text'> Individual Cost </h1>
+        <Legend
+          data= {[
+            {
+              key: 'Individual Cost Curve',
+              color: 'red'
+            }, {
+              key: 'P10',
+              color: 'blue'
+            }, {
+              key: 'P50',
+              color: 'green'
+            }, {
+              key: 'p90',
+              color: 'orange'
+            }
+          ]}
+          dataId={'key'}
+          horizontal
+          config = {[
+            {color: 'red'},
+            {color: 'blue'},
+            {color: 'green'},
+            {color: 'orange'}
+          ]}
+          styles = {{
+            '.legend': {
+              backgroundColor: '#f9f9f9',
+              borderRadius: '2px',
+              fontSize: '0.8em',
+              marginLeft: '40px',
+              maxWidth: '50%',
+              fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
+            }
+          }}/>
+        <LineChart
+          data={
+            [
+              this.state.ICgraphData,
+              [{x: this.state.ICP10, y: 0}, {x: this.state.ICP10, y: this.state.ICMax}],
+              [{x: this.state.ICP50, y: 0}, {x: this.state.ICP50, y: this.state.ICMax}],
+              [{x: this.state.ICP90, y: 0}, {x: this.state.ICP90, y: this.state.ICMax}]
+            ]
+          }
+          width={1000}
+          height={400}
+          margin={{top: 40, right: 5, bottom: 30, left: 100}}
+          axes
+          axisLabels={{x: 'X Axis', y: 'Y Axis'}}
+          interpolate={'cardinal'}
+          grid
+          verticalGrid
+          lineColors={['red', 'blue', 'green', 'orange']}
+          xDomainRange={[0, (this.state.ICP90 + 10000)]}
+          xTicks={10}
+          yTicks={10}
+        />
+        <h1 className = 'analysis-text'> Group Cost </h1>
+        <Legend
+          data= {[
+            {
+              key: 'Group Cost Curve',
+              color: 'purple'
+            }, {
+              key: 'P10',
+              color: 'green'
+            }, {
+              key: 'P50',
+              color: 'pink'
+            }, {
+              key: 'p90',
+              color: 'brown'
+            }
+          ]}
+          dataId={'key'}
+          horizontal
+          config = {[
+            {color: 'purple'},
+            {color: 'green'},
+            {color: 'pink'},
+            {color: 'brown'}
+          ]}
+          styles = {{
+            '.legend': {
+              backgroundColor: '#f9f9f9',
+              borderRadius: '2px',
+              fontSize: '0.8em',
+              marginLeft: '40px',
+              maxWidth: '50%',
+              fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
+            }
+          }}/>
+        <LineChart
+          data={
+            [
+              this.state.GCgraphData,
+              [{x: this.state.GCP10, y: 0}, {x: this.state.GCP10, y: this.state.GCMax}],
+              [{x: this.state.GCP50, y: 0}, {x: this.state.GCP50, y: this.state.GCMax}],
+              [{x: this.state.GCP90, y: 0}, {x: this.state.GCP90, y: this.state.GCMax}]
+            ]
+          }
+          width={1000}
+          height={400}
+          margin={{top: 40, right: 5, bottom: 30, left: 100}}
+          axes
+          axisLabels={{x: 'X Axis', y: 'Y Axis'}}
+          interpolate={'cardinal'}
+          grid
+          verticalGrid
+          lineColors={['purple', 'green', 'pink', 'brown']}
+          xDomainRange={[0, (this.state.GCP90 + 10000)]}
+          xTicks={10}
+          yTicks={10}
+        />
         <button className = 'spacer-button' onClick = {() => { location.href = '/element-estimations' }}>
           Next
         </button>

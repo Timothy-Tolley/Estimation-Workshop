@@ -9,6 +9,9 @@ module.exports = {
 
 function addGroupBenefit (input, testDb) {
   const conn = testDb || connection
+  const compPess = input.data.pessimistic * (input.data.chance_of_success / 100)
+  const compOti = input.data.optimistic * (input.data.chance_of_success / 100)
+  const compLike = input.data.likely * (input.data.chance_of_success / 100)
   return conn('group_benefit')
     .where('group_id', input.group_id)
     .select()
@@ -16,9 +19,9 @@ function addGroupBenefit (input, testDb) {
       if (rows.length === 0) {
         return conn('group_benefit')
           .insert({
-            pessimistic: input.data.pessimistic,
-            optimistic: input.data.optimistic,
-            likely: input.data.likely,
+            pessimistic: compPess,
+            optimistic: compOti,
+            likely: compLike,
             chance_of_success: input.data.chance_of_success,
             group_id: input.group_id
           })

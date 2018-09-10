@@ -3,6 +3,7 @@ exports.up = (knex, Promise) => {
     table.increments('user_id').primary()
     table.string('name')
     table.string('email')
+    table.string('work_email')
     table.integer('group_id')
     table.boolean('completed_sign_up')
     table.boolean('completed_group_benefit')

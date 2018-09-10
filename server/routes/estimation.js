@@ -3,7 +3,6 @@ const express = require('express')
 const groupBenefitDb = require('../db/groupBenefitDb')
 const individualCostDb = require('../db/individualCostDb')
 const elementsCostDb = require('../db/elementsCostDb')
-const wbsDb = require('../db/wbsDb')
 
 const router = express.Router()
 
@@ -36,7 +35,7 @@ router.get('/analysis-one', (req, res) => {
 
 router.get('/analysis-two/:id', (req, res) => {
   const userId = Number(req.params.id)
-  wbsDb.getCostData(userId)
+  elementsCostDb.getCostData(userId)
     .then(data => {
       res.json(data)
     })
