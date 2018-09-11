@@ -10,12 +10,27 @@ router.get('/analysis-one', (req, res) => {
   const groupId = Number(req.query.group)
   const userId = Number(req.query.user)
   let gbd = null
-  let icd = null
   groupBenefitDb.getGroupBenefitData(groupId)
     .then(data => {
       gbd = data
       return individualCostDb.getOwnCostData(userId)
     })
+    .then(data => {
+      res.json({
+        gbd,
+        icd: data
+      })
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
+router.get('/analysis-one-2', (req, res) => {
+  const groupId = Number(req.query.group)
+  const userId = Number(req.query.user)
+  let icd = null
+  individualCostDb.getOwnCostData(userId)
     .then(data => {
       icd = data
       return individualCostDb.getGroupCostData(groupId)
@@ -24,7 +39,6 @@ router.get('/analysis-one', (req, res) => {
     .then(data => {
       res.json({
         icd,
-        gbd,
         gcd: data
       })
     })

@@ -28,7 +28,7 @@ class AnalysisOne extends React.Component {
   componentDidMount () {
     const groupId = localStorage.getItem('group_id')
     const userId = localStorage.getItem('user_id')
-    const analysisOneUrl = '/api/v1/estimation/analysis-one'
+    const analysisOneUrl = '/api/v1/estimation/analysis-one-2'
     request
       .get(analysisOneUrl)
       .query({
