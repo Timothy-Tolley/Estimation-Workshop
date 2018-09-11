@@ -39,7 +39,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_one',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A Spade ($)',
+              title: 'A Spade: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -53,7 +53,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_one',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: A Spade ($)',
+              title: ' A Spade: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -67,7 +67,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_one',
               type: 'text',
-              title: 'Likely Cost Estimate for: A Spade ($)',
+              title: 'A Spade: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -85,7 +85,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_two',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A Digger for a day ($)',
+              title: 'A Digger for a day: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -99,7 +99,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_two',
               type: 'text',
-              title: 'Optimistic Cost Estimate for:  A Digger for a day ($)',
+              title: 'A Digger for a day: Optimistic Cost Estimate  ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -113,7 +113,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_two',
               type: 'text',
-              title: 'Likely Cost Estimate for:  A Digger for a day ($)',
+              title: 'A Digger for a day: Likely Cost Estimate  ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -131,7 +131,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_three',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A worker for 8 hours ($)',
+              title: 'A worker for 8 hours: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -145,7 +145,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_three',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: A worker for 8 hours ($)',
+              title: 'A worker for 8 hours: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -159,7 +159,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_three',
               type: 'text',
-              title: 'Likely Cost Estimate for: A worker for 8 hours ($)',
+              title: 'A worker for 8 hours: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -177,7 +177,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_four',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: 10 small native trees  ($)',
+              title: '10 small native trees: Pessimistic Cost Estimate  ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -191,7 +191,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_four',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: 10 small native trees ($)',
+              title: '10 small native trees: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -205,7 +205,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_four',
               type: 'text',
-              title: 'Likely Cost Estimate for: 10 small native trees ($)',
+              title: '10 small native trees: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -223,7 +223,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_five',
               type: 'text',
-              title: 'Pessimistic Cost Estimate for: A bag of cement ($)',
+              title: 'A bag of cement: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -237,7 +237,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_five',
               type: 'text',
-              title: 'Optimistic Cost Estimate for: A bag of cement ($)',
+              title: 'A bag of cement: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -251,7 +251,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_five',
               type: 'text',
-              title: 'Likely Cost Estimate for: A bag of cement ($)',
+              title: 'A bag of cement: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {

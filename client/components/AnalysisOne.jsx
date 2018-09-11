@@ -2,7 +2,7 @@ import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
 import _ from 'lodash'
-import {AreaChart, Legend} from 'react-easy-chart'
+import {LineChart, Legend} from 'react-easy-chart'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -58,7 +58,7 @@ class AnalysisOne extends React.Component {
         let GBP10 = jStat.lognormal.inv(0.1, gbMean, gbStd)
         let GBP50 = jStat.lognormal.inv(0.5, gbMean, gbStd)
         let GBP90 = jStat.lognormal.inv(0.9, gbMean, gbStd)
-        let GBP99 = jStat.lognormal.inv(0.99, gbMean, gbStd)
+        let GBP99 = jStat.lognormal.inv(0.999, gbMean, gbStd)
         // graph results
         let GBxVals = _.range(0, GBP99, (GBP99 / 100))
         let GByVals = []
@@ -85,7 +85,7 @@ class AnalysisOne extends React.Component {
         let ICP10 = jStat.lognormal.inv(0.1, ICMean, ICStDev)
         let ICP50 = jStat.lognormal.inv(0.5, ICMean, ICStDev)
         let ICP90 = jStat.lognormal.inv(0.9, ICMean, ICStDev)
-        let ICP99 = jStat.lognormal.inv(0.99, ICMean, ICStDev)
+        let ICP99 = jStat.lognormal.inv(0.999, ICMean, ICStDev)
         // graph results
         let ICxVals = _.range(0, ICP99, (ICP99 / 100))
         let ICyVals = []
@@ -113,7 +113,7 @@ class AnalysisOne extends React.Component {
         let GCP10 = jStat.lognormal.inv(0.1, GCMean, GCStDev)
         let GCP50 = jStat.lognormal.inv(0.5, GCMean, GCStDev)
         let GCP90 = jStat.lognormal.inv(0.9, GCMean, GCStDev)
-        let GCP99 = jStat.lognormal.inv(0.99, GCMean, GCStDev)
+        let GCP99 = jStat.lognormal.inv(0.999, GCMean, GCStDev)
         // graph results
         let GCxVals = _.range(0, GCP99, (GCP99 / 100))
         let GCyVals = []
@@ -166,17 +166,17 @@ class AnalysisOne extends React.Component {
           <Legend
             data= {[
               {
-                key: 'Group Benefit Curve',
+                key: "Group's agreed estimate of Benefit * Chance of Success",
                 color: 'red'
               }, {
-                key: 'Individual Cost Curve',
-                color: 'lightBlue'
+                key: 'Your personal estimate of Cost',
+                color: 'blue'
               }, {
                 key: 'Group Benefit P10',
                 color: 'cyan'
               }, {
                 key: 'Group Benefit P50',
-                color: 'yellow'
+                color: 'purple'
               }, {
                 key: 'Group Benefit p90',
                 color: 'green'
@@ -186,9 +186,9 @@ class AnalysisOne extends React.Component {
             horizontal
             config = {[
               {color: 'red'},
-              {color: 'lightBlue'},
+              {color: 'blue'},
               {color: 'cyan'},
-              {color: 'yellow'},
+              {color: 'purple'},
               {color: 'green'}
             ]}
             styles = {{
@@ -201,8 +201,8 @@ class AnalysisOne extends React.Component {
                 fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
               }
             }}/>
-          <AreaChart
-            areaColors={['red', 'lightBlue', 'cyan', 'yellow', 'green']}
+          <LineChart
+            lineColors={['red', 'blue', 'cyan', 'purple', 'green']}
             noAreaGradient
             data={
               [
@@ -240,17 +240,17 @@ class AnalysisOne extends React.Component {
           <Legend
             data= {[
               {
-                key: 'Group Benefit Curve',
-                color: 'red'
+                key: "Group's agreed estimate of Benefit * Chance of Success",
+                color: 'green'
               }, {
                 key: 'Group Cost Curve',
-                color: 'lightGrey'
+                color: 'orange'
               }, {
                 key: 'Group Benefit P10',
                 color: 'blue'
               }, {
                 key: 'Group Benefit P50',
-                color: 'green'
+                color: 'pink'
               }, {
                 key: 'Group Benefit p90',
                 color: 'purple'
@@ -259,10 +259,10 @@ class AnalysisOne extends React.Component {
             dataId={'key'}
             horizontal
             config = {[
-              {color: 'yellow'},
-              {color: 'lightGrey'},
-              {color: 'blue'},
               {color: 'green'},
+              {color: 'orange'},
+              {color: 'blue'},
+              {color: 'pink'},
               {color: 'purple'}
             ]}
             styles = {{
@@ -275,8 +275,8 @@ class AnalysisOne extends React.Component {
                 fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
               }
             }}/>
-          <AreaChart
-            areaColors={['yellow', 'lightGrey', 'blue', 'green', 'purple']}
+          <LineChart
+            lineColors={['green', 'orange', 'blue', 'pink', 'purple']}
             noAreaGradient
             data={
               [

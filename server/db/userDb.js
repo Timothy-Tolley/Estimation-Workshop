@@ -23,7 +23,6 @@ function checkComplete (input, testConn) {
 function addUser (input, testDb) {
   const conn = testDb || connection
   return conn('users')
-    .returning('user_id')
     .insert({
       name: input.name,
       email: input.email,

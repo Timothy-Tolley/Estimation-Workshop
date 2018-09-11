@@ -17,8 +17,8 @@ class AnalysisThree extends React.Component {
       .get(analysisThreeUrl)
       .then(res => {
         this.setState({
-          brierScore1: res.body.brier1,
-          brierScore2: res.body.brier2
+          brierScore1: res.body[0].brier1,
+          brierScore2: res.body[0].brier2
         })
       })
   }
@@ -30,7 +30,7 @@ class AnalysisThree extends React.Component {
           Your Original Score: {this.state.brierScore1}
         </h1>
         <h1 className = 'analysis-text'>
-          Your Score After Training: {this.state.brierScore1}
+          Your Score After Training: {this.state.brierScore2}
         </h1>
         <button className = 'spacer-button' onClick = {() => { location.href = '/final' }}>
           Next
