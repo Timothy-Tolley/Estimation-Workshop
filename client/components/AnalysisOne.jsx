@@ -172,13 +172,13 @@ class AnalysisOne extends React.Component {
                 key: 'Individual Cost Curve',
                 color: 'blue'
               }, {
-                key: 'P10',
+                key: 'Group Benefit P10',
                 color: 'cyan'
               }, {
-                key: 'P50',
+                key: 'Group Benefit P50',
                 color: 'red'
               }, {
-                key: 'p90',
+                key: 'Group Benefit p90',
                 color: 'purple'
               }
             ]}
@@ -225,13 +225,13 @@ class AnalysisOne extends React.Component {
           />
           <h1 className = 'analysis-text'>
             <p className = 'analysis-text-small' >
-                  p 10 - {this.state.GBP10}
+                  Group Benefit p 10 (Chance Adjusted) - {this.state.GBP10}
             </p>
             <p className = 'analysis-text-small' >
-                  p 50 - {this.state.GBP50}
+                  Group Benefit p 50 (Chance Adjusted) - {this.state.GBP50}
             </p>
             <p className = 'analysis-text-small' >
-                  p 90 - {this.state.GBP90}
+                  Group Benefit p 90 (Chance Adjusted) - {this.state.GBP90}
             </p>
           </h1>
           <h1 className = 'analysis-text'> Group Benefit vs Group Cost </h1>
@@ -244,13 +244,13 @@ class AnalysisOne extends React.Component {
                 key: 'Group Cost Curve',
                 color: 'green'
               }, {
-                key: 'P10',
+                key: 'Group Benefit P10',
                 color: 'cyan'
               }, {
-                key: 'P50',
+                key: 'Group Benefit P50',
                 color: 'red'
               }, {
-                key: 'p90',
+                key: 'Group Benefit p90',
                 color: 'purple'
               }
             ]}
