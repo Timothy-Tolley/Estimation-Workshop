@@ -17,8 +17,8 @@ class AnalysisThree extends React.Component {
       .get(analysisThreeUrl)
       .then(res => {
         this.setState({
-          brierScore1: res.body.brier_one,
-          brierScore2: res.body.brier_two
+          brierScore1: res.body.brier1,
+          brierScore2: res.body.brier2
         })
       })
   }

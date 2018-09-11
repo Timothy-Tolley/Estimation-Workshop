@@ -295,7 +295,6 @@ class AnalysisOne extends React.Component {
             interpolate={'cardinal'}
             grid
             verticalGrid
-            // lineColors={['orange', 'green', 'cyan', 'yellow', 'purple']}
             xTicks={10}
             yTicks={10}
           />

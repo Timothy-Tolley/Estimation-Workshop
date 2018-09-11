@@ -16,7 +16,7 @@ class SplitTwo extends React.Component {
       .get(url)
       .then(res =>
         this.setState({
-          brier: res.body
+          brier: res.body.brier_score_total
         }))
   }
 
