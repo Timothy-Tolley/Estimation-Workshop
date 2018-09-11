@@ -124,7 +124,7 @@ class GroupBenefit extends React.Component {
     }
     return (
       <div className = 'survey-page'>
-        <Survey.Survey json={benefitJSON} onComplete={this.sendDataToServer}/>
+        <Survey.Survey json={benefitJSON} onComplete={this.sendDataToServer} showPrevButton={false}/>
       </div>
     )
   }

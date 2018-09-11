@@ -268,7 +268,7 @@ class ElementEstimation extends React.Component {
     }
     return (
       <div className = 'survey-page'>
-        <Survey.Survey json={elementEstimationJSON} onComplete={this.sendDataToServer}/>
+        <Survey.Survey json={elementEstimationJSON} onComplete={this.sendDataToServer} showPrevButton={false}/>
       </div>
     )
   }

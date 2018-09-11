@@ -97,7 +97,7 @@ class CostEstimate extends React.Component {
     }
     return (
       <div className = 'survey-page'>
-        <Survey.Survey json={costJSON} onComplete={this.sendDataToServer}/>
+        <Survey.Survey json={costJSON} onComplete={this.sendDataToServer} showPrevButton={false}/>
       </div>
     )
   }
