@@ -2,7 +2,7 @@ import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
 import _ from 'lodash'
-import {LineChart, Legend} from 'react-easy-chart'
+import {AreaChart, Legend} from 'react-easy-chart'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -167,29 +167,29 @@ class AnalysisOne extends React.Component {
             data= {[
               {
                 key: 'Group Benefit Curve',
-                color: 'orange'
+                color: 'red'
               }, {
                 key: 'Individual Cost Curve',
-                color: 'blue'
+                color: 'lightBlue'
               }, {
                 key: 'Group Benefit P10',
                 color: 'cyan'
               }, {
                 key: 'Group Benefit P50',
-                color: 'red'
+                color: 'yellow'
               }, {
                 key: 'Group Benefit p90',
-                color: 'purple'
+                color: 'green'
               }
             ]}
             dataId={'key'}
             horizontal
             config = {[
-              {color: 'orange'},
-              {color: 'blue'},
-              {color: 'cyan'},
               {color: 'red'},
-              {color: 'purple'}
+              {color: 'lightBlue'},
+              {color: 'cyan'},
+              {color: 'yellow'},
+              {color: 'green'}
             ]}
             styles = {{
               '.legend': {
@@ -201,7 +201,9 @@ class AnalysisOne extends React.Component {
                 fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
               }
             }}/>
-          <LineChart
+          <AreaChart
+            areaColors={['red', 'lightBlue', 'cyan', 'yellow', 'green']}
+            noAreaGradient
             data={
               [
                 this.state.GBgraphData,
@@ -219,7 +221,7 @@ class AnalysisOne extends React.Component {
             interpolate={'cardinal'}
             grid
             verticalGrid
-            lineColors={['orange', 'blue', 'cyan', 'red', 'purple']}
+
             xTicks={10}
             yTicks={10}
           />
@@ -239,16 +241,16 @@ class AnalysisOne extends React.Component {
             data= {[
               {
                 key: 'Group Benefit Curve',
-                color: 'orange'
+                color: 'red'
               }, {
                 key: 'Group Cost Curve',
-                color: 'green'
+                color: 'lightGrey'
               }, {
                 key: 'Group Benefit P10',
-                color: 'cyan'
+                color: 'blue'
               }, {
                 key: 'Group Benefit P50',
-                color: 'red'
+                color: 'green'
               }, {
                 key: 'Group Benefit p90',
                 color: 'purple'
@@ -257,10 +259,10 @@ class AnalysisOne extends React.Component {
             dataId={'key'}
             horizontal
             config = {[
-              {color: 'orange'},
+              {color: 'yellow'},
+              {color: 'lightGrey'},
+              {color: 'blue'},
               {color: 'green'},
-              {color: 'cyan'},
-              {color: 'red'},
               {color: 'purple'}
             ]}
             styles = {{
@@ -273,7 +275,9 @@ class AnalysisOne extends React.Component {
                 fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
               }
             }}/>
-          <LineChart
+          <AreaChart
+            areaColors={['yellow', 'lightGrey', 'blue', 'green', 'purple']}
+            noAreaGradient
             data={
               [
                 this.state.GBgraphData,
@@ -291,7 +295,7 @@ class AnalysisOne extends React.Component {
             interpolate={'cardinal'}
             grid
             verticalGrid
-            lineColors={['orange', 'green', 'cyan', 'red', 'purple']}
+            // lineColors={['orange', 'green', 'cyan', 'yellow', 'purple']}
             xTicks={10}
             yTicks={10}
           />
