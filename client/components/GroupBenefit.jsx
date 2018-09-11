@@ -53,7 +53,7 @@ class GroupBenefit extends React.Component {
             {
               name: 'pessimistic',
               type: 'text',
-              title: 'Please enter your pessimistic estimate for benefit ($)',
+              title: 'Think about the worst case. Include even less plausible problems like extra costs to obtain and/or return things, things getting broken, delays for whatever cause, consumables, protective equipment, insurances, things having to be un-done and re-done, etc. Please enter your pessimistic estimate for benefit ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -71,7 +71,7 @@ class GroupBenefit extends React.Component {
             {
               name: 'optimistic',
               type: 'text',
-              title: 'Next, please enter your optimistic estimate for benefit ($)',
+              title: 'Next, please enter your optimistic estimate for benefit, the best you could imagine in your wildest dreams ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -89,7 +89,7 @@ class GroupBenefit extends React.Component {
             {
               name: 'likely',
               type: 'text',
-              title: 'Next, please enter your likely estimate for benefit ($)',
+              title: 'Forget the previous estimates. What does your instinct tell you, how much it is most likely to be? ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {

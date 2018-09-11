@@ -49,7 +49,10 @@ class ElementEstimation extends React.Component {
                 }
               ],
               isRequired: true
-            },
+            }
+          ]
+        }, {name: 'page2',
+          questions: [
             {
               name: 'optimistic_one',
               type: 'text',
@@ -63,7 +66,10 @@ class ElementEstimation extends React.Component {
                 }
               ],
               isRequired: true
-            },
+            }
+          ]
+        }, {name: 'page3',
+          questions: [
             {
               name: 'likely_one',
               type: 'text',
@@ -79,41 +85,12 @@ class ElementEstimation extends React.Component {
               isRequired: true
             }
           ]
-        },
-        {name: 'page2',
+        }, {name: 'page4',
           questions: [
             {
               name: 'pessimistic_two',
               type: 'text',
-              title: 'A Digger for a day: Pessimistic Cost Estimate ($)',
-              placeHolder: 'Amount in $',
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 1,
-                  maxValue: 500000
-                }
-              ],
-              isRequired: true
-            },
-            {
-              name: 'optimistic_two',
-              type: 'text',
-              title: 'A Digger for a day: Optimistic Cost Estimate  ($)',
-              placeHolder: 'Amount in $',
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 1,
-                  maxValue: 500000
-                }
-              ],
-              isRequired: true
-            },
-            {
-              name: 'likely_two',
-              type: 'text',
-              title: 'A Digger for a day: Likely Cost Estimate  ($)',
+              title: 'A Digger for a Day: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -125,41 +102,46 @@ class ElementEstimation extends React.Component {
               isRequired: true
             }
           ]
-        },
-        {name: 'page3',
+        }, {name: 'page5',
+          questions: [
+            {
+              name: 'optimistic_two',
+              type: 'text',
+              title: 'A Digger for a Day : Optimistic Cost Estimate ($)',
+              placeHolder: 'Amount in $',
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 1,
+                  maxValue: 500000
+                }
+              ],
+              isRequired: true
+            }
+          ]
+        }, {name: 'page6',
+          questions: [
+            {
+              name: 'likely_two',
+              type: 'text',
+              title: 'A Digger for a Day: Likely Cost Estimate ($)',
+              placeHolder: 'Amount in $',
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 1,
+                  maxValue: 500000
+                }
+              ],
+              isRequired: true
+            }
+          ]
+        }, {name: 'page7',
           questions: [
             {
               name: 'pessimistic_three',
               type: 'text',
-              title: 'A worker for 8 hours: Pessimistic Cost Estimate ($)',
-              placeHolder: 'Amount in $',
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 1,
-                  maxValue: 500000
-                }
-              ],
-              isRequired: true
-            },
-            {
-              name: 'optimistic_three',
-              type: 'text',
-              title: 'A worker for 8 hours: Optimistic Cost Estimate ($)',
-              placeHolder: 'Amount in $',
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 1,
-                  maxValue: 500000
-                }
-              ],
-              isRequired: true
-            },
-            {
-              name: 'likely_three',
-              type: 'text',
-              title: 'A worker for 8 hours: Likely Cost Estimate ($)',
+              title: '10 Native Trees: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -171,41 +153,46 @@ class ElementEstimation extends React.Component {
               isRequired: true
             }
           ]
-        },
-        {name: 'page4',
+        }, {name: 'page8',
+          questions: [
+            {
+              name: 'optimistic_three',
+              type: 'text',
+              title: ' 10 Native Trees: Optimistic Cost Estimate ($)',
+              placeHolder: 'Amount in $',
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 1,
+                  maxValue: 500000
+                }
+              ],
+              isRequired: true
+            }
+          ]
+        }, {name: 'page9',
+          questions: [
+            {
+              name: 'likely_three',
+              type: 'text',
+              title: '10 Native Trees: Likely Cost Estimate ($)',
+              placeHolder: 'Amount in $',
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 1,
+                  maxValue: 500000
+                }
+              ],
+              isRequired: true
+            }
+          ]
+        }, {name: 'page10',
           questions: [
             {
               name: 'pessimistic_four',
               type: 'text',
-              title: '10 small native trees: Pessimistic Cost Estimate  ($)',
-              placeHolder: 'Amount in $',
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 1,
-                  maxValue: 500000
-                }
-              ],
-              isRequired: true
-            },
-            {
-              name: 'optimistic_four',
-              type: 'text',
-              title: '10 small native trees: Optimistic Cost Estimate ($)',
-              placeHolder: 'Amount in $',
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 1,
-                  maxValue: 500000
-                }
-              ],
-              isRequired: true
-            },
-            {
-              name: 'likely_four',
-              type: 'text',
-              title: '10 small native trees: Likely Cost Estimate ($)',
+              title: 'A workman for a Day: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
@@ -217,41 +204,80 @@ class ElementEstimation extends React.Component {
               isRequired: true
             }
           ]
-        },
-        {name: 'page5',
+        }, {name: 'page11',
+          questions: [
+            {
+              name: 'optimistic_four',
+              type: 'text',
+              title: ' A workman for a Day: Optimistic Cost Estimate ($)',
+              placeHolder: 'Amount in $',
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 1,
+                  maxValue: 500000
+                }
+              ],
+              isRequired: true
+            }
+          ]
+        }, {name: 'page12',
+          questions: [
+            {
+              name: 'likely_four',
+              type: 'text',
+              title: 'A workman for a Day: Likely Cost Estimate ($)',
+              placeHolder: 'Amount in $',
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 1,
+                  maxValue: 500000
+                }
+              ],
+              isRequired: true
+            }
+          ]
+        }, {name: 'page13',
           questions: [
             {
               name: 'pessimistic_five',
               type: 'text',
-              title: 'A bag of cement: Pessimistic Cost Estimate ($)',
+              title: 'A bag of Cement: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
-            },
+            }
+          ]
+        }, {name: 'page14',
+          questions: [
             {
               name: 'optimistic_five',
               type: 'text',
-              title: 'A bag of cement: Optimistic Cost Estimate ($)',
+              title: 'A bag of Cement: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 10000
+                  maxValue: 500000
                 }
               ],
               isRequired: true
-            },
+            }
+          ]
+        }, {name: 'page15',
+          questions: [
             {
               name: 'likely_five',
               type: 'text',
-              title: 'A bag of cement: Likely Cost Estimate ($)',
+              title: 'A bag of Cement: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
               validators: [
                 {

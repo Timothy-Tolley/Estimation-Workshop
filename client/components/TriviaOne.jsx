@@ -51,6 +51,13 @@ class TriviaOne extends React.Component {
                   name: 'upper_limit',
                   title: 'upper boundary'
                 }
+              ],
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 0,
+                  maxValue: 1000
+                }
               ]
             }
           ]
@@ -100,6 +107,13 @@ class TriviaOne extends React.Component {
                   name: 'upper_limit',
                   title: 'upper boundary'
                 }
+              ],
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 0,
+                  maxValue: 1000
+                }
               ]
             }
           ]
@@ -148,6 +162,13 @@ class TriviaOne extends React.Component {
                 }, {
                   name: 'upper_limit',
                   title: 'upper boundary'
+                }
+              ],
+              validators: [
+                {
+                  type: 'numeric',
+                  minValue: 0,
+                  maxValue: 1000
                 }
               ]
             }

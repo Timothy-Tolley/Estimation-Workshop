@@ -14,6 +14,7 @@ import AnalysisThree from './AnalysisThree'
 import AnalysisTwo from './AnalysisTwo'
 import ElementEstimations from './ElementEstimations'
 import Final from './Final'
+import AnalysisOneP2 from './AnalysisOneP2'
 
 class App extends React.Component {
   render () {
@@ -26,6 +27,7 @@ class App extends React.Component {
           <Route exact path='/split-two' component={SplitTwo} />
           <Route exact path='/cost' component={CostEstimate} />
           <Route exact path='/analysis-one' component={AnalysisOne} />
+          <Route exact path='/analysis-one-2' component={AnalysisOneP2} />
           <Route exact path='/trivia-one' component={TriviaOne} />
           <Route exact path='/split-three' component={SplitThree} />
           <Route exact path='/trivia-two' component={TriviaTwo} />
