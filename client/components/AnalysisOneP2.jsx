@@ -2,7 +2,9 @@ import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
 import _ from 'lodash'
-import {LineChart, Legend} from 'react-easy-chart'
+// import {LineChart, Legend} from 'react-easy-chart'
+import {Scatter} from 'react-chartjs-2'
+import 'chartjs-plugin-annotation'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -110,14 +112,115 @@ class AnalysisOne extends React.Component {
   }
 
   render () {
+    const data = {
+      datasets: [
+        {
+          label: 'Your personal estimate of Cost',
+          fill: false,
+          backgroundColor: 'red',
+          borderColor: 'red',
+          pointBorderColor: 'red',
+          pointBorderWidth: 1,
+          pointHoverBackgroundColor: 'red',
+          pointHoverBorderColor: 'orange',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          data: this.state.ICgraphData
+        },
+        {
+          label: "Aggregate of all your group's personal Cost estimates",
+          fill: false,
+          backgroundColor: 'green',
+          borderColor: 'green',
+          pointBorderColor: 'green',
+          pointBorderWidth: 1,
+          pointHoverBackgroundColor: 'green',
+          pointHoverBorderColor: 'lightGreen',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          data: this.state.GCgraphData
+        }
+      ]
+    }
+    const chartOptions = {
+      showScale: true,
+      pointDot: true,
+      showLines: true,
+      title: {
+        display: false
+      },
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 20,
+          fontSize: 14,
+          fontColor: 'black',
+          padding: 10
+        }
+      },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || ''
+
+            if (label) {
+              label += ': ' + tooltipItem.xLabel
+            }
+            return label
+          }
+        }
+      },
+      annotation: {
+        drawTime: 'afterDatasetsDraw',
+        annotations: [
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.ICP10,
+            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderWidth: 2,
+            label: {
+              content: 'P10',
+              enabled: true,
+              position: 'center'
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.ICP50,
+            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderWidth: 2,
+            label: {
+              content: 'P50',
+              enabled: true,
+              position: 'center'
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.ICP90,
+            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderWidth: 2,
+            label: {
+              content: 'P90',
+              enabled: true,
+              position: 'center'
+            }
+          }
+        ]
+      }
+
+    }
     return (
       <div className = 'analysis-page'>
-        <h1 className = 'analysis-text'>
-          Analysis One
-        </h1>
         <h1 className = 'analysis-text'> Your personal estimate of Cost vs Aggregate of all your group&#39;s personal Cost estimates </h1>
         {this.state.active && <div>
-          <Legend
+          {/* <Legend
             data= {[
               {
                 key: 'Your personal estimate of Cost',
@@ -158,6 +261,7 @@ class AnalysisOne extends React.Component {
           <LineChart
             lineColors={['orange', 'blue', 'cyan', 'purple', 'green']}
             noAreaGradient
+            dataPoints
             data={
               [
                 this.state.GCgraphData,
@@ -178,7 +282,10 @@ class AnalysisOne extends React.Component {
 
             xTicks={10}
             yTicks={10}
-          />
+          /> */}
+
+          <Scatter data={data} options={chartOptions} width={1000}height={400}/>
+
         </div>
         }
 
