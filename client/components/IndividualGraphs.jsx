@@ -169,3 +169,131 @@
 //           xTicks={10}
 //           yTicks={10}
 //         /> */}
+
+{ /* <Legend
+            data= {[
+              {
+                key: 'Your personal estimate of Cost',
+                color: 'orange'
+              }, {
+                key: "Aggregate of all your group's personal Cost estimates",
+                color: 'blue'
+              }, {
+                key: 'Individual Cost P10',
+                color: 'cyan'
+              }, {
+                key: 'Individual Cost P50',
+                color: 'purple'
+              }, {
+                key: 'Individual Cost p90',
+                color: 'green'
+              }
+            ]}
+            dataId={'key'}
+            horizontal
+            config = {[
+              {color: 'orange'},
+              {color: 'blue'},
+              {color: 'cyan'},
+              {color: 'purple'},
+              {color: 'green'}
+            ]}
+            styles = {{
+              '.legend': {
+                backgroundColor: '#f9f9f9',
+                borderRadius: '2px',
+                fontSize: '0.8em',
+                marginLeft: '40px',
+                maxWidth: '50%',
+                fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
+              }
+            }}/>
+          <LineChart
+            lineColors={['orange', 'blue', 'cyan', 'purple', 'green']}
+            noAreaGradient
+            dataPoints
+            data={
+              [
+                this.state.GCgraphData,
+                this.state.ICgraphData,
+                [{x: this.state.ICP10, y: 0}, {x: this.state.ICP10, y: this.state.ICGCMax}],
+                [{x: this.state.ICP50, y: 0}, {x: this.state.ICP50, y: this.state.ICGCMax}],
+                [{x: this.state.ICP90, y: 0}, {x: this.state.ICP90, y: this.state.ICGCMax}]
+              ]
+            }
+            width={1000}
+            height={400}
+            margin={{top: 40, right: 5, bottom: 60, left: 60}}
+            axes
+            axisLabels={{x: 'Dollar Value ($)', y: 'Y Axis'}}
+            interpolate={'cardinal'}
+            grid
+            verticalGrid
+
+            xTicks={10}
+            yTicks={10}
+          /> */ }
+{/* <Legend
+            data= {[
+              {
+                key: "Group's agreed estimate of Benefit * Chance of Success",
+                color: 'red'
+              }, {
+                key: 'Your personal estimate of Cost',
+                color: 'blue'
+              }, {
+                key: 'Group Benefit P10',
+                color: 'cyan'
+              }, {
+                key: 'Group Benefit P50',
+                color: 'purple'
+              }, {
+                key: 'Group Benefit p90',
+                color: 'green'
+              }
+            ]}
+            dataId={'key'}
+            horizontal
+            config = {[
+              {color: 'red'},
+              {color: 'blue'},
+              {color: 'cyan'},
+              {color: 'purple'},
+              {color: 'green'}
+            ]}
+            styles = {{
+              '.legend': {
+                backgroundColor: '#f9f9f9',
+                borderRadius: '2px',
+                fontSize: '0.8em',
+                marginLeft: '40px',
+                maxWidth: '50%',
+                fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
+              }
+            }}/>
+          <LineChart
+            lineColors={['red', 'blue', 'cyan', 'purple', 'green']}
+            noAreaGradient
+            data={
+              [
+                this.state.GBgraphData,
+                this.state.ICgraphData,
+                [{x: this.state.GBP10, y: 0}, {x: this.state.GBP10, y: this.state.GBICMax}],
+                [{x: this.state.GBP50, y: 0}, {x: this.state.GBP50, y: this.state.GBICMax}],
+                [{x: this.state.GBP90, y: 0}, {x: this.state.GBP90, y: this.state.GBICMax}]
+              ]
+            }
+            width={1000}
+            height={400}
+            margin={{top: 40, right: 5, bottom: 60, left: 60}}
+            axes
+            axisLabels={{x: 'Dollar Value ($)', y: 'Y Axis'}}
+            interpolate={'cardinal'}
+            grid
+            verticalGrid
+
+            xTicks={10}
+            yTicks={10}
+          /> */}
+
+          // import {LineChart, Legend} from 'react-easy-chart'

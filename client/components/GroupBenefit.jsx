@@ -13,7 +13,7 @@ class GroupBenefit extends React.Component {
 
   componentDidMount () {
     let userId = localStorage.getItem('user_id')
-    userId = JSON.parse(userId)
+    // userId = JSON.parse(userId)
     const url = `/api/v1/users/group/${userId}`
     request
       .get(url)

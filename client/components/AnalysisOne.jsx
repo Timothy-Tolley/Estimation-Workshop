@@ -2,7 +2,9 @@ import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
 import _ from 'lodash'
-import {LineChart, Legend} from 'react-easy-chart'
+
+import {Scatter} from 'react-chartjs-2'
+import 'chartjs-plugin-annotation'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -110,6 +112,110 @@ class AnalysisOne extends React.Component {
   }
 
   render () {
+    const data = {
+      datasets: [
+        {
+          label: "Group's agreed estimate of Benefit * Chance of Success",
+          fill: false,
+          backgroundColor: 'red',
+          borderColor: 'red',
+          pointBorderColor: 'red',
+          pointBorderWidth: 1,
+          pointHoverBackgroundColor: 'red',
+          pointHoverBorderColor: 'orange',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          data: this.state.GBgraphData
+        },
+        {
+          label: 'Your personal estimate of Cost',
+          fill: false,
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+          pointBorderColor: 'blue',
+          pointBorderWidth: 1,
+          pointHoverBackgroundColor: 'blue',
+          pointHoverBorderColor: 'lightBlue',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          data: this.state.ICgraphData
+        }
+      ]
+    }
+    const chartOptions = {
+      showScale: true,
+      pointDot: true,
+      showLines: true,
+      title: {
+        display: false
+      },
+      legend: {
+        display: true,
+        labels: {
+          boxWidth: 20,
+          fontSize: 14,
+          fontColor: 'black',
+          padding: 10
+        }
+      },
+      tooltips: {
+        callbacks: {
+          label: function (tooltipItem, data) {
+            var label = data.datasets[tooltipItem.datasetIndex].label || ''
+
+            if (label) {
+              label += ': ' + tooltipItem.xLabel
+            }
+            return label
+          }
+        }
+      },
+      annotation: {
+        drawTime: 'afterDatasetsDraw',
+        annotations: [
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.GBP10,
+            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderWidth: 2,
+            label: {
+              content: 'P10',
+              enabled: true,
+              position: 'center'
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.GBP50,
+            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderWidth: 2,
+            label: {
+              content: 'P50',
+              enabled: true,
+              position: 'center'
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.GBP90,
+            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderWidth: 2,
+            label: {
+              content: 'P90',
+              enabled: true,
+              position: 'center'
+            }
+          }
+        ]
+      }
+
+    }
     return (
       <div className = 'analysis-page'>
         <h1 className = 'analysis-text'>
@@ -117,68 +223,7 @@ class AnalysisOne extends React.Component {
         </h1>
         <h1 className = 'analysis-text'> Group Benefit vs Individual Cost </h1>
         {this.state.active && <div>
-          <Legend
-            data= {[
-              {
-                key: "Group's agreed estimate of Benefit * Chance of Success",
-                color: 'red'
-              }, {
-                key: 'Your personal estimate of Cost',
-                color: 'blue'
-              }, {
-                key: 'Group Benefit P10',
-                color: 'cyan'
-              }, {
-                key: 'Group Benefit P50',
-                color: 'purple'
-              }, {
-                key: 'Group Benefit p90',
-                color: 'green'
-              }
-            ]}
-            dataId={'key'}
-            horizontal
-            config = {[
-              {color: 'red'},
-              {color: 'blue'},
-              {color: 'cyan'},
-              {color: 'purple'},
-              {color: 'green'}
-            ]}
-            styles = {{
-              '.legend': {
-                backgroundColor: '#f9f9f9',
-                borderRadius: '2px',
-                fontSize: '0.8em',
-                marginLeft: '40px',
-                maxWidth: '50%',
-                fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
-              }
-            }}/>
-          <LineChart
-            lineColors={['red', 'blue', 'cyan', 'purple', 'green']}
-            noAreaGradient
-            data={
-              [
-                this.state.GBgraphData,
-                this.state.ICgraphData,
-                [{x: this.state.GBP10, y: 0}, {x: this.state.GBP10, y: this.state.GBICMax}],
-                [{x: this.state.GBP50, y: 0}, {x: this.state.GBP50, y: this.state.GBICMax}],
-                [{x: this.state.GBP90, y: 0}, {x: this.state.GBP90, y: this.state.GBICMax}]
-              ]
-            }
-            width={1000}
-            height={400}
-            margin={{top: 40, right: 5, bottom: 60, left: 60}}
-            axes
-            axisLabels={{x: 'Dollar Value ($)', y: 'Y Axis'}}
-            interpolate={'cardinal'}
-            grid
-            verticalGrid
-
-            xTicks={10}
-            yTicks={10}
-          />
+          <Scatter data={data} options={chartOptions} width={1000}height={400}/>
         </div>
         }
         <button className = 'spacer-button' onClick = {() => { location.href = '/analysis-one-2' }}>
