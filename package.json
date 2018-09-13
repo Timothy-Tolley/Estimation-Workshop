@@ -10,8 +10,9 @@
     "start": "node server/index.js",
     "build": "webpack --config ./client/webpack.config.js",
     "dev": "nodemon --watch server/index.js & yarn build --watch",
-    "test": "jest --watch --noStackTrace",
+    "test": "jest --watch",
     "webpack": "webpack --config ./client/webpack.config.js",
+    "knex": "knex --knexfile ./server/db/knexfile.js",
     "postinstall": "webpack --config ./client/webpack.config.js && knex migrate:latest"
   },
   "engines": {
@@ -50,10 +51,12 @@
     "sqlite3": "^4.0.2",
     "superagent": "^3.8.3",
     "survey-react": "^1.0.39",
+    "test": "^0.6.0",
     "webpack": "^4.16.3"
   },
   "devDependencies": {
     "nodemon": "^1.18.3",
-    "webpack-cli": "^3.1.0"
+    "webpack-cli": "^3.1.0",
+    "jest": "^23.6.0"
   }
 }

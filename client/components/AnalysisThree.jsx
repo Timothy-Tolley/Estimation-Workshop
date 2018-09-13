@@ -28,8 +28,7 @@ class AnalysisThree extends React.Component {
       <div className = 'analysis-page'>
         <h1 className = 'analysis-text'>
           Your Original Score: {this.state.brierScore1}
-        </h1>
-        <h1 className = 'analysis-text'>
+          <br/>
           Your Score After Training: {this.state.brierScore2}
         </h1>
         <button className = 'spacer-button' onClick = {() => { location.href = '/final' }}>

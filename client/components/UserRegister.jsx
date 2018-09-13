@@ -23,7 +23,7 @@ class UserRegister extends React.Component {
         if (res.status === 200) {
           setTimeout(() => {
             location.href = '/split-one'
-          }, 1500)
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console

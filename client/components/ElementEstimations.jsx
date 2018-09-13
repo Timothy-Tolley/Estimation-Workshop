@@ -8,13 +8,6 @@ class ElementEstimation extends React.Component {
     this.sendDataToServer = this.sendDataToServer.bind(this)
   }
 
-  // componentDidMount () {
-  //   const userId = localStorage.getItem('user_id')
-  //   const url = `/api/v1/users/update-gb${userId}`
-  //   request
-  //     .post(url)
-  // }
-
   sendDataToServer (survey) {
     const userId = localStorage.getItem('user_id')
     const url = `/api/v1/estimation/elements/${userId}`
@@ -23,7 +16,9 @@ class ElementEstimation extends React.Component {
       .send(survey.data)
       .then(res => {
         if (res.status === 200) {
-          location.href = '/analysis-two'
+          setTimeout(() => {
+            location.href = '/analysis-two'
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console
@@ -41,6 +36,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A Spade: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -58,6 +54,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: ' A Spade: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -75,6 +72,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A Spade: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -92,6 +90,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A Digger for a Day: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -109,6 +108,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A Digger for a Day : Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -126,6 +126,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A Digger for a Day: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -143,6 +144,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: '10 Native Trees: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -160,6 +162,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: ' 10 Native Trees: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -177,6 +180,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: '10 Native Trees: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -194,6 +198,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A workman for a Day: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -211,6 +216,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: ' A workman for a Day: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -228,6 +234,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A workman for a Day: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -245,6 +252,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A bag of Cement: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -262,6 +270,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A bag of Cement: Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -279,6 +288,7 @@ class ElementEstimation extends React.Component {
               type: 'text',
               title: 'A bag of Cement: Likely Cost Estimate ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',

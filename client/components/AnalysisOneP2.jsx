@@ -1,10 +1,9 @@
+import _ from 'lodash'
 import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
-import _ from 'lodash'
-// import {LineChart, Legend} from 'react-easy-chart'
-import {Scatter} from 'react-chartjs-2'
 import 'chartjs-plugin-annotation'
+import {Scatter} from 'react-chartjs-2'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
@@ -214,78 +213,12 @@ class AnalysisOne extends React.Component {
           }
         ]
       }
-
     }
     return (
       <div className = 'analysis-page'>
         <h1 className = 'analysis-text'> Your personal estimate of Cost vs Aggregate of all your group&#39;s personal Cost estimates </h1>
         {this.state.active && <div>
-          {/* <Legend
-            data= {[
-              {
-                key: 'Your personal estimate of Cost',
-                color: 'orange'
-              }, {
-                key: "Aggregate of all your group's personal Cost estimates",
-                color: 'blue'
-              }, {
-                key: 'Individual Cost P10',
-                color: 'cyan'
-              }, {
-                key: 'Individual Cost P50',
-                color: 'purple'
-              }, {
-                key: 'Individual Cost p90',
-                color: 'green'
-              }
-            ]}
-            dataId={'key'}
-            horizontal
-            config = {[
-              {color: 'orange'},
-              {color: 'blue'},
-              {color: 'cyan'},
-              {color: 'purple'},
-              {color: 'green'}
-            ]}
-            styles = {{
-              '.legend': {
-                backgroundColor: '#f9f9f9',
-                borderRadius: '2px',
-                fontSize: '0.8em',
-                marginLeft: '40px',
-                maxWidth: '50%',
-                fontFamily: '"Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif'
-              }
-            }}/>
-          <LineChart
-            lineColors={['orange', 'blue', 'cyan', 'purple', 'green']}
-            noAreaGradient
-            dataPoints
-            data={
-              [
-                this.state.GCgraphData,
-                this.state.ICgraphData,
-                [{x: this.state.ICP10, y: 0}, {x: this.state.ICP10, y: this.state.ICGCMax}],
-                [{x: this.state.ICP50, y: 0}, {x: this.state.ICP50, y: this.state.ICGCMax}],
-                [{x: this.state.ICP90, y: 0}, {x: this.state.ICP90, y: this.state.ICGCMax}]
-              ]
-            }
-            width={1000}
-            height={400}
-            margin={{top: 40, right: 5, bottom: 60, left: 60}}
-            axes
-            axisLabels={{x: 'Dollar Value ($)', y: 'Y Axis'}}
-            interpolate={'cardinal'}
-            grid
-            verticalGrid
-
-            xTicks={10}
-            yTicks={10}
-          /> */}
-
           <Scatter data={data} options={chartOptions} width={1000}height={400}/>
-
         </div>
         }
 

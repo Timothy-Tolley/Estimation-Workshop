@@ -24,7 +24,9 @@ class TriviaTwo extends React.Component {
       .on('error', (err) => alert(err.status))
       .then(res => {
         if (res.status === 200) {
-          location.href = '/analysis-three'
+          setTimeout(() => {
+            location.href = '/analysis-three'
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console
@@ -46,10 +48,26 @@ class TriviaTwo extends React.Component {
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary'
+                  title: 'lower boundary',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary'
+                  title: 'upper boundary',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }
               ],
               validators: [
@@ -81,6 +99,7 @@ class TriviaTwo extends React.Component {
               title: 'How confident are you that you are correct? (%)',
               isRequired: true,
               placeHolder: 'Confidence (%)',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -102,17 +121,26 @@ class TriviaTwo extends React.Component {
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary'
+                  title: 'lower boundary',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary'
-                }
-              ],
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 0,
-                  maxValue: 1000
+                  title: 'upper boundary',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }
               ]
             }
@@ -137,6 +165,7 @@ class TriviaTwo extends React.Component {
               title: 'How confident are you that you are correct? (%)',
               isRequired: true,
               placeHolder: 'Confidence (%)',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -158,17 +187,26 @@ class TriviaTwo extends React.Component {
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary'
+                  title: 'lower boundary',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary'
-                }
-              ],
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 0,
-                  maxValue: 1000
+                  title: 'upper boundary',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }
               ]
             }

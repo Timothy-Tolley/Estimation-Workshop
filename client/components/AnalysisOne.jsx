@@ -1,10 +1,9 @@
+import _ from 'lodash'
 import React from 'react'
 import jStat from 'jStat'
 import request from 'superagent'
-import _ from 'lodash'
-
-import {Scatter} from 'react-chartjs-2'
 import 'chartjs-plugin-annotation'
+import {Scatter} from 'react-chartjs-2'
 
 class AnalysisOne extends React.Component {
   constructor (props) {

@@ -13,7 +13,7 @@ class GroupBenefit extends React.Component {
 
   componentDidMount () {
     let userId = localStorage.getItem('user_id')
-    // userId = JSON.parse(userId)
+    userId = JSON.parse(userId)
     const url = `/api/v1/users/group/${userId}`
     request
       .get(url)
@@ -37,7 +37,9 @@ class GroupBenefit extends React.Component {
       .on('error', (err) => alert(err.status))
       .then(res => {
         if (res.status === 200) {
-          location.href = '/split-two'
+          setTimeout(() => {
+            location.href = '/split-two'
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console
@@ -55,6 +57,7 @@ class GroupBenefit extends React.Component {
               type: 'text',
               title: 'Think about the worst case. Include even less plausible problems like extra costs to obtain and/or return things, things getting broken, delays for whatever cause, consumables, protective equipment, insurances, things having to be un-done and re-done, etc. Please enter your pessimistic estimate for benefit ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -73,6 +76,7 @@ class GroupBenefit extends React.Component {
               type: 'text',
               title: 'Next, please enter your optimistic estimate for benefit, the best you could imagine in your wildest dreams ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -91,6 +95,7 @@ class GroupBenefit extends React.Component {
               type: 'text',
               title: 'Forget the previous estimates. What does your instinct tell you, how much it is most likely to be? ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -109,6 +114,7 @@ class GroupBenefit extends React.Component {
               type: 'text',
               title: 'Finally, please enter the percentage chance of success (%)',
               placeHolder: 'percentage chance (%)',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',

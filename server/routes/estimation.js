@@ -49,9 +49,17 @@ router.get('/analysis-one-2', (req, res) => {
 
 router.get('/analysis-two/:id', (req, res) => {
   const userId = Number(req.params.id)
+  let elementCost = []
   elementsCostDb.getCostData(userId)
     .then(data => {
-      res.json(data)
+      elementCost = data
+      return individualCostDb.getOwnCostData(userId)
+    })
+    .then(data => {
+      res.json({
+        elementCost,
+        individualCost: data
+      })
     })
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)

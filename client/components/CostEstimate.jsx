@@ -8,13 +8,6 @@ class CostEstimate extends React.Component {
     this.sendDataToServer = this.sendDataToServer.bind(this)
   }
 
-  componentDidMount () {
-    const userId = localStorage.getItem('user_id')
-    const url = `/api/v1/users/update-gb${userId}`
-    request
-      .post(url)
-  }
-
   sendDataToServer (survey) {
     const url = '/api/v1/estimation/cost'
     const groupId = localStorage.getItem('group_id')
@@ -28,7 +21,9 @@ class CostEstimate extends React.Component {
       })
       .then(res => {
         if (res.status === 200) {
-          location.href = '/analysis-one'
+          setTimeout(() => {
+            location.href = '/analysis-one'
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console
@@ -46,6 +41,7 @@ class CostEstimate extends React.Component {
               type: 'text',
               title: 'Please enter your pessimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -64,6 +60,7 @@ class CostEstimate extends React.Component {
               type: 'text',
               title: 'Next, please enter your optimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -82,6 +79,7 @@ class CostEstimate extends React.Component {
               type: 'text',
               title: 'Next, please enter your likely estimate for cost ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',

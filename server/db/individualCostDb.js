@@ -1,5 +1,5 @@
 const environment = process.env.NODE_ENV || 'development'
-const config = require('../../knexfile')[environment]
+const config = require('./knexfile')[environment]
 const connection = require('knex')(config)
 
 module.exports = {
@@ -20,11 +20,11 @@ function addIndividualCost (input, testDb) {
     })
 }
 
-function getOwnCostData (input, testConn) {
+function getOwnCostData (id, testConn) {
   const conn = testConn || connection
   return conn('individual_cost')
     .where({
-      user_id: input
+      user_id: id
     })
     .select('pessimistic', 'optimistic', 'likely')
 }
