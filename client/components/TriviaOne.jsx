@@ -49,7 +49,7 @@ class TriviaOne extends React.Component {
                 {
                   name: 'lower_limit',
                   title: 'lower boundary',
-                  inputType: 'number',
+                  // inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
@@ -60,7 +60,7 @@ class TriviaOne extends React.Component {
                 }, {
                   name: 'upper_limit',
                   title: 'upper boundary',
-                  inputType: 'number',
+                  // inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
@@ -92,7 +92,7 @@ class TriviaOne extends React.Component {
               title: 'How confident are you that you are correct? (%)',
               isRequired: true,
               placeHolder: 'Confidence (%)',
-              inputType: 'number',
+              // inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -115,7 +115,7 @@ class TriviaOne extends React.Component {
                 {
                   name: 'lower_limit',
                   title: 'lower boundary',
-                  inputType: 'number',
+                  // inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
@@ -126,7 +126,7 @@ class TriviaOne extends React.Component {
                 }, {
                   name: 'upper_limit',
                   title: 'upper boundary',
-                  inputType: 'number',
+                  // inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
@@ -158,7 +158,7 @@ class TriviaOne extends React.Component {
               title: 'How confident are you that you are correct? (%)',
               isRequired: true,
               placeHolder: 'Confidence (%)',
-              inputType: 'number',
+              // inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -181,7 +181,7 @@ class TriviaOne extends React.Component {
                 {
                   name: 'lower_limit',
                   title: 'lower boundary',
-                  inputType: 'number',
+                  // inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
@@ -192,7 +192,7 @@ class TriviaOne extends React.Component {
                 }, {
                   name: 'upper_limit',
                   title: 'upper boundary',
-                  inputType: 'number',
+                  // inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
