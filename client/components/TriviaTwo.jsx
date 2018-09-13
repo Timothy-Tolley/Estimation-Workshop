@@ -69,13 +69,6 @@ class TriviaTwo extends React.Component {
                     }
                   ]
                 }
-              ],
-              validators: [
-                {
-                  type: 'numeric',
-                  minValue: 0,
-                  maxValue: 1000
-                }
               ]
             }
           ]
