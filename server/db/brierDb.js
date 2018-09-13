@@ -39,12 +39,12 @@ function getBothBriers (input, testConn) {
 }
 
 function addBrierOne (input, testConn) {
-  const brierScoreOne = Number(calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '100'))
-  const brierScoreTwo = Number(calcTrueFalseBrier(input.data.tf_two, 'True', input.data.conf_two))
-  const brierScoreThree = Number(calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '200'))
-  const brierScoreFour = Number(calcTrueFalseBrier(input.data.tf_four, 'False', input.data.conf_four))
-  const brierScoreFive = Number(calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '300'))
-  const brierScoreTotal = Number((brierScoreOne + brierScoreTwo + brierScoreThree + brierScoreFour + brierScoreFive) / 5)
+  const brierScoreOne = calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '100')
+  const brierScoreTwo = calcTrueFalseBrier(input.data.tf_two, 'True', input.data.conf_two)
+  const brierScoreThree = calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '200')
+  const brierScoreFour = calcTrueFalseBrier(input.data.tf_four, 'False', input.data.conf_four)
+  const brierScoreFive = calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '300')
+  const brierScoreTotal = (brierScoreOne + brierScoreTwo + brierScoreThree + brierScoreFour + brierScoreFive) / 5
   const conn = testConn || connection
   return conn('trivia_one')
     .insert({
@@ -87,12 +87,12 @@ function calcLimitBrier (upper, lower, value) {
 }
 
 function addBrierTwo (input, testConn) {
-  const brierScoreOne = Number(calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '100'))
-  const brierScoreTwo = Number(calcTrueFalseBrier(input.data.tf_two, 'True', input.data.conf_two))
-  const brierScoreThree = Number(calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '200'))
-  const brierScoreFour = Number(calcTrueFalseBrier(input.data.tf_four, 'False', input.data.conf_four))
-  const brierScoreFive = Number(calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '300'))
-  const brierScoreTotal = Number((brierScoreOne + brierScoreTwo + brierScoreThree + brierScoreFour + brierScoreFive) / 5)
+  const brierScoreOne = calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '100')
+  const brierScoreTwo = calcTrueFalseBrier(input.data.tf_two, 'True', input.data.conf_two)
+  const brierScoreThree = calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '200')
+  const brierScoreFour = calcTrueFalseBrier(input.data.tf_four, 'False', input.data.conf_four)
+  const brierScoreFive = calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '300')
+  const brierScoreTotal = (brierScoreOne + brierScoreTwo + brierScoreThree + brierScoreFour + brierScoreFive) / 5
   const conn = testConn || connection
   return conn('trivia_two')
     .insert({
