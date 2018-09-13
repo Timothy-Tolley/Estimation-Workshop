@@ -13,7 +13,7 @@
     "test": "jest --watch",
     "webpack": "webpack --config ./client/webpack.config.js",
     "knex": "knex --knexfile ./server/db/knexfile.js",
-    "postinstall": "webpack --config ./client/webpack.config.js && knex migrate:latest"
+    "postinstall": "webpack --config ./client/webpack.config.js && knex --knexfile ./server/db/knexfile.js migrate:latest "
   },
   "engines": {
     "node": "^8.0.0",
