@@ -50,7 +50,6 @@ module.exports = {
 
 // process.env.DATABASE_URL means pick the database URL up from the heroku environment variable
 // set by $ heroku config:set DATABASE_URL='<the_database_url_from_the_last_step>' -a <app_name>
-// https://codeselfstudy.com/blog/deploy-node-postgres-heroku/
   production: Object.assign({
     connection: process.env.DATABASE_URL,
     seeds: {
