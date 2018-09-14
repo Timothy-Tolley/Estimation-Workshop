@@ -4,11 +4,14 @@ const connection = require('knex')(config)
 const {brierScore} = require('brier-score')
 
 module.exports = {
-  getBothBriers,
+
   getBrierOne,
   getBrierTwo,
   addBrierOne,
-  addBrierTwo
+  addBrierTwo,
+  getBothBriers,
+  calcLimitBrier,
+  calcTrueFalseBrier
 }
 
 function getBrierOne (input, testConn) {
@@ -18,7 +21,6 @@ function getBrierOne (input, testConn) {
       user_id: input
     })
     .first('brier_score_total')
-    // .select('brier_score_total')
 }
 
 function getBrierTwo (input, testConn) {
