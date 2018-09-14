@@ -4,7 +4,8 @@ const connection = require('knex')(config)
 
 module.exports = {
   addElements,
-  getCostData
+  getCostData,
+  getAllElementsData
 }
 
 function addElements (input, testDb) {
@@ -36,5 +37,11 @@ function getCostData (input, testConn) {
     .where({
       user_id: input
     })
+    .select()
+}
+
+function getAllElementsData (testConn) {
+  const conn = testConn || connection
+  return conn('wbs_estimates')
     .select()
 }

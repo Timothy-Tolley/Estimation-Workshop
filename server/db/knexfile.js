@@ -49,9 +49,6 @@ module.exports = {
   }, postgresDefaults),
 
   production: Object.assign({
-    connection: process.env.DATABASE_URL,
-    seeds: {
-      directory: path.join(__dirname, '../../tests/server/db/seeds')
-    }
+    connection: process.env.DATABASE_URL
   }, postgresDefaults)
 }

@@ -17,6 +17,17 @@ class AnalysisTwo extends React.Component {
       WgraphData: [],
       WMax: null
     }
+    this.createDataArray = this.createDataArray.bind(this)
+  }
+
+  createDataArray (pess, opt, likely) {
+    let pessLog = Math.log(pess)
+    let optLog = Math.log(opt)
+    let likeLog = Math.log(likely)
+    let logsArray = [pessLog, optLog, likeLog]
+    let meanLogs = jStat.mean(logsArray)
+    let stDevLogs = jStat.stdev(logsArray, true)
+    return [meanLogs, stDevLogs]
   }
 
   componentDidMount () {
@@ -25,65 +36,100 @@ class AnalysisTwo extends React.Component {
     request
       .get(analysisTwoUrl)
       .then(res => {
-        // ELEMENTS ESTIMATE
-        let elements = res.body.elementCost[0]
-        let pTot = elements.pessimistic_one + elements.pessimistic_two + elements.pessimistic_three + elements.pessimistic_four + elements.pessimistic_five
-        let oTot = elements.optimistic_one + elements.optimistic_two + elements.optimistic_three + elements.optimistic_four + elements.optimistic_five
-        let lTot = elements.likely_one + elements.likely_two + elements.likely_three + elements.likely_four + elements.likely_five
-        let wbsEstimates = [
-          Math.log(pTot),
-          Math.log(oTot),
-          Math.log(lTot)
-        ]
-        let wMean = jStat.mean(wbsEstimates)
-        let wStDev = jStat.stdev(wbsEstimates, true)
-        let wP10 = jStat.lognormal.inv(0.1, wMean, wStDev)
-        let wP50 = jStat.lognormal.inv(0.5, wMean, wStDev)
-        let wP90 = jStat.lognormal.inv(0.9, wMean, wStDev)
-        let wP99 = jStat.lognormal.inv(0.999, wMean, wStDev)
+        // ELEMENTS ESTIMATE -- Personal
+        let personalElements = res.body.userElementCost[0]
+        let MSDOne = this.createDataArray(personalElements.pessimistic_one, personalElements.optimistic_one, personalElements.likely_one)
+        let MSDTwo = this.createDataArray(personalElements.pessimistic_two, personalElements.optimistic_two, personalElements.likely_two)
+        let MSDThree = this.createDataArray(personalElements.pessimistic_three, personalElements.optimistic_three, personalElements.likely_three)
+        let MSDFour = this.createDataArray(personalElements.pessimistic_four, personalElements.optimistic_four, personalElements.likely_four)
+        let MSDFive = this.createDataArray(personalElements.pessimistic_five, personalElements.optimistic_five, personalElements.likely_five)
+        // all elements for a single user
+        let personalMeanArray = [MSDOne[0], MSDTwo[0], MSDThree[0], MSDFour[0], MSDFive[0]]
+        let personalStDevArray = [MSDOne[1], MSDTwo[1], MSDThree[1], MSDFour[1], MSDFive[1]]
+        let personalMeanMean = jStat.mean(personalMeanArray)
+        let personalMeanStDev = jStat.stdev(personalStDevArray, true)
+        // P values
+        let personalP10 = jStat.lognormal.inv(0.1, personalMeanMean, personalMeanStDev)
+        let personalP50 = jStat.lognormal.inv(0.5, personalMeanMean, personalMeanStDev)
+        let personalP90 = jStat.lognormal.inv(0.9, personalMeanMean, personalMeanStDev)
+        let personalP99 = jStat.lognormal.inv(0.999, personalMeanMean, personalMeanStDev)
         // graph results
-        let WxVals = _.range(0, wP99, (wP99 / 100))
-        let WyVals = []
-        let WgraphData = WxVals.map(xVal => {
-          let WyVal = jStat.lognormal.pdf(xVal, wMean, wStDev)
-          WyVals.push(WyVal)
-          return {x: xVal, y: WyVal}
+        let personalxVals = _.range(0, personalP99, (personalP99 / 100))
+        let personalyVals = []
+        let personalGraphData = personalxVals.map(xVal => {
+          let personalyVal = jStat.lognormal.pdf(xVal, personalMeanMean, personalMeanStDev)
+          personalyVals.push(personalyVal)
+          return {x: xVal, y: personalyVal}
         })
-        // INDIVIDUAL COST
-        // array for ID calculations
-        let individualCost = res.body.individualCost[0]
-        let ICArray = [
-          Math.log(individualCost.pessimistic),
-          Math.log(individualCost.optimistic),
-          Math.log(individualCost.likely)
-        ]
-        // mean + stdev
-        let ICMean = jStat.mean(ICArray)
-        let ICStDev = jStat.stdev(ICArray, true)
-        // p values
-        let ICP10 = jStat.lognormal.inv(0.1, ICMean, ICStDev)
-        let ICP50 = jStat.lognormal.inv(0.5, ICMean, ICStDev)
-        let ICP90 = jStat.lognormal.inv(0.9, ICMean, ICStDev)
-        let ICP99 = jStat.lognormal.inv(0.999, ICMean, ICStDev)
+
+        // all elements for all users
+        // all element one
+
+        let allUsers = res.body.allUsersData
+        // Element One
+        let roomElementOneArray = []
+        // Element Two
+        let roomElementTwoArray = []
+        // Element Three
+        let roomElementThreeArray = []
+        // Element Four
+        let roomElementFourArray = []
+        // Element Five
+        let roomElementFiveArray = []
+
+        allUsers.forEach(user => {
+          // one
+          roomElementOneArray.push(Math.log(user.pessimistic_one), Math.log(user.optimistic_one), Math.log(user.likely_one))
+          // two
+          roomElementTwoArray.push(Math.log(user.pessimistic_two), Math.log(user.optimistic_two), Math.log(user.likely_two))
+          // three
+          roomElementThreeArray.push(Math.log(user.pessimistic_three), Math.log(user.optimistic_three), Math.log(user.likely_three))
+          // four
+          roomElementFourArray.push(Math.log(user.pessimistic_four), Math.log(user.optimistic_four), Math.log(user.likely_four))
+          // five
+          roomElementFiveArray.push(Math.log(user.pessimistic_five), Math.log(user.optimistic_five), Math.log(user.likely_five))
+        })
+
+        let allUsersMeanOne = jStat.mean(roomElementOneArray)
+        let allUsersMeanTwo = jStat.mean(roomElementTwoArray)
+        let allUsersMeanThree = jStat.mean(roomElementThreeArray)
+        let allUsersMeanFour = jStat.mean(roomElementFourArray)
+        let allUsersMeanFive = jStat.mean(roomElementFiveArray)
+
+        let allUsersStDevOne = jStat.stdev(roomElementOneArray)
+        let allUsersStDevTwo = jStat.stdev(roomElementTwoArray)
+        let allUsersStDevThree = jStat.stdev(roomElementThreeArray)
+        let allUsersStDevFour = jStat.stdev(roomElementFourArray)
+        let allUsersStDevFive = jStat.stdev(roomElementFiveArray)
+
+        let roomAllElementsMeans = [allUsersMeanOne, allUsersMeanTwo, allUsersMeanThree, allUsersMeanFour, allUsersMeanFive]
+        let roomAllElementsStDevs = [allUsersStDevOne, allUsersStDevTwo, allUsersStDevThree, allUsersStDevFour, allUsersStDevFive]
+        let roomMeanMean = jStat.mean(roomAllElementsMeans)
+        let roomMeanStDev = jStat.mean(roomAllElementsStDevs, true)
+        // P values
+        let roomP10 = jStat.lognormal.inv(0.1, roomMeanMean, roomMeanStDev)
+        let roomP50 = jStat.lognormal.inv(0.5, roomMeanMean, roomMeanStDev)
+        let roomP90 = jStat.lognormal.inv(0.9, roomMeanMean, roomMeanStDev)
+        let roomP99 = jStat.lognormal.inv(0.999, roomMeanMean, roomMeanStDev)
         // graph results
-        let ICxVals = _.range(0, ICP99, (ICP99 / 100))
-        let ICyVals = []
-        let ICgraphData = ICxVals.map(xVal => {
-          let ICyVal = jStat.lognormal.pdf(xVal, ICMean, ICStDev)
-          ICyVals.push(ICyVal)
-          return {x: xVal, y: ICyVal}
+        let roomxVals = _.range(0, roomP99, (roomP99 / 100))
+        let roomyVals = []
+        let roomGraphData = roomxVals.map(xVal => {
+          let roomyVal = jStat.lognormal.pdf(xVal, roomMeanMean, roomMeanStDev)
+          roomyVals.push(roomyVal)
+          return {x: xVal, y: roomyVal}
         })
         // set all Data to State
         this.setState({
           active: true,
-          icP10: ICP10,
-          icP50: ICP50,
-          icP90: ICP90,
-          ICgraphData: ICgraphData,
-          wbsP10: wP10,
-          wbsP50: wP50,
-          wbsP90: wP90,
-          WgraphData: WgraphData
+          roomP10: roomP10,
+          roomP50: roomP50,
+          roomP90: roomP90,
+          roomGraphData: roomGraphData,
+          personalP10: personalP10,
+          personalP50: personalP50,
+          personalP90: personalP90,
+          personalGraphData: personalGraphData
         })
       })
   }
@@ -102,10 +148,10 @@ class AnalysisTwo extends React.Component {
           pointHoverBorderColor: 'orange',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
-          data: this.state.WgraphData
+          data: this.state.personalGraphData
         },
         {
-          label: 'Your personal estimate of Cost',
+          label: "Aggregate of Rooms' Element Based Estimates of Cost",
           fill: false,
           backgroundColor: 'green',
           borderColor: 'green',
@@ -115,7 +161,7 @@ class AnalysisTwo extends React.Component {
           pointHoverBorderColor: 'lightGreen',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
-          data: this.state.ICgraphData
+          data: this.state.roomGraphData
         }
       ]
     }
@@ -125,6 +171,25 @@ class AnalysisTwo extends React.Component {
       showLines: true,
       title: {
         display: false
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Probability'
+          },
+          ticks: {
+            callback: (value, index, values) => {
+              return ''
+            }
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Dollar Value ($)'
+          }
+        }]
       },
       legend: {
         display: true,
@@ -195,7 +260,9 @@ class AnalysisTwo extends React.Component {
     }
     return (
       <div className = 'analysis-page'>
-        <h1 className = 'analysis-text'> Your personal estimate of Cost vs Aggregate of all your group&#39;s personal Cost estimates </h1>
+        <h1 className = 'analysis-text'>
+        Your personal estimate of Cost vs Aggregate of all your group&#39;s personal Cost estimates
+        </h1>
         {this.state.active && <div>
           <Scatter data={data} options={chartOptions} width={1000}height={400}/>
         </div>

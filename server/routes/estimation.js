@@ -49,16 +49,16 @@ router.get('/analysis-one-2', (req, res) => {
 
 router.get('/analysis-two/:id', (req, res) => {
   const userId = Number(req.params.id)
-  let elementCost = []
+  let userElementCost = []
   elementsCostDb.getCostData(userId)
     .then(data => {
-      elementCost = data
-      return individualCostDb.getOwnCostData(userId)
+      userElementCost = data
+      return elementsCostDb.getAllElementsData()
     })
     .then(data => {
       res.json({
-        elementCost,
-        individualCost: data
+        userElementCost,
+        allUsersData: data
       })
     })
     .catch(err => {

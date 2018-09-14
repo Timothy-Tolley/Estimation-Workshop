@@ -25,8 +25,7 @@ class SplitTwo extends React.Component {
       <div className = 'spacer-page'>
         <h1 className = 'spacer-text'>
          Your Current Brier Score is: {this.state.brier}
-        </h1>
-        <h1 className = 'spacer-text'>
+          <br/>
          Please wait for Graham to explain the next steps before continuing..
         </h1>
         <button className = 'spacer-button' onClick = {() => { location.href = '/trivia-two' }}>

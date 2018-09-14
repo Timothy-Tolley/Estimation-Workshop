@@ -116,12 +116,12 @@ class AnalysisOne extends React.Component {
         {
           label: 'Your personal estimate of Cost',
           fill: false,
-          backgroundColor: 'red',
-          borderColor: 'red',
-          pointBorderColor: 'red',
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+          pointBorderColor: 'blue',
           pointBorderWidth: 1,
-          pointHoverBackgroundColor: 'red',
-          pointHoverBorderColor: 'orange',
+          pointHoverBackgroundColor: 'blue',
+          pointHoverBorderColor: 'lightBlue',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           data: this.state.ICgraphData
@@ -147,6 +147,25 @@ class AnalysisOne extends React.Component {
       showLines: true,
       title: {
         display: false
+      },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Probability'
+          },
+          ticks: {
+            callback: (value, index, values) => {
+              return ''
+            }
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Dollar Value ($)'
+          }
+        }]
       },
       legend: {
         display: true,

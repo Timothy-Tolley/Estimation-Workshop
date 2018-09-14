@@ -148,6 +148,25 @@ class AnalysisOne extends React.Component {
       title: {
         display: false
       },
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Probability'
+          },
+          ticks: {
+            callback: (value, index, values) => {
+              return ''
+            }
+          }
+        }],
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Dollar Value ($)'
+          }
+        }]
+      },
       legend: {
         display: true,
         labels: {
