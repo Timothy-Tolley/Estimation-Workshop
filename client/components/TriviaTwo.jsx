@@ -35,37 +35,37 @@ class TriviaTwo extends React.Component {
   }
 
   render () {
-    var triviaTwoJSON = {title: 'Please answer each question to the best of your ability',
+    var triviaTwoJSON = {title: 'Tests of your confidence in estimating with a range',
       pages: [
         {name: 'page1',
           questions: [
             {
               type: 'multipletext',
               name: 'question1',
-              title: 'Please provide two numbers between which you are 90% sure the height of your chair is between (cm) -- 100',
+              title: 'The Airbus A380 provides seating for 525 people in standard three-class configuration.  How many could it seat if all seats were economy class? ',
               isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary',
+                  title: 'I am 95% confident it is no less than',
                   inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
                       minValue: 0,
-                      maxValue: 1000
+                      maxValue: 10000
                     }
                   ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary',
+                  title: 'I am 95% confident it is no more than',
                   inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
                       minValue: 0,
-                      maxValue: 1000
+                      maxValue: 10000
                     }
                   ]
                 }
@@ -78,7 +78,7 @@ class TriviaTwo extends React.Component {
             {
               type: 'radiogroup',
               name: 'tf_two',
-              title: 'Is this true or false? True',
+              title: 'The deepest ocean trench is deeper than the Grand Canyon. Is this true or false?',
               isRequired: true,
               colCount: 2,
               choices: [
@@ -108,13 +108,13 @@ class TriviaTwo extends React.Component {
             {
               type: 'multipletext',
               name: 'question3',
-              title: 'Please provide two numbers between which you are 90% sure the height of mt eden is between (m) -- 200',
+              title: 'How many letters were in the classical Greek alphabet?',
               isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary',
+                  title: 'I am 95% confident it is no less than',
                   inputType: 'number',
                   validators: [
                     {
@@ -125,7 +125,7 @@ class TriviaTwo extends React.Component {
                   ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary',
+                  title: 'I am 95% confident it is no more than',
                   inputType: 'number',
                   validators: [
                     {
@@ -144,7 +144,7 @@ class TriviaTwo extends React.Component {
             {
               type: 'radiogroup',
               name: 'tf_four',
-              title: 'Is this true or false? False',
+              title: 'Another name for aspirin is nitric acid. Is this true or false?',
               isRequired: true,
               colCount: 2,
               choices: [
@@ -174,13 +174,13 @@ class TriviaTwo extends React.Component {
             {
               type: 'multipletext',
               name: 'question5',
-              title: 'Please provide two numbers between which you are 90% sure the width of stage is between (m) -- 300',
+              title: 'How many plays did Shakespeare write?',
               isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary',
+                  title: 'I am 95% confident it is no less than',
                   inputType: 'number',
                   validators: [
                     {
@@ -191,7 +191,7 @@ class TriviaTwo extends React.Component {
                   ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary',
+                  title: 'I am 95% confident it is no more than',
                   inputType: 'number',
                   validators: [
                     {

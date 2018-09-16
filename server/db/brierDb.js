@@ -41,11 +41,11 @@ function getBothBriers (input, testConn) {
 }
 
 function addBrierOne (input, testConn) {
-  const brierScoreOne = calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '100')
-  const brierScoreTwo = calcTrueFalseBrier(input.data.tf_two, 'True', input.data.conf_two)
-  const brierScoreThree = calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '200')
+  const brierScoreOne = calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '92')
+  const brierScoreTwo = calcTrueFalseBrier(input.data.tf_two, 'False', input.data.conf_two)
+  const brierScoreThree = calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '172')
   const brierScoreFour = calcTrueFalseBrier(input.data.tf_four, 'False', input.data.conf_four)
-  const brierScoreFive = calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '300')
+  const brierScoreFive = calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '3724')
   const brierScoreTotal = (brierScoreOne + brierScoreTwo + brierScoreThree + brierScoreFour + brierScoreFive) / 5
   const conn = testConn || connection
   return conn('trivia_one')
@@ -60,40 +60,42 @@ function addBrierOne (input, testConn) {
     })
 }
 
-function calcTrueFalseBrier (TF, exp, conf) {
+// the second parameter of the calcTrueFalse Brier function is either “True” or “False” (capitalised first letters).
+function calcTrueFalseBrier (userSelection, expectation, confidence) {
   let correct = null
-  if (TF === exp) {
+  if (userSelection === expectation) {
     correct = 1
   } else {
     correct = 0
   }
   return brierScore({
-    probability: (conf / 100),
+    probability: (confidence / 100),
     outcome: correct
   })
 }
 
+// The third parameter of the calcLimitBrier function is the correct answer
 function calcLimitBrier (upper, lower, value) {
   let correct = null
   let lowerLimit = Number(lower)
   let upperLimit = Number(upper)
-  if (value > lowerLimit && value < upperLimit) {
+  if (value >= lowerLimit && value <= upperLimit) {
     correct = 1
   } else {
     correct = 0
   }
   return brierScore({
-    probability: 0.9,
+    probability: 0.95,
     outcome: correct
   })
 }
 
 function addBrierTwo (input, testConn) {
-  const brierScoreOne = calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '100')
+  const brierScoreOne = calcLimitBrier(input.data.question1.upper_limit, input.data.question1.lower_limit, '853')
   const brierScoreTwo = calcTrueFalseBrier(input.data.tf_two, 'True', input.data.conf_two)
-  const brierScoreThree = calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '200')
+  const brierScoreThree = calcLimitBrier(input.data.question3.upper_limit, input.data.question3.lower_limit, '24')
   const brierScoreFour = calcTrueFalseBrier(input.data.tf_four, 'False', input.data.conf_four)
-  const brierScoreFive = calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '300')
+  const brierScoreFive = calcLimitBrier(input.data.question5.upper_limit, input.data.question5.lower_limit, '37')
   const brierScoreTotal = (brierScoreOne + brierScoreTwo + brierScoreThree + brierScoreFour + brierScoreFive) / 5
   const conn = testConn || connection
   return conn('trivia_two')

@@ -34,7 +34,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_one',
               type: 'text',
-              title: 'A Spade: Pessimistic Cost Estimate ($)',
+              title: 'Machinery: There is a lot of overgrown stuff and steep slopes to deal with and you have little time. Your most Pessimistic Cost Estimate to hire a cultivator, including fuel, delivery and operator ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -52,7 +52,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_one',
               type: 'text',
-              title: ' A Spade: Optimistic Cost Estimate ($)',
+              title: 'Machinery: You can get a cultivator into the back of the ute, and operate it yourself. Your most Optimistic Cost Estimate to hire a cultivator ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -70,7 +70,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_one',
               type: 'text',
-              title: 'A Spade: Likely Cost Estimate ($)',
+              title: 'Machinery: Now be realistic. What do you really think a decennt cultivator will cost to hire and operate ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -88,7 +88,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_two',
               type: 'text',
-              title: 'A Digger for a Day: Pessimistic Cost Estimate ($)',
+              title: 'Hard Landscaping: You need some pavers, sand and cement to build paths and steps. It has to look a million dollars. How much could it cost (worst case) ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -106,7 +106,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_two',
               type: 'text',
-              title: 'A Digger for a Day : Optimistic Cost Estimate ($)',
+              title: 'Hard Landscaping: Stuff it, lay some crushed shells on the soil to make paths like a nature reserve. How little could you get away with ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -124,7 +124,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_two',
               type: 'text',
-              title: 'A Digger for a Day: Likely Cost Estimate ($)',
+              title: 'Hard Landscaping: You want the tenants to actually get out in the garden so they will value and look after your investment in it. Realistically, how much will you have to spend to achieve that ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -142,7 +142,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_three',
               type: 'text',
-              title: '10 Native Trees: Pessimistic Cost Estimate ($)',
+              title: 'Trees & Plants: You need to buy some substantial native trees and long-lasting decorative plants, and there is a pretty large area to cover. What is the worst case cost, including delivery ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -160,7 +160,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_three',
               type: 'text',
-              title: ' 10 Native Trees: Optimistic Cost Estimate ($)',
+              title: ' Trees & Plants: You can get a job lot of trees and plants on Trademe, and they will grow fast once planted. Your most Optimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -178,7 +178,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_three',
               type: 'text',
-              title: '10 Native Trees: Likely Cost Estimate ($)',
+              title: 'Trees & Plants: The planting has to look really good or you will not realise the expected benefit. Realistically, what should you spend to give it the Wow! factor ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -196,9 +196,9 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_four',
               type: 'text',
-              title: 'A workman for a Day: Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
+              title: 'Topsoil and Seeds: You are going to have to build some parts up to flat for a play lawn, and cover some of that mess at the bottom end. Your most Pessimistic Cost Estimate for Topsoil and Grass Seed, including delivery ($)',
               validators: [
                 {
                   type: 'numeric',
@@ -214,7 +214,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_four',
               type: 'text',
-              title: ' A workman for a Day: Optimistic Cost Estimate ($)',
+              title: 'Topsoil and Seeds: You can redistibute some existing soil around, and hide the worst bits behind a screen of trees.That can really cut down on Topsoil and Grass Seed, but you will still need some- how little can you get away with ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -232,7 +232,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_four',
               type: 'text',
-              title: 'A workman for a Day: Likely Cost Estimate ($)',
+              title: 'Topsoil and Seeds: Your instinctive Likely Cost Estimate for Topsoil and Grass Seed, including delivery ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -250,7 +250,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'pessimistic_five',
               type: 'text',
-              title: 'A bag of Cement: Pessimistic Cost Estimate ($)',
+              title: 'Professional Help: She is a big job and you are going to need skilled help to do this. How many people, where will you find them and at what hourly rate? Your Pessimistic Cost Estimate ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -268,7 +268,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'optimistic_five',
               type: 'text',
-              title: 'A bag of Cement: Optimistic Cost Estimate ($)',
+              title: 'Professional Help: You can get some mates along and give them a feed and some beer. How much could that possibly cost ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -286,7 +286,7 @@ class ElementEstimation extends React.Component {
             {
               name: 'likely_five',
               type: 'text',
-              title: 'A bag of Cement: Likely Cost Estimate ($)',
+              title: 'Professional Help: How much use are your mates, really? How much will you probably have to spend on someone who knows what they are doing ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [

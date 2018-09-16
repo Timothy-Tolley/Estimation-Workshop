@@ -7,6 +7,14 @@ class SplitTwo extends React.Component {
     this.state = {
       brier: null
     }
+    this.setDecimalPlaces = this.setDecimalPlaces.bind(this)
+  }
+
+  setDecimalPlaces (number) {
+    let numberString = number.toString()
+    if (numberString.length > 4) {
+      return number.toFixed(3)
+    } else return number.toFixed(2)
   }
 
   componentDidMount () {
@@ -14,19 +22,22 @@ class SplitTwo extends React.Component {
     const url = `/api/v1/brier/trivia-one/${userId}`
     request
       .get(url)
-      .then(res =>
+      .then(res => {
+        const brierFull = res.body.brier_score_total
+        const brierShort = this.setDecimalPlaces(brierFull)
         this.setState({
-          brier: res.body.brier_score_total
-        }))
+          brier: brierShort
+        })
+      })
   }
 
   render () {
     return (
       <div className = 'spacer-page'>
         <h1 className = 'spacer-text'>
-         Your Current Brier Score is: {this.state.brier}
+          Your Brier Score for those questions is: {this.state.brier}
           <br/>
-         Please wait for Graham to explain the next steps before continuing..
+          Please wait for your workshop leader to explain the next steps before continuing..
         </h1>
         <button className = 'spacer-button' onClick = {() => { location.href = '/trivia-two' }}>
           Next

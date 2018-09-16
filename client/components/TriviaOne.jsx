@@ -35,37 +35,37 @@ class TriviaOne extends React.Component {
   }
 
   render () {
-    var triviaOneJSON = {title: 'Please answer each question to the best of your ability',
+    var triviaOneJSON = {title: 'Tests of your confidence in estimating with a range',
       pages: [
         {name: 'page1',
           questions: [
             {
               type: 'multipletext',
               name: 'question1',
-              title: 'Please provide two numbers between which you are 90% sure the height of your chair is between (cm) -- 100',
+              title: 'What is the usual percentage of copper in the alloy bronze?',
               isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary',
-                  // inputType: 'number',
+                  title: 'I am 95% confident it is no less than',
+                  inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
                       minValue: 0,
-                      maxValue: 1000
+                      maxValue: 100
                     }
                   ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary',
-                  // inputType: 'number',
+                  title: 'I am 95% confident it is no more than',
+                  inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
                       minValue: 0,
-                      maxValue: 1000
+                      maxValue: 100
                     }
                   ]
                 }
@@ -78,7 +78,7 @@ class TriviaOne extends React.Component {
             {
               type: 'radiogroup',
               name: 'tf_two',
-              title: 'Is this true or false? True',
+              title: 'Sir Christopher Wren was a British anthropologist. Is this true or false?',
               isRequired: true,
               colCount: 2,
               choices: [
@@ -92,7 +92,7 @@ class TriviaOne extends React.Component {
               title: 'How confident are you that you are correct? (%)',
               isRequired: true,
               placeHolder: 'Confidence (%)',
-              // inputType: 'number',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -108,14 +108,14 @@ class TriviaOne extends React.Component {
             {
               type: 'multipletext',
               name: 'question3',
-              title: 'Please provide two numbers between which you are 90% sure the height of mt eden is between (m) -- 200',
+              title: 'The Supremes’ (with Diana Ross) song “Stop! In the Name of Love” was how many seconds long?',
               isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary',
-                  // inputType: 'number',
+                  title: 'I am 95% confident it is no less than',
+                  inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
@@ -125,8 +125,8 @@ class TriviaOne extends React.Component {
                   ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary',
-                  // inputType: 'number',
+                  title: 'I am 95% confident it is no more than',
+                  inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
@@ -144,7 +144,7 @@ class TriviaOne extends React.Component {
             {
               type: 'radiogroup',
               name: 'tf_four',
-              title: 'Is this true or false? False',
+              title: 'Pakistan borders on Russia. Is this true or false?',
               isRequired: true,
               colCount: 2,
               choices: [
@@ -158,7 +158,7 @@ class TriviaOne extends React.Component {
               title: 'How confident are you that you are correct? (%)',
               isRequired: true,
               placeHolder: 'Confidence (%)',
-              // inputType: 'number',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -174,30 +174,30 @@ class TriviaOne extends React.Component {
             {
               type: 'multipletext',
               name: 'question5',
-              title: 'Please provide two numbers between which you are 90% sure the width of stage is between (m) -- 300',
+              title: 'How many meters above sea level is the top of Aoraki Mount Cook?',
               isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary',
-                  // inputType: 'number',
+                  title: 'I am 95% confident it is no less than',
+                  inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
                       minValue: 0,
-                      maxValue: 1000
+                      maxValue: 10000
                     }
                   ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary',
-                  // inputType: 'number',
+                  title: 'I am 95% confident it is no more than',
+                  inputType: 'number',
                   validators: [
                     {
                       type: 'numeric',
                       minValue: 0,
-                      maxValue: 1000
+                      maxValue: 10000
                     }
                   ]
                 }

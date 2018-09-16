@@ -1,9 +1,9 @@
-import _ from 'lodash'
 import React from 'react'
-import jStat from 'jStat'
+import range from 'lodash.range'
 import request from 'superagent'
 import 'chartjs-plugin-annotation'
 import {Scatter} from 'react-chartjs-2'
+import {mean, stdev, lognormal} from 'jStat'
 
 class AnalysisTwo extends React.Component {
   constructor (props) {
@@ -25,8 +25,8 @@ class AnalysisTwo extends React.Component {
     let optLog = Math.log(opt)
     let likeLog = Math.log(likely)
     let logsArray = [pessLog, optLog, likeLog]
-    let meanLogs = jStat.mean(logsArray)
-    let stDevLogs = jStat.stdev(logsArray, true)
+    let meanLogs = mean(logsArray)
+    let stDevLogs = stdev(logsArray, true)
     return [meanLogs, stDevLogs]
   }
 
@@ -46,18 +46,18 @@ class AnalysisTwo extends React.Component {
         // all elements for a single user
         let personalMeanArray = [MSDOne[0], MSDTwo[0], MSDThree[0], MSDFour[0], MSDFive[0]]
         let personalStDevArray = [MSDOne[1], MSDTwo[1], MSDThree[1], MSDFour[1], MSDFive[1]]
-        let personalMeanMean = jStat.mean(personalMeanArray)
-        let personalMeanStDev = jStat.stdev(personalStDevArray, true)
+        let personalMeanMean = mean(personalMeanArray)
+        let personalMeanStDev = stdev(personalStDevArray, true)
         // P values
-        let personalP10 = jStat.lognormal.inv(0.1, personalMeanMean, personalMeanStDev)
-        let personalP50 = jStat.lognormal.inv(0.5, personalMeanMean, personalMeanStDev)
-        let personalP90 = jStat.lognormal.inv(0.9, personalMeanMean, personalMeanStDev)
-        let personalP99 = jStat.lognormal.inv(0.999, personalMeanMean, personalMeanStDev)
+        let personalP10 = lognormal.inv(0.1, personalMeanMean, personalMeanStDev)
+        let personalP50 = lognormal.inv(0.5, personalMeanMean, personalMeanStDev)
+        let personalP90 = lognormal.inv(0.9, personalMeanMean, personalMeanStDev)
+        let personalP99 = lognormal.inv(0.999, personalMeanMean, personalMeanStDev)
         // graph results
-        let personalxVals = _.range(0, personalP99, (personalP99 / 100))
+        let personalxVals = range(0, personalP99, (personalP99 / 100))
         let personalyVals = []
         let personalGraphData = personalxVals.map(xVal => {
-          let personalyVal = jStat.lognormal.pdf(xVal, personalMeanMean, personalMeanStDev)
+          let personalyVal = lognormal.pdf(xVal, personalMeanMean, personalMeanStDev)
           personalyVals.push(personalyVal)
           return {x: xVal, y: personalyVal}
         })
@@ -90,32 +90,32 @@ class AnalysisTwo extends React.Component {
           roomElementFiveArray.push(Math.log(user.pessimistic_five), Math.log(user.optimistic_five), Math.log(user.likely_five))
         })
 
-        let allUsersMeanOne = jStat.mean(roomElementOneArray)
-        let allUsersMeanTwo = jStat.mean(roomElementTwoArray)
-        let allUsersMeanThree = jStat.mean(roomElementThreeArray)
-        let allUsersMeanFour = jStat.mean(roomElementFourArray)
-        let allUsersMeanFive = jStat.mean(roomElementFiveArray)
+        let allUsersMeanOne = mean(roomElementOneArray)
+        let allUsersMeanTwo = mean(roomElementTwoArray)
+        let allUsersMeanThree = mean(roomElementThreeArray)
+        let allUsersMeanFour = mean(roomElementFourArray)
+        let allUsersMeanFive = mean(roomElementFiveArray)
 
-        let allUsersStDevOne = jStat.stdev(roomElementOneArray)
-        let allUsersStDevTwo = jStat.stdev(roomElementTwoArray)
-        let allUsersStDevThree = jStat.stdev(roomElementThreeArray)
-        let allUsersStDevFour = jStat.stdev(roomElementFourArray)
-        let allUsersStDevFive = jStat.stdev(roomElementFiveArray)
+        let allUsersStDevOne = stdev(roomElementOneArray)
+        let allUsersStDevTwo = stdev(roomElementTwoArray)
+        let allUsersStDevThree = stdev(roomElementThreeArray)
+        let allUsersStDevFour = stdev(roomElementFourArray)
+        let allUsersStDevFive = stdev(roomElementFiveArray)
 
         let roomAllElementsMeans = [allUsersMeanOne, allUsersMeanTwo, allUsersMeanThree, allUsersMeanFour, allUsersMeanFive]
         let roomAllElementsStDevs = [allUsersStDevOne, allUsersStDevTwo, allUsersStDevThree, allUsersStDevFour, allUsersStDevFive]
-        let roomMeanMean = jStat.mean(roomAllElementsMeans)
-        let roomMeanStDev = jStat.mean(roomAllElementsStDevs, true)
+        let roomMeanMean = mean(roomAllElementsMeans)
+        let roomMeanStDev = mean(roomAllElementsStDevs, true)
         // P values
-        let roomP10 = jStat.lognormal.inv(0.1, roomMeanMean, roomMeanStDev)
-        let roomP50 = jStat.lognormal.inv(0.5, roomMeanMean, roomMeanStDev)
-        let roomP90 = jStat.lognormal.inv(0.9, roomMeanMean, roomMeanStDev)
-        let roomP99 = jStat.lognormal.inv(0.999, roomMeanMean, roomMeanStDev)
+        let roomP10 = lognormal.inv(0.1, roomMeanMean, roomMeanStDev)
+        let roomP50 = lognormal.inv(0.5, roomMeanMean, roomMeanStDev)
+        let roomP90 = lognormal.inv(0.9, roomMeanMean, roomMeanStDev)
+        let roomP99 = lognormal.inv(0.999, roomMeanMean, roomMeanStDev)
         // graph results
-        let roomxVals = _.range(0, roomP99, (roomP99 / 100))
+        let roomxVals = range(0, roomP99, (roomP99 / 100))
         let roomyVals = []
         let roomGraphData = roomxVals.map(xVal => {
-          let roomyVal = jStat.lognormal.pdf(xVal, roomMeanMean, roomMeanStDev)
+          let roomyVal = lognormal.pdf(xVal, roomMeanMean, roomMeanStDev)
           roomyVals.push(roomyVal)
           return {x: xVal, y: roomyVal}
         })

@@ -1,6 +1,6 @@
-import _ from 'lodash'
+import range from 'lodash.range'
 import React from 'react'
-import jStat from 'jStat'
+import {mean, stdev, lognormal} from 'jStat'
 import request from 'superagent'
 import 'chartjs-plugin-annotation'
 import {Scatter} from 'react-chartjs-2'
@@ -44,18 +44,18 @@ class AnalysisOne extends React.Component {
           Math.log(res.body.gbd[0].likely)
         ]
         // mean + stdev
-        let gbMean = jStat.mean(GBArray)
-        let gbStd = jStat.stdev(GBArray, true)
+        let gbMean = mean(GBArray)
+        let gbStd = stdev(GBArray, true)
         // p values
-        let GBP10 = jStat.lognormal.inv(0.1, gbMean, gbStd)
-        let GBP50 = jStat.lognormal.inv(0.5, gbMean, gbStd)
-        let GBP90 = jStat.lognormal.inv(0.9, gbMean, gbStd)
-        let GBP99 = jStat.lognormal.inv(0.999, gbMean, gbStd)
+        let GBP10 = lognormal.inv(0.1, gbMean, gbStd)
+        let GBP50 = lognormal.inv(0.5, gbMean, gbStd)
+        let GBP90 = lognormal.inv(0.9, gbMean, gbStd)
+        let GBP99 = lognormal.inv(0.999, gbMean, gbStd)
         // graph results
-        let GBxVals = _.range(0, GBP99, (GBP99 / 100))
+        let GBxVals = range(0, GBP99, (GBP99 / 100))
         let GByVals = []
         let GBgraphData = GBxVals.map(xVal => {
-          let GByVal = jStat.lognormal.pdf(xVal, gbMean, gbStd)
+          let GByVal = lognormal.pdf(xVal, gbMean, gbStd)
           GByVals.push(GByVal)
           return {x: xVal, y: GByVal}
         })
@@ -69,18 +69,18 @@ class AnalysisOne extends React.Component {
           Math.log(res.body.icd[0].likely)
         ]
         // mean + stdev
-        let ICMean = jStat.mean(ICArray)
-        let ICStDev = jStat.stdev(ICArray, true)
+        let ICMean = mean(ICArray)
+        let ICStDev = stdev(ICArray, true)
         // p values
-        let ICP10 = jStat.lognormal.inv(0.1, ICMean, ICStDev)
-        let ICP50 = jStat.lognormal.inv(0.5, ICMean, ICStDev)
-        let ICP90 = jStat.lognormal.inv(0.9, ICMean, ICStDev)
-        let ICP99 = jStat.lognormal.inv(0.999, ICMean, ICStDev)
+        let ICP10 = lognormal.inv(0.1, ICMean, ICStDev)
+        let ICP50 = lognormal.inv(0.5, ICMean, ICStDev)
+        let ICP90 = lognormal.inv(0.9, ICMean, ICStDev)
+        let ICP99 = lognormal.inv(0.999, ICMean, ICStDev)
         // graph results
-        let ICxVals = _.range(0, ICP99, (ICP99 / 100))
+        let ICxVals = range(0, ICP99, (ICP99 / 100))
         let ICyVals = []
         let ICgraphData = ICxVals.map(xVal => {
-          let ICyVal = jStat.lognormal.pdf(xVal, ICMean, ICStDev)
+          let ICyVal = lognormal.pdf(xVal, ICMean, ICStDev)
           ICyVals.push(ICyVal)
           return {x: xVal, y: ICyVal}
         })
@@ -196,7 +196,7 @@ class AnalysisOne extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.GBP10,
-            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderColor: 'pink',
             borderWidth: 2,
             label: {
               content: 'P10',
@@ -209,7 +209,7 @@ class AnalysisOne extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.GBP50,
-            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderColor: 'pink',
             borderWidth: 2,
             label: {
               content: 'P50',
@@ -222,7 +222,7 @@ class AnalysisOne extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.GBP90,
-            borderColor: 'rgba(43, 187, 135, 0.9)',
+            borderColor: 'pink',
             borderWidth: 2,
             label: {
               content: 'P90',

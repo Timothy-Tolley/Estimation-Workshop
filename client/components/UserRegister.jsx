@@ -32,7 +32,7 @@ class UserRegister extends React.Component {
   }
 
   render () {
-    var userJSON = {title: 'Please fill in your details so we can send you your results and connect you to your group!',
+    var userJSON = {title: 'Please let us know who you are',
       pages: [
         {name: 'page1',
           questions: [
@@ -46,7 +46,7 @@ class UserRegister extends React.Component {
             {
               name: 'email',
               type: 'text',
-              title: 'Please enter your email address:',
+              title: 'Please enter your preferred email address (required so we can send you results):',
               placeHolder: 'email',
               validators: [
                 {
@@ -58,7 +58,7 @@ class UserRegister extends React.Component {
             {
               name: 'group_number',
               type: 'text',
-              title: 'Please enter the group number you have been provided with:',
+              title: 'Please enter your Table number (required so we can group your results by table):',
               placeHolder: 'group number',
               validators: [
                 {

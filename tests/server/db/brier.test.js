@@ -54,7 +54,7 @@ test('getBothBriers gets both brier scores', () => {
 // addBriers
 
 test('addBrierOne adds new brier scores to trivia one table', () => {
-  const expected = 0.009999999999999995
+  const expected = 0.0055000000000000005
   const id = 10
   const input = {
     user_id: 10,
@@ -63,7 +63,7 @@ test('addBrierOne adds new brier scores to trivia one table', () => {
         upper_limit: 120,
         lower_limit: 10
       },
-      tf_two: 'True',
+      tf_two: 'False',
       conf_two: 90,
       question3: {
         upper_limit: 300,
@@ -72,7 +72,7 @@ test('addBrierOne adds new brier scores to trivia one table', () => {
       tf_four: 'False',
       conf_four: 90,
       question5: {
-        upper_limit: 400,
+        upper_limit: 4000,
         lower_limit: 10
       }
     }
@@ -87,14 +87,14 @@ test('addBrierOne adds new brier scores to trivia one table', () => {
     })
 })
 
-test('addBrierTwo adds new brier scores to trivia one table', () => {
-  const expected = 0.009999999999999995
+test('addBrierTwo adds new brier scores to trivia two table', () => {
+  const expected = 0.0055000000000000005
   const id = 10
   const input = {
     user_id: 10,
     data: {
       question1: {
-        upper_limit: 120,
+        upper_limit: 1000,
         lower_limit: 10
       },
       tf_two: 'True',
@@ -133,7 +133,7 @@ test('calcTrueFalseBrier produces correct result', () => {
 })
 
 test('calcLimitBrier produces correct result', () => {
-  const expected = 0.009999999999999995
+  const expected = 0.0025000000000000044
   const upper = 100
   const lower = 10
   const value = 90

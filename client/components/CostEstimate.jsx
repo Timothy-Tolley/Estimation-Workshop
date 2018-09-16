@@ -32,14 +32,14 @@ class CostEstimate extends React.Component {
   }
 
   render () {
-    var costJSON = {title: 'Please fill out your estimation of cost, individually, in regards to building a water feature in your garden',
+    var costJSON = {title: 'Please give your personal (not group) estimate of costs for the whole project',
       pages: [
         {name: 'page1',
           questions: [
             {
               name: 'pessimistic',
               type: 'text',
-              title: 'Please enter your pessimistic estimate for cost ($)',
+              title: 'Please enter your personal pessimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -58,7 +58,7 @@ class CostEstimate extends React.Component {
             {
               name: 'optimistic',
               type: 'text',
-              title: 'Next, please enter your optimistic estimate for cost ($)',
+              title: 'Next, please enter your personal optimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
@@ -77,7 +77,7 @@ class CostEstimate extends React.Component {
             {
               name: 'likely',
               type: 'text',
-              title: 'Next, please enter your likely estimate for cost ($)',
+              title: 'Please forget the previous estimates and enter your instinctive estimate for likely cost ($)',
               placeHolder: 'Amount in $',
               inputType: 'number',
               validators: [
