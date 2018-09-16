@@ -8,9 +8,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [{
       test: /\.jsx?$/,
