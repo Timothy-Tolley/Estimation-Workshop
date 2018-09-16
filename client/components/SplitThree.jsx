@@ -11,10 +11,11 @@ class SplitTwo extends React.Component {
   }
 
   setDecimalPlaces (number) {
-    let numberString = number.toString()
+    let num = Number(number)
+    let numberString = num.toString()
     if (numberString.length > 4) {
-      return number.toFixed(3)
-    } else return number.toFixed(2)
+      return num.toFixed(3)
+    } else return num.toFixed(2)
   }
 
   componentDidMount () {
