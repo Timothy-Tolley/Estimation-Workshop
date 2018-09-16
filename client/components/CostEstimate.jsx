@@ -8,13 +8,6 @@ class CostEstimate extends React.Component {
     this.sendDataToServer = this.sendDataToServer.bind(this)
   }
 
-  componentDidMount () {
-    const userId = localStorage.getItem('user_id')
-    const url = `/api/v1/users/update-gb${userId}`
-    request
-      .post(url)
-  }
-
   sendDataToServer (survey) {
     const url = '/api/v1/estimation/cost'
     const groupId = localStorage.getItem('group_id')
@@ -28,7 +21,9 @@ class CostEstimate extends React.Component {
       })
       .then(res => {
         if (res.status === 200) {
-          location.href = '/analysis-one'
+          setTimeout(() => {
+            location.href = '/analysis-one'
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console
@@ -37,20 +32,21 @@ class CostEstimate extends React.Component {
   }
 
   render () {
-    var costJSON = {title: 'Please fill out your estimation of cost, individually, in regards to building a water feature in your garden',
+    var costJSON = {title: 'Please give your personal (not group) estimate of costs for the whole project',
       pages: [
         {name: 'page1',
           questions: [
             {
               name: 'pessimistic',
               type: 'text',
-              title: 'Please enter your pessimistic estimate for cost',
+              title: 'Please enter your personal pessimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -62,13 +58,14 @@ class CostEstimate extends React.Component {
             {
               name: 'optimistic',
               type: 'text',
-              title: 'Next, please enter your optimistic estimate for cost',
+              title: 'Next, please enter your personal optimistic estimate for cost ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -80,13 +77,14 @@ class CostEstimate extends React.Component {
             {
               name: 'likely',
               type: 'text',
-              title: 'Next, please enter your likely estimate for cost',
+              title: 'Please forget the previous estimates and enter your instinctive estimate for likely cost ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -97,7 +95,7 @@ class CostEstimate extends React.Component {
     }
     return (
       <div className = 'survey-page'>
-        <Survey.Survey json={costJSON} onComplete={this.sendDataToServer}/>
+        <Survey.Survey json={costJSON} onComplete={this.sendDataToServer} showPrevButton={false}/>
       </div>
     )
   }

@@ -37,7 +37,9 @@ class GroupBenefit extends React.Component {
       .on('error', (err) => alert(err.status))
       .then(res => {
         if (res.status === 200) {
-          location.href = '/split-two'
+          setTimeout(() => {
+            location.href = '/split-two'
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console
@@ -46,20 +48,21 @@ class GroupBenefit extends React.Component {
   }
 
   render () {
-    var benefitJSON = {title: 'As a group, decide on values for the following in regards to building a water feature in your garden',
+    var benefitJSON = {title: "Please provide your group's agreed annual benefit estimates...",
       pages: [
         {name: 'page1',
           questions: [
             {
               name: 'pessimistic',
               type: 'text',
-              title: 'Please enter your pessimistic estimate for benefit',
+              title: 'Think about the worst case. What could reduce the value add? Please enter your group pessimistic estimate for annual benefit ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -71,13 +74,14 @@ class GroupBenefit extends React.Component {
             {
               name: 'optimistic',
               type: 'text',
-              title: 'Next, please enter your optimistic estimate for benefit',
+              title: 'Please enter your group optimistic estimate for annual benefit, the best you can imagine in your wildest dreams ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -89,13 +93,14 @@ class GroupBenefit extends React.Component {
             {
               name: 'likely',
               type: 'text',
-              title: 'Next, please enter your likely estimate for benefit',
+              title: 'Forget the previous estimates. What does your group instinct tell you, how much is the most likely annual benefit? ($)',
               placeHolder: 'Amount in $',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
                   minValue: 1,
-                  maxValue: 500
+                  maxValue: 500000
                 }
               ],
               isRequired: true
@@ -107,8 +112,9 @@ class GroupBenefit extends React.Component {
             {
               name: 'chance_of_success',
               type: 'text',
-              title: 'Finally, please enter the percentage chance of success',
-              placeHolder: 'percentage chance',
+              title: 'Please enter your group estimate of chance of success (%)',
+              placeHolder: 'percentage chance (%)',
+              inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
@@ -124,7 +130,7 @@ class GroupBenefit extends React.Component {
     }
     return (
       <div className = 'survey-page'>
-        <Survey.Survey json={benefitJSON} onComplete={this.sendDataToServer}/>
+        <Survey.Survey json={benefitJSON} onComplete={this.sendDataToServer} showPrevButton={false}/>
       </div>
     )
   }

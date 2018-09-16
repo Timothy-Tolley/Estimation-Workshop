@@ -6,8 +6,7 @@ const router = express.Router()
 
 router.post('/trivia-one', (req, res) => {
   db.addBrierOne(req.body)
-    .then(resp => res.json(resp))
-    // .then(() => res.sendStatus(200))
+    .then(() => res.sendStatus(200))
     .catch(err => {
       res.status(500).send(err.message)
     })
@@ -15,14 +14,13 @@ router.post('/trivia-one', (req, res) => {
 
 router.post('/trivia-two', (req, res) => {
   db.addBrierTwo(req.body)
-    .then(resp => res.json(resp))
-    // .then(() => res.sendStatus(200))
+    .then(() => res.sendStatus(200))
     .catch(err => {
       res.status(500).send(err.message)
     })
 })
 
-router.get('trivia-one/:id', (req, res) => {
+router.get('/trivia-one/:id', (req, res) => {
   const userId = Number(req.params.id)
   db.getBrierOne(userId)
     .then(data => {

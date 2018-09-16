@@ -56,3 +56,11 @@
   padding: 10px;
   font-family: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
 }
+
+.label {
+  fill: black
+}
+
+.sv_header {
+  width: 100%;
+}

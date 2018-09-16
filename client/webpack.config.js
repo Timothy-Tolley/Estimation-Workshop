@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   entry: path.join(__dirname, './index.js'),
@@ -6,16 +7,12 @@ module.exports = {
     path: path.join(__dirname, '../public'),
     filename: 'bundle.js'
   },
-  mode: 'development',
+  plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  ],
+  mode: 'production',
   module: {
     rules: [{
-      test: /\.css$|\.scss$|\.sass$/,
-      use: [
-        {loader: 'style-loader'},
-        {loader: 'css-loader'},
-        {loader: 'sass-loader'}
-      ]
-    }, {
       test: /\.jsx?$/,
       exclude: /node_modules/,
       use: [

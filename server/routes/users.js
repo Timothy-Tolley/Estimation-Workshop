@@ -13,13 +13,26 @@ router.post('/', (req, res) => {
     })
 })
 
-router.post('/update-gb/:id', (req, res) => {
+router.post('/email/:id', (req, res) => {
   const id = Number(req.params.id)
-  db.updateComplete({
-    user_id: id,
-    survey: 'completed_group_benefit'
-  })
-    .then(res => res.status(200))
+  db.updateEmailPrefs(id, req.body)
+    .then(email =>
+      res.sendStatus(200)
+    )
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
+router.get('/email/:id', (req, res) => {
+  const id = Number(req.params.id)
+  db.getEmail(id)
+    .then(emails => {
+      res.json(emails)
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
 })
 
 router.get('/group/:id', (req, res) => {
@@ -32,15 +45,5 @@ router.get('/group/:id', (req, res) => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
 })
-
-// router.get('/mvvms', (req, res) => {
-//   db.getElementSurveyOne('mvvm_name')
-//     .then(mvvms => {
-//       res.send(mvvms)
-//     })
-//     .catch(err => {
-//       res.status(500).send('DATABASE ERROR: ' + err.message)
-//     })
-// })
 
 module.exports = router

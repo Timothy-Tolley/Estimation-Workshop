@@ -24,7 +24,9 @@ class TriviaOne extends React.Component {
       .on('error', (err) => alert(err.status))
       .then(res => {
         if (res.status === 200) {
-          location.href = '/split-three'
+          setTimeout(() => {
+            location.href = '/split-three'
+          }, 200)
         }
         // remove on production
         // eslint-disable-next-line no-console
@@ -33,22 +35,39 @@ class TriviaOne extends React.Component {
   }
 
   render () {
-    var triviaOneJSON = {title: 'Please answer each question to the best of your ability',
+    var triviaOneJSON = {title: 'Tests of your confidence in estimating with a range',
       pages: [
         {name: 'page1',
           questions: [
             {
               type: 'multipletext',
               name: 'question1',
-              title: 'Please provide two numbers between which you are 80% sure the height of your chair is between (cm)',
+              title: 'What is the usual percentage of copper in the alloy bronze?',
+              isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary'
+                  title: 'I am 95% confident it is no less than',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 100
+                    }
+                  ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary'
+                  title: 'I am 95% confident it is no more than',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 100
+                    }
+                  ]
                 }
               ]
             }
@@ -57,17 +76,28 @@ class TriviaOne extends React.Component {
         {name: 'page2',
           questions: [
             {
-              type: 'multipletext',
-              name: 'question2',
-              title: 'Please provide two numbers between which you are 660% sure the height of your table is between (cm)',
+              type: 'radiogroup',
+              name: 'tf_two',
+              title: 'Sir Christopher Wren was a British anthropologist. Is this true or false?',
+              isRequired: true,
               colCount: 2,
-              items: [
+              choices: [
+                'True',
+                'False'
+              ]
+            },
+            {
+              type: 'text',
+              name: 'conf_two',
+              title: 'How confident are you that you are correct? (%)',
+              isRequired: true,
+              placeHolder: 'Confidence (%)',
+              inputType: 'number',
+              validators: [
                 {
-                  name: 'lower_limit',
-                  title: 'lower boundary'
-                }, {
-                  name: 'upper_limit',
-                  title: 'upper boundary'
+                  type: 'numeric',
+                  minValue: 0,
+                  maxValue: 100
                 }
               ]
             }
@@ -78,15 +108,32 @@ class TriviaOne extends React.Component {
             {
               type: 'multipletext',
               name: 'question3',
-              title: 'Please provide two numbers between which you are 90% sure the height of mt eden is between (m)',
+              title: 'The Supremes’ (with Diana Ross) song “Stop! In the Name of Love” was how many seconds long?',
+              isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary'
+                  title: 'I am 95% confident it is no less than',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary'
+                  title: 'I am 95% confident it is no more than',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 1000
+                    }
+                  ]
                 }
               ]
             }
@@ -95,17 +142,28 @@ class TriviaOne extends React.Component {
         {name: 'page4',
           questions: [
             {
-              type: 'multipletext',
-              name: 'question4',
-              title: 'Please provide two numbers between which you are 95% sure the height of the ceiling is between (m)',
+              type: 'radiogroup',
+              name: 'tf_four',
+              title: 'Pakistan borders on Russia. Is this true or false?',
+              isRequired: true,
               colCount: 2,
-              items: [
+              choices: [
+                'True',
+                'False'
+              ]
+            },
+            {
+              type: 'text',
+              name: 'conf_four',
+              title: 'How confident are you that you are correct? (%)',
+              isRequired: true,
+              placeHolder: 'Confidence (%)',
+              inputType: 'number',
+              validators: [
                 {
-                  name: 'lower_limit',
-                  title: 'lower boundary'
-                }, {
-                  name: 'upper_limit',
-                  title: 'upper boundary'
+                  type: 'numeric',
+                  minValue: 0,
+                  maxValue: 100
                 }
               ]
             }
@@ -116,15 +174,32 @@ class TriviaOne extends React.Component {
             {
               type: 'multipletext',
               name: 'question5',
-              title: 'Please provide two numbers between which you are 50% sure the width of stage is between (m)',
+              title: 'How many meters above sea level is the top of Aoraki Mount Cook?',
+              isRequired: true,
               colCount: 2,
               items: [
                 {
                   name: 'lower_limit',
-                  title: 'lower boundary'
+                  title: 'I am 95% confident it is no less than',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 10000
+                    }
+                  ]
                 }, {
                   name: 'upper_limit',
-                  title: 'upper boundary'
+                  title: 'I am 95% confident it is no more than',
+                  inputType: 'number',
+                  validators: [
+                    {
+                      type: 'numeric',
+                      minValue: 0,
+                      maxValue: 10000
+                    }
+                  ]
                 }
               ]
             }
