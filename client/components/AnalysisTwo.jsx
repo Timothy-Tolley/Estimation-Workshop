@@ -126,6 +126,11 @@ class AnalysisTwo extends React.Component {
           roomP50: roomP50,
           roomP90: roomP90,
           roomGraphData: roomGraphData,
+          roomElementOneData: roomElementOneArray,
+          roomElementTwoData: roomElementTwoArray,
+          roomElementThreeData: roomElementThreeArray,
+          roomElementFourData: roomElementFourArray,
+          roomElementFiveData: roomElementFiveArray,
           personalP10: personalP10,
           personalP50: personalP50,
           personalP90: personalP90,
@@ -271,11 +276,59 @@ class AnalysisTwo extends React.Component {
         }
         <h1 className = 'analysis-text'>
         Personal Mean of means: {this.state.personalMeanMean}
+          <br/>
         Personal Mean of st devs: {this.state.personalMeanStDev}
+          <br/>
         Room p10: {this.state.roomP10}
+          <br/>
         Room p50: {this.state.roomP50}
+          <br/>
         Room p90: {this.state.roomP90}
         </h1>
+        {this.state.active && <div>
+          <h1> Element One Math log of Room Values </h1>
+          {this.state.roomElementOneData.map((value, idx) => {
+            return (
+              <p key = {idx}>
+              value: {value}
+              </p>
+            )
+          })}
+          <h1> Element Two Math log of Room Values </h1>
+          {this.state.roomElementTwoData.map((value, idx) => {
+            return (
+              <p key = {idx}>
+              value: {value}
+              </p>
+            )
+          })}
+          <h1> Element Three Math log of Room Values </h1>
+          {this.state.roomElementThreeData.map((value, idx) => {
+            return (
+              <p key = {idx}>
+              value: {value}
+              </p>
+            )
+          })}
+          <h1> Element Four Math log of Room Values </h1>
+          {this.state.roomElementFourData.map((value, idx) => {
+            return (
+              <p key = {idx}>
+              value: {value}
+              </p>
+            )
+          })}
+          <h1> Element Five Math log of Room Values </h1>
+          {this.state.roomElementFiveData.map((value, idx) => {
+            return (
+              <p key = {idx}>
+              value: {value}
+              </p>
+            )
+          })}
+        </div>
+        }
+
         <button className = 'spacer-button' onClick = {() => { location.href = '/trivia-one' }}>
           Next
         </button>
