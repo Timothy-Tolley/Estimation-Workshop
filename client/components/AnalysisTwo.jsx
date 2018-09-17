@@ -219,7 +219,7 @@ class AnalysisTwo extends React.Component {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-1',
-            value: this.state.wbsP10,
+            value: this.state.personalP10,
             borderColor: 'rgba(43, 187, 135, 0.9)',
             borderWidth: 2,
             label: {
@@ -232,7 +232,7 @@ class AnalysisTwo extends React.Component {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-1',
-            value: this.state.wbsP50,
+            value: this.state.personalP50,
             borderColor: 'rgba(43, 187, 135, 0.9)',
             borderWidth: 2,
             label: {
@@ -245,7 +245,7 @@ class AnalysisTwo extends React.Component {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-1',
-            value: this.state.wbsP90,
+            value: this.state.personalP90,
             borderColor: 'rgba(43, 187, 135, 0.9)',
             borderWidth: 2,
             label: {
