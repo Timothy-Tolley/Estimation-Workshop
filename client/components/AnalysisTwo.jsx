@@ -272,6 +272,9 @@ class AnalysisTwo extends React.Component {
         <h1 className = 'analysis-text'>
         Personal Mean of means: {this.state.personalMeanMean}
         Personal Mean of st devs: {this.state.personalMeanStDev}
+        Room p10: {this.state.roomP10}
+        Room p50: {this.state.roomP50}
+        Room p90: {this.state.roomP90}
         </h1>
         <button className = 'spacer-button' onClick = {() => { location.href = '/trivia-one' }}>
           Next
