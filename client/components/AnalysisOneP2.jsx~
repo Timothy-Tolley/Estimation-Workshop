@@ -1,34 +1,35 @@
-import range from 'lodash.range'
 import React from 'react'
-import {mean, stdev, lognormal} from 'jStat'
+import range from 'lodash.range'
 import request from 'superagent'
 import 'chartjs-plugin-annotation'
 import {Scatter} from 'react-chartjs-2'
+import {mean, stdev, lognormal} from 'jStat'
 
 class AnalysisOne extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       active: false,
-      GBgraphData: [],
-      GBP10: null,
-      GBP50: null,
-      GBP90: null,
-      GBP99: null,
-      GBMax: null,
       ICgraphData: [],
       ICP10: null,
       ICP50: null,
       ICP90: null,
       ICP99: null,
-      ICMax: null
+      ICMax: null,
+      GCgraphData: [],
+      GCP10: null,
+      GCP50: null,
+      GCP90: null,
+      GCP99: null,
+      GCMax: null,
+      ICGCMax: null
     }
   }
 
   componentDidMount () {
     const groupId = localStorage.getItem('group_id')
     const userId = localStorage.getItem('user_id')
-    const analysisOneUrl = '/api/v1/estimation/analysis-one'
+    const analysisOneUrl = '/api/v1/estimation/analysis-one-2'
     request
       .get(analysisOneUrl)
       .query({
@@ -36,31 +37,6 @@ class AnalysisOne extends React.Component {
         user: userId
       })
       .then(res => {
-        // GROUP BENEFIT
-        // array for group benefit calculations
-        let GBArray = [
-          Math.log(res.body.gbd[0].pessimistic),
-          Math.log(res.body.gbd[0].optimistic),
-          Math.log(res.body.gbd[0].likely)
-        ]
-        // mean + stdev
-        let gbMean = mean(GBArray)
-        let gbStd = stdev(GBArray, true)
-        // p values
-        let GBP10 = lognormal.inv(0.1, gbMean, gbStd)
-        let GBP50 = lognormal.inv(0.5, gbMean, gbStd)
-        let GBP90 = lognormal.inv(0.9, gbMean, gbStd)
-        let GBP99 = lognormal.inv(0.999, gbMean, gbStd)
-        // graph results
-        let GBxVals = range(0, GBP99, (GBP99 / 100))
-        let GByVals = []
-        let GBgraphData = GBxVals.map(xVal => {
-          let GByVal = lognormal.pdf(xVal, gbMean, gbStd)
-          GByVals.push(GByVal)
-          return {x: xVal, y: GByVal}
-        })
-        let GBMax = Math.max(...GByVals)
-
         // INDIVIDUAL COST
         // array for ID calculations
         let ICArray = [
@@ -85,25 +61,49 @@ class AnalysisOne extends React.Component {
           return {x: xVal, y: ICyVal}
         })
         let ICMax = Math.max(...ICyVals)
-        let GImaxs = [ICMax, GBMax]
-        let GBICmax = Math.max(...GImaxs)
+
+        // GROUP COST
+        // array for ID calculations
+        let GCArray = []
+        res.body.gcd.forEach(dataset =>
+          GCArray.push(Math.log(dataset.pessimistic), Math.log(dataset.optimistic), Math.log(dataset.likely))
+        )
+        // mean + stdev
+        let GCMean = mean(GCArray)
+        let GCStDev = stdev(GCArray, true)
+        // p values
+        let GCP10 = lognormal.inv(0.1, GCMean, GCStDev)
+        let GCP50 = lognormal.inv(0.5, GCMean, GCStDev)
+        let GCP90 = lognormal.inv(0.9, GCMean, GCStDev)
+        let GCP99 = lognormal.inv(0.999, GCMean, GCStDev)
+        // graph results
+        let GCxVals = range(0, GCP99, (GCP99 / 100))
+        let GCyVals = []
+        let GCgraphData = GCxVals.map(xVal => {
+          let GCyVal = lognormal.pdf(xVal, GCMean, GCStDev)
+          GCyVals.push(GCyVal)
+          return {x: xVal, y: GCyVal}
+        })
+        let GCMax = Math.max(...GCyVals)
+        let GImaxs = [GCMax, ICMax]
+        let ICGCmax = Math.max(...GImaxs)
 
         // add all to state
         this.setState({
           active: true,
-          GBgraphData: GBgraphData,
-          GBP10: GBP10,
-          GBP50: GBP50,
-          GBP90: GBP90,
-          GBP99: GBP99,
-          GBMax: GBMax,
           ICgraphData: ICgraphData,
           ICP10: ICP10,
           ICP50: ICP50,
           ICP90: ICP90,
           ICP99: ICP99,
           ICMax: ICMax,
-          GBICMax: GBICmax
+          GCgraphData: GCgraphData,
+          GCP10: GCP10,
+          GCP50: GCP50,
+          GCP90: GCP90,
+          GCP99: GCP99,
+          GCMax: GCMax,
+          ICGCMax: ICGCmax
         })
       })
     // eslint-disable-next-line no-console
@@ -113,19 +113,6 @@ class AnalysisOne extends React.Component {
   render () {
     const data = {
       datasets: [
-        {
-          label: "Group's agreed estimate of Benefit * Chance of Success",
-          fill: false,
-          backgroundColor: 'red',
-          borderColor: 'red',
-          pointBorderColor: 'red',
-          pointBorderWidth: 1,
-          pointHoverBackgroundColor: 'red',
-          pointHoverBorderColor: 'orange',
-          pointHoverBorderWidth: 2,
-          pointRadius: 1,
-          data: this.state.GBgraphData
-        },
         {
           label: 'Your personal estimate of Cost',
           fill: false,
@@ -138,6 +125,19 @@ class AnalysisOne extends React.Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           data: this.state.ICgraphData
+        },
+        {
+          label: "Aggregate of all your group's personal Cost estimates",
+          fill: false,
+          backgroundColor: 'green',
+          borderColor: 'green',
+          pointBorderColor: 'green',
+          pointBorderWidth: 1,
+          pointHoverBackgroundColor: 'green',
+          pointHoverBorderColor: 'lightGreen',
+          pointHoverBorderWidth: 2,
+          pointRadius: 1,
+          data: this.state.GCgraphData
         }
       ]
     }
@@ -195,13 +195,12 @@ class AnalysisOne extends React.Component {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-1',
-            value: this.state.GBP10,
-            borderColor: 'pink',
+            value: this.state.ICP10,
+            borderColor: 'lightBlue',
             borderWidth: 1,
             label: {
               content: 'P10',
               enabled: true,
-              backgroundColor: 'pink',
               position: 'center',
               yAdjust: -30
             }
@@ -210,13 +209,12 @@ class AnalysisOne extends React.Component {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-1',
-            value: this.state.GBP50,
-            borderColor: 'pink',
+            value: this.state.ICP50,
+            borderColor: 'lightBlue',
             borderWidth: 1,
             label: {
               content: 'P50',
               enabled: true,
-              backgroundColor: 'pink',
               position: 'center'
             }
           },
@@ -224,32 +222,29 @@ class AnalysisOne extends React.Component {
             type: 'line',
             mode: 'vertical',
             scaleID: 'x-axis-1',
-            value: this.state.GBP90,
-            borderColor: 'pink',
+            value: this.state.ICP90,
+            borderColor: 'lightBlue',
             borderWidth: 1,
             label: {
               content: 'P90',
               enabled: true,
-              backgroundColor: 'pink',
               position: 'center',
               yAdjust: +30
+
             }
           }
         ]
       }
-
     }
     return (
       <div className = 'analysis-page'>
-        <h1 className = 'analysis-text'>
-          Analysis One
-        </h1>
-        <h1 className = 'analysis-text'> Group Benefit vs Individual Cost </h1>
+        <h1 className = 'analysis-text'> Your personal estimate of Cost vs Aggregate of all your group&#39;s personal Cost estimates </h1>
         {this.state.active && <div>
           <Scatter data={data} options={chartOptions} width={1000}height={400}/>
         </div>
         }
-        <button className = 'spacer-button' onClick = {() => { location.href = '/analysis-one-2' }}>
+
+        <button className = 'spacer-button' onClick = {() => { location.href = '/element-estimations' }}>
           Next
         </button>
       </div>

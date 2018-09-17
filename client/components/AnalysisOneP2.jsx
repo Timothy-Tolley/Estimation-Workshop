@@ -197,11 +197,13 @@ class AnalysisOne extends React.Component {
             scaleID: 'x-axis-1',
             value: this.state.ICP10,
             borderColor: 'lightBlue',
-            borderWidth: 2,
+            borderWidth: 1,
             label: {
               content: 'P10',
               enabled: true,
-              position: 'center'
+              backgroundColor: 'lightBlue',
+              position: 'center',
+              yAdjust: -30
             }
           },
           {
@@ -210,10 +212,11 @@ class AnalysisOne extends React.Component {
             scaleID: 'x-axis-1',
             value: this.state.ICP50,
             borderColor: 'lightBlue',
-            borderWidth: 2,
+            borderWidth: 1,
             label: {
               content: 'P50',
               enabled: true,
+              backgroundColor: 'lightBlue',
               position: 'center'
             }
           },
@@ -223,11 +226,14 @@ class AnalysisOne extends React.Component {
             scaleID: 'x-axis-1',
             value: this.state.ICP90,
             borderColor: 'lightBlue',
-            borderWidth: 2,
+            borderWidth: 1,
             label: {
               content: 'P90',
               enabled: true,
-              position: 'center'
+              backgroundColor: 'lightBlue',
+              position: 'center',
+              yAdjust: +30
+
             }
           }
         ]

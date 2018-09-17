@@ -201,7 +201,6 @@ class AnalysisOne extends React.Component {
             label: {
               content: 'P10',
               enabled: true,
-              backgroundColor: 'pink',
               position: 'center',
               yAdjust: -30
             }
@@ -216,7 +215,6 @@ class AnalysisOne extends React.Component {
             label: {
               content: 'P50',
               enabled: true,
-              backgroundColor: 'pink',
               position: 'center'
             }
           },
@@ -230,7 +228,6 @@ class AnalysisOne extends React.Component {
             label: {
               content: 'P90',
               enabled: true,
-              backgroundColor: 'pink',
               position: 'center',
               yAdjust: +30
             }

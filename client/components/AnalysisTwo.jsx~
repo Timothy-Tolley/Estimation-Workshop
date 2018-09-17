@@ -233,7 +233,6 @@ class AnalysisTwo extends React.Component {
               content: 'P10',
               enabled: true,
               position: 'center',
-              backgroundColor: 'lightBlue',
               yAdjust: -30
             }
           },
@@ -247,7 +246,6 @@ class AnalysisTwo extends React.Component {
             label: {
               content: 'P50',
               enabled: true,
-              backgroundColor: 'lightBlue',
               position: 'center'
             }
           },
@@ -261,7 +259,6 @@ class AnalysisTwo extends React.Component {
             label: {
               content: 'P90',
               enabled: true,
-              backgroundColor: 'lightBlue',
               position: 'center',
               yAdjust: +30
             }
@@ -272,13 +269,12 @@ class AnalysisTwo extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.roomP10,
-            borderColor: 'green',
+            borderColor: 'rgba(152,251,152,0.9)',
             borderWidth: 1,
             label: {
               content: 'P10',
               enabled: true,
               position: 'center',
-              backgroundColor: 'green',
               yAdjust: -30
             }
           },
@@ -287,12 +283,11 @@ class AnalysisTwo extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.roomP50,
-            borderColor: 'green',
+            borderColor: 'rgba(152,251,152,0.9)',
             borderWidth: 1,
             label: {
               content: 'P50',
               enabled: true,
-              backgroundColor: 'green',
               position: 'center'
             }
           },
@@ -301,12 +296,11 @@ class AnalysisTwo extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.roomP90,
-            borderColor: 'green',
+            borderColor: 'rgba(152,251,152,0.9)',
             borderWidth: 1,
             label: {
               content: 'P90',
               enabled: true,
-              backgroundColor: 'green',
               position: 'center',
               yAdjust: +30
             }
