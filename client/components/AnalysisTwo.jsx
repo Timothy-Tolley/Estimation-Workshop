@@ -105,7 +105,7 @@ class AnalysisTwo extends React.Component {
         let roomAllElementsMeans = [allUsersMeanOne, allUsersMeanTwo, allUsersMeanThree, allUsersMeanFour, allUsersMeanFive]
         let roomAllElementsStDevs = [allUsersStDevOne, allUsersStDevTwo, allUsersStDevThree, allUsersStDevFour, allUsersStDevFive]
         let roomMeanMean = mean(roomAllElementsMeans)
-        let roomMeanStDev = mean(roomAllElementsStDevs, true)
+        let roomMeanStDev = mean(roomAllElementsStDevs)
         // P values
         let roomP10 = lognormal.inv(0.1, roomMeanMean, roomMeanStDev)
         let roomP50 = lognormal.inv(0.5, roomMeanMean, roomMeanStDev)
