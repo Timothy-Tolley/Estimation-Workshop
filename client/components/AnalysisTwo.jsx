@@ -232,7 +232,8 @@ class AnalysisTwo extends React.Component {
             label: {
               content: 'P10',
               enabled: true,
-              position: 'center'
+              position: 'center',
+              yAdjust: -30
             }
           },
           {
@@ -258,7 +259,8 @@ class AnalysisTwo extends React.Component {
             label: {
               content: 'P90',
               enabled: true,
-              position: 'center'
+              position: 'center',
+              yAdjust: +30
             }
           }
         ]
