@@ -275,15 +275,21 @@ class AnalysisTwo extends React.Component {
         </div>
         }
         <h1 className = 'analysis-text'>
-        Personal Mean of means: {this.state.personalMeanMean}
+          Personal Mean of means: {this.state.personalMeanMean}
           <br/>
-        Personal Mean of st devs: {this.state.personalMeanStDev}
+          Personal Mean of st devs: {this.state.personalMeanStDev}
           <br/>
-        Room p10: {this.state.roomP10}
+          Room p10: {this.state.roomP10}
           <br/>
-        Room p50: {this.state.roomP50}
+          Room p50: {this.state.roomP50}
           <br/>
-        Room p90: {this.state.roomP90}
+          Room p90: {this.state.roomP90}
+          <br/>
+          Personal p10: {this.state.personalP10}
+          <br/>
+          Personal p50: {this.state.personalP50}
+          <br/>
+          Personal p90: {this.state.personalP90}
         </h1>
         {this.state.active && <div>
           <h1> Element One Math log of Room Values </h1>
