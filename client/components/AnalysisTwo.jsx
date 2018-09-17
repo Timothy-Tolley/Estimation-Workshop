@@ -129,6 +129,8 @@ class AnalysisTwo extends React.Component {
           personalP10: personalP10,
           personalP50: personalP50,
           personalP90: personalP90,
+          personalMeanMean: personalMeanMean,
+          personalMeanStDev: personalMeanStDev,
           personalGraphData: personalGraphData
         })
       })
@@ -267,6 +269,10 @@ class AnalysisTwo extends React.Component {
           <Scatter data={data} options={chartOptions} width={1000}height={400}/>
         </div>
         }
+        <h1 className = 'analysis-text'>
+        Personal Mean of means: {this.state.personalMeanMean}
+        Personal Mean of st devs: {this.state.personalMeanStDev}
+        </h1>
         <button className = 'spacer-button' onClick = {() => { location.href = '/trivia-one' }}>
           Next
         </button>
