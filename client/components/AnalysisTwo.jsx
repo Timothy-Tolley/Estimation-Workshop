@@ -145,20 +145,20 @@ class AnalysisTwo extends React.Component {
     const data = {
       datasets: [
         {
-          label: 'Your Element Based Estimate of Cost',
+          label: 'Your personal WBS Estimate of Cost',
           fill: false,
-          backgroundColor: 'red',
-          borderColor: 'red',
-          pointBorderColor: 'red',
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+          pointBorderColor: 'blue',
           pointBorderWidth: 1,
-          pointHoverBackgroundColor: 'red',
-          pointHoverBorderColor: 'orange',
+          pointHoverBackgroundColor: 'blue',
+          pointHoverBorderColor: 'lightBlue',
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           data: this.state.personalGraphData
         },
         {
-          label: "Aggregate of Rooms' Element Based Estimates of Cost",
+          label: "Aggregate of Rooms' WBS Estimates of Cost",
           fill: false,
           backgroundColor: 'green',
           borderColor: 'green',
@@ -227,12 +227,13 @@ class AnalysisTwo extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.personalP10,
-            borderColor: 'rgba(43, 187, 135, 0.9)',
-            borderWidth: 2,
+            borderColor: 'lightBlue',
+            borderWidth: 1,
             label: {
               content: 'P10',
               enabled: true,
               position: 'center',
+              backgroundColor: 'lightBlue',
               yAdjust: -30
             }
           },
@@ -241,11 +242,12 @@ class AnalysisTwo extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.personalP50,
-            borderColor: 'rgba(43, 187, 135, 0.9)',
-            borderWidth: 2,
+            borderColor: 'lightBlue',
+            borderWidth: 1,
             label: {
               content: 'P50',
               enabled: true,
+              backgroundColor: 'lightBlue',
               position: 'center'
             }
           },
@@ -254,11 +256,56 @@ class AnalysisTwo extends React.Component {
             mode: 'vertical',
             scaleID: 'x-axis-1',
             value: this.state.personalP90,
-            borderColor: 'rgba(43, 187, 135, 0.9)',
-            borderWidth: 2,
+            borderColor: 'lightBlue',
+            borderWidth: 1,
             label: {
               content: 'P90',
               enabled: true,
+              backgroundColor: 'lightBlue',
+              position: 'center',
+              yAdjust: +30
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.roomP10,
+            borderColor: 'green',
+            borderWidth: 1,
+            label: {
+              content: 'P10',
+              enabled: true,
+              position: 'center',
+              backgroundColor: 'green',
+              yAdjust: -30
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.roomP50,
+            borderColor: 'green',
+            borderWidth: 1,
+            label: {
+              content: 'P50',
+              enabled: true,
+              backgroundColor: 'green',
+              position: 'center'
+            }
+          },
+          {
+            type: 'line',
+            mode: 'vertical',
+            scaleID: 'x-axis-1',
+            value: this.state.roomP90,
+            borderColor: 'green',
+            borderWidth: 1,
+            label: {
+              content: 'P90',
+              enabled: true,
+              backgroundColor: 'green',
               position: 'center',
               yAdjust: +30
             }
@@ -270,7 +317,7 @@ class AnalysisTwo extends React.Component {
     return (
       <div className = 'analysis-page'>
         <h1 className = 'analysis-text'>
-        Your personal estimate of Cost vs Aggregate of all your group&#39;s personal Cost estimates
+        Your personal estimate of WBS Costs vs Aggregate of personal WBS Cost estimates of everyone in the room
         </h1>
         {this.state.active && <div>
           <Scatter data={data} options={chartOptions} width={1000}height={400}/>

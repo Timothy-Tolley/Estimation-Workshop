@@ -197,10 +197,11 @@ class AnalysisOne extends React.Component {
             scaleID: 'x-axis-1',
             value: this.state.GBP10,
             borderColor: 'pink',
-            borderWidth: 2,
+            borderWidth: 1,
             label: {
               content: 'P10',
               enabled: true,
+              backgroundColor: 'pink',
               position: 'center',
               yAdjust: -30
             }
@@ -211,10 +212,11 @@ class AnalysisOne extends React.Component {
             scaleID: 'x-axis-1',
             value: this.state.GBP50,
             borderColor: 'pink',
-            borderWidth: 2,
+            borderWidth: 1,
             label: {
               content: 'P50',
               enabled: true,
+              backgroundColor: 'pink',
               position: 'center'
             }
           },
@@ -224,10 +226,11 @@ class AnalysisOne extends React.Component {
             scaleID: 'x-axis-1',
             value: this.state.GBP90,
             borderColor: 'pink',
-            borderWidth: 2,
+            borderWidth: 1,
             label: {
               content: 'P90',
               enabled: true,
+              backgroundColor: 'pink',
               position: 'center',
               yAdjust: +30
             }
