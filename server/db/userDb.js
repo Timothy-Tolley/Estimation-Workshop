@@ -41,7 +41,7 @@ function getEmail (input, testConn) {
     .where({
       user_id: input
     })
-    .select('email', 'work_email')
+    .select('email')
 }
 
 function updateEmailPrefs (id, input, testConn) {
