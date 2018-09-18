@@ -49,14 +49,11 @@ class Final extends React.Component {
             {
               type: 'radiogroup',
               name: 'correctCheck',
-              title: `Is the following email correct? ${this.state.currentEmail || this.state.currentWorkEmail}`,
+              title: `Is the following email correct? ${this.state.currentEmail}`,
               isRequired: true,
               colCount: 2,
               choices: [
-                {
-                  value: this.state.currentEmail || this.state.currentWorkEmail,
-                  text: 'Yes'
-                },
+                'Yes',
                 'No'
               ]
             },
@@ -73,47 +70,11 @@ class Final extends React.Component {
                   type: 'email'
                 }
               ]
-            },
-            {
-              type: 'radiogroup',
-              name: 'workEmailCheck',
-              title: `Is this a work email address?`,
-              isRequired: true,
-              colCount: 2,
-              choices: [
-                'Yes',
-                'No'
-              ]
-            },
-            {
-              type: 'radiogroup',
-              name: 'addEmailCheck',
-              title: `Would you like to provide your work email address as well?`,
-              isRequired: true,
-              colCount: 2,
-              visibleIf: '{workEmailCheck} = "No"',
-              choices: [
-                'Yes',
-                'No'
-              ]
-            },
-            {
-              type: 'text',
-              name: 'addWorkEmail',
-              title: `Please add Your work email below:`,
-              isRequired: true,
-              inputType: 'email',
-              placeHolder: 'Work Email',
-              visibleIf: '{addEmailCheck} = "Yes"',
-              validators: [
-                {
-                  type: 'email'
-                }
-              ]
             }
           ]
         }
-      ]
+      ],
+      completedHtml: "<h4>Thank you for taking Part in today's workshop!</h4>"
     }
     return (
       <div className = 'spacer-page'>

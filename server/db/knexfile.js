@@ -19,24 +19,27 @@ const sqliteDefaults = Object.assign({
 const postgresDefaults = Object.assign({
   client: 'postgresql',
   pool: {
-    min: 2,
-    max: 10
+    min: process.env.DATABASE_POOL_MIN,
+    max: process.env.DATABASE_POOL_MAX
   }
 }, defaults)
 
 module.exports = {
+  // development: Object.assign({
+  //   connection: {
+  //     filename: path.join(__dirname, 'dev.sqlite')
+  //   }
+  // }, sqliteDefaults),
   development: Object.assign({
+    client: 'postgresql',
     connection: {
-      client: 'pg',
-      connection: {
-        host: 'postgres://punga.local:5432',
-        database: 'postgres',
-        user: 'graham',
-        password: 'p'
-      },
-      migrations: {
-        directory: '../../server/db/migrations'
-      }
+      host: 'punga.local',
+      database: 'postgres',
+      user: 'graham',
+      password: 'p'
+    },
+    migrations: {
+      directory: '../../server/db/migrations'
     },
     useNullAsDefault: true
   }, postgresDefaults),

@@ -46,42 +46,7 @@ function getEmail (input, testConn) {
 
 function updateEmailPrefs (id, input, testConn) {
   const conn = testConn || connection
-  if (input.correctCheck === 'No' && input.workEmailCheck === 'Yes') {
-    return conn('users')
-      .where({
-        user_id: id
-      })
-      .update({
-        work_email: input.updateEmail,
-        email: null
-      })
-  } else if (input.correctCheck === 'No' && input.workEmailCheck === 'No' && input.addEmailCheck === 'Yes') {
-    return conn('users')
-      .where({
-        user_id: id
-      })
-      .update({
-        email: input.updateEmail,
-        work_email: input.addWorkEmail
-      })
-  } else if (input.correctCheck !== 'No' && input.workEmailCheck === 'No' && input.addEmailCheck === 'Yes') {
-    return conn('users')
-      .where({
-        user_id: id
-      })
-      .update({
-        work_email: input.addWorkEmail
-      })
-  } else if (input.correctCheck !== 'No' && input.workEmailCheck === 'Yes') {
-    return conn('users')
-      .where({
-        user_id: id
-      })
-      .update({
-        work_email: input.correctCheck,
-        email: null
-      })
-  } else if (input.correctCheck === 'No' && input.workEmailCheck === 'No' && input.addEmailCheck === 'No') {
+  if (input.correctCheck === 'No') {
     return conn('users')
       .where({
         user_id: id
