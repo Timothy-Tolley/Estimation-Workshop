@@ -7,11 +7,21 @@ module.exports = {
   getGroupBenefitData
 }
 
+function chanceOfSuccessCheck (chance) {
+  let charOne = String(chance).charAt(0)
+  if (Number.isInteger(chance)) {
+    return chance
+  } else if (Number(charOne) === 0 && !Number.isInteger(chance)) {
+    return chance * 100
+  } else return Math.round(chance)
+}
+
 function addGroupBenefit (input, testDb) {
   const conn = testDb || connection
-  const compPess = input.data.pessimistic * (input.data.chance_of_success / 100)
-  const compOti = input.data.optimistic * (input.data.chance_of_success / 100)
-  const compLike = input.data.likely * (input.data.chance_of_success / 100)
+  const chance = chanceOfSuccessCheck(input.data.chance_of_success)
+  const compPess = input.data.pessimistic * (chance / 100)
+  const compOti = input.data.optimistic * (chance / 100)
+  const compLike = input.data.likely * (chance / 100)
   return conn('group_benefit')
     .where('group_id', input.group_id)
     .select()
@@ -22,7 +32,7 @@ function addGroupBenefit (input, testDb) {
             pessimistic: compPess,
             optimistic: compOti,
             likely: compLike,
-            chance_of_success: input.data.chance_of_success,
+            chance_of_success: chance,
             group_id: input.group_id
           })
       } else {

@@ -25,24 +25,24 @@ const postgresDefaults = Object.assign({
 }, defaults)
 
 module.exports = {
-  // development: Object.assign({
-  //   connection: {
-  //     filename: path.join(__dirname, 'dev.sqlite')
-  //   }
-  // }, sqliteDefaults),
   development: Object.assign({
-    client: 'postgresql',
     connection: {
-      host: 'punga.local',
-      database: 'postgres',
-      user: 'graham',
-      password: 'p'
-    },
-    migrations: {
-      directory: '../../server/db/migrations'
-    },
-    useNullAsDefault: true
-  }, postgresDefaults),
+      filename: path.join(__dirname, 'dev.sqlite')
+    }
+  }, sqliteDefaults),
+  // development: Object.assign({
+  //   client: 'postgresql',
+  //   connection: {
+  //     host: 'punga.local',
+  //     database: 'postgres',
+  //     user: 'graham',
+  //     password: 'p'
+  //   },
+  //   migrations: {
+  //     directory: '../../server/db/migrations'
+  //   },
+  //   useNullAsDefault: true
+  // }, postgresDefaults),
 
   test: Object.assign({
     connection: {
