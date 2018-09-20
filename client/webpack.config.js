@@ -1,5 +1,5 @@
 const path = require('path')
-// const webpack = require('webpack')
+const webpack = require('webpack')
 
 module.exports = {
   entry: path.join(__dirname, './index.js'),
@@ -7,11 +7,11 @@ module.exports = {
     path: path.join(__dirname, '../public'),
     filename: 'bundle.js'
   },
-  // plugins: [
-  //   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-  // ],
-  // mode: 'production',
-  mode: 'development',
+  plugins: [
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  ],
+  mode: 'production',
+  // mode: 'development',
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -22,10 +22,9 @@ module.exports = {
     }]
   },
   externals: {
-    'sqlite3': 'sqlite3'
-  //   // Use external version of React
-  //   'react': 'React',
-  //   'react-dom': 'ReactDOM'
+    // Use external version of React
+    'react': 'React',
+    'react-dom': 'ReactDOM'
   },
   resolve: {
     extensions: ['.js', '.jsx']
