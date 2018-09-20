@@ -113,12 +113,12 @@ class GroupBenefit extends React.Component {
               name: 'chance_of_success',
               type: 'text',
               title: 'Please enter your group estimate of chance of success (%)',
-              placeHolder: 'percentage chance (%)',
+              placeHolder: 'Whole Number Percentage Chance (%)',
               inputType: 'number',
               validators: [
                 {
                   type: 'numeric',
-                  minValue: 0,
+                  minValue: 1,
                   maxValue: 100
                 }
               ],

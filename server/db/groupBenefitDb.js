@@ -7,18 +7,9 @@ module.exports = {
   getGroupBenefitData
 }
 
-function chanceOfSuccessCheck (chance) {
-  let charOne = String(chance).charAt(0)
-  if (Number.isInteger(chance)) {
-    return chance
-  } else if (Number(charOne) === 0 && !Number.isInteger(chance)) {
-    return chance * 100
-  } else return Math.round(chance)
-}
-
 function addGroupBenefit (input, testDb) {
   const conn = testDb || connection
-  const chance = chanceOfSuccessCheck(input.data.chance_of_success)
+  const chance = Math.round(input.data.chance_of_success)
   const compPess = input.data.pessimistic * (chance / 100)
   const compOti = input.data.optimistic * (chance / 100)
   const compLike = input.data.likely * (chance / 100)
