@@ -7,11 +7,11 @@ module.exports = {
     path: path.join(__dirname, '../public'),
     filename: 'bundle.js'
   },
-  plugins: [
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
-  ],
-  mode: 'production',
-  // mode: 'development',
+  // plugins: [
+  //   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+  // ],
+  // mode: 'production',
+  mode: 'development',
   module: {
     rules: [{
       test: /\.jsx?$/,
@@ -21,13 +21,13 @@ module.exports = {
       ]
     }]
   },
-  externals: {
-    // Use external version of React
-    'react': 'React',
-    'react-dom': 'ReactDOM'
-  },
+  // externals: {
+  //   // Use external version of React
+  //   'react': 'React',
+  //   'react-dom': 'ReactDOM'
+  // },
   resolve: {
     extensions: ['.js', '.jsx']
   },
-  devtool: false
+  devtool: 'source-map'
 }
